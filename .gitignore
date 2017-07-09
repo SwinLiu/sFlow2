@@ -24,6 +24,7 @@ local.properties
 target/
 
 ## nodeJs
+package-lock.json
 
 # compiled output
 /dist
@@ -31,7 +32,7 @@ target/
 /out-tsc
 
 # dependencies
-/node_modules
+node_modules
 
 # e2e
 /e2e/*.js
