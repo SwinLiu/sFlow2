@@ -10,11 +10,13 @@ import { TestService } from '../../services/test.service';
 })
 export class DashboardComponent implements OnInit {
 
+  title = 'sFlow2';
+
   constructor(
     private router: Router,
     private testService: TestService) {
     console.log("Test1 DashboardComponent");
-}
+  }
 
   ngOnInit(): void {
     console.log("Test DashboardComponent");
