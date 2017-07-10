@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lyplay.</groupId>
-    <artifactId>sflow</artifactId>
+    <artifactId>sFlow</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
