@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { TestService } from '../../services/test.service';
 
 @Component({
   selector: 'my-dashboard',
@@ -7,7 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  ngOnInit(): void {
+  constructor(
+    private router: Router,
+    private testService: TestService) {
+    console.log("Test1 DashboardComponent");
+}
 
+  ngOnInit(): void {
+    console.log("Test DashboardComponent");
+    this.testService.getTest();
   }
 }
