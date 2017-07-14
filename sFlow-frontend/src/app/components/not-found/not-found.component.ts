@@ -2,10 +2,10 @@ import {Location} from '@angular/common';
 import {Component, NgModule, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'sFlow-main-error',
-  templateUrl: './main-error.component.html'
+  selector: 'sFlow-404-error',
+  templateUrl: './not-found.component.html'
 })
-export class MainErrorComponent implements OnInit {
+export class PageNotFoundComponent implements OnInit {
 
   constructor(private location: Location) { }
 
