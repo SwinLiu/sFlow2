@@ -15,11 +15,11 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private testService: TestService) {
-    console.log("Test1 DashboardComponent");
+    console.log("Test DashboardComponent constructor");
   }
 
   ngOnInit(): void {
-    console.log("Test DashboardComponent");
+    console.log("Test DashboardComponent ngOnInit");
     this.testService.getTest();
   }
 }
