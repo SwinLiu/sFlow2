@@ -17,6 +17,8 @@ import { UserProfileComponent }   from './components/user-profile/user-profile.c
 
 
 import { TestService }          from './services/test.service';
+import { ConsoleService }          from './services/console.service';
+import { LoggerService }          from './services/logger.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -48,7 +50,11 @@ export function createTranslateHttpLoader(http: Http) {
     PageNotFoundComponent,
     UserProfileComponent
   ],
-  providers: [ TestService ],
+  providers: [
+    TestService,
+    ConsoleService,
+    LoggerService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
