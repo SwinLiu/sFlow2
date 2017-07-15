@@ -18,6 +18,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.testService.getTest();
+    //this.testService.getTest();
   }
 }
