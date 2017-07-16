@@ -16,6 +16,7 @@ import { AuthService }          from './services/auth.service';
 import { TestService }          from './services/test.service';
 import { ConsoleService }          from './services/console.service';
 import { LoggerService }          from './services/logger.service';
+import { AuthGuard }            from './services/auth-guard.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { AppTranslateModule }     from './app-translate.module';
@@ -39,7 +40,8 @@ import { AppTranslateModule }     from './app-translate.module';
     AuthService,
     TestService,
     ConsoleService,
-    LoggerService
+    LoggerService,
+    AuthGuard
   ],
   bootstrap: [ AppComponent ]
 })

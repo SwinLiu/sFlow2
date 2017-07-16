@@ -5,19 +5,22 @@ import { MainComponent }   from './main.component';
 import { DashboardComponent }   from '../dashboard/dashboard.component';
 import { UserProfileComponent }   from '../user-profile/user-profile.component';
 
+import { AuthGuard }                from '../../services/auth-guard.service';
+
 const mainRoutes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: MainComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'userProfile',
-        component: UserProfileComponent
+        path: '',
+        canActivateChild: [AuthGuard],
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'userProfile', component: UserProfileComponent }
+        ]
       }
     ]
   }
