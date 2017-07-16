@@ -11,6 +11,7 @@ import { AppConfigModule } from './app-config.module';
 import { LoginComponent }   from './components/login/login.component';
 import { PageNotFoundComponent }   from './components/not-found/not-found.component';
 
+import { AuthService }          from './services/auth.service';
 import { TestService }          from './services/test.service';
 import { ConsoleService }          from './services/console.service';
 import { LoggerService }          from './services/logger.service';
@@ -42,6 +43,7 @@ export function createTranslateHttpLoader(http: Http) {
     PageNotFoundComponent
   ],
   providers: [
+    AuthService,
     TestService,
     ConsoleService,
     LoggerService

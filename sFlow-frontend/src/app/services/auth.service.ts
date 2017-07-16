@@ -17,6 +17,7 @@ export class AuthService {
   private apiUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
 
+  loginUserName: string = "";
   isLoggedIn: boolean = false;
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -34,16 +35,26 @@ export class AuthService {
     console.log(url);
     this.http.get(url)
       .toPromise()
-      .then(res => console.log(res))
+      .then(res => this.loggerService.log(res))
       .catch(this.loggerService.handleError);
   }
 
-  login(): Observable<boolean> {
-    return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+  setLoginInfo(): void{
+    this.isLoggedIn = true;
+    this.loginUserName = "Swin Liu";
   }
 
-  logout(): void {
+  setLogoutInfo(): void{
     this.isLoggedIn = false;
+    this.loginUserName = "";
+  }
+
+  login(): Observable<boolean> {
+    return Observable.of(true).do(val => this.setLoginInfo());
+  }
+
+  logout(): Observable<boolean> {
+    return Observable.of(true).do(val => this.setLogoutInfo());
   }
 
 }

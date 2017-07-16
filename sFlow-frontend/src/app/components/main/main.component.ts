@@ -8,8 +8,6 @@ import { LoggerService }   from '../../services/logger.service';
 })
 export class MainComponent implements OnInit {
 
-  systemLang : string;
-
   constructor(private loggerService : LoggerService) {
     this.loggerService.debug("sFlow MainComponent Start ...");
   }
