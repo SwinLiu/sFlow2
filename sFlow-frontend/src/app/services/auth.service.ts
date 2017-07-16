@@ -48,7 +48,7 @@ export class AuthService {
     this.isLoggedIn = true;
     this.loginUserName = "Swin Liu";
     localStorage.setItem('id_token', '123456789');
-    localStorage.setItem('loginUserName', 'loginUserName');
+    localStorage.setItem('loginUserName', this.loginUserName);
   }
 
   setLogoutInfo(): void{

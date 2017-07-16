@@ -1,7 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">{{title}}</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -16,22 +17,19 @@
             <span translate="dashboard">Dashboard</span>
           </a>
         </li>
-        <li >
-          <a href="#" >
-            <span translate="settings">Settings</span>
-          </a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Hi, {{loginUserName}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li >
+              <a routerLink="/userProfile" routerLinkActive="active" >
+                <span translate="profile">Profile</span>
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li ><a (click)="logout()" ><span translate="logout">logout</span></a></li>
+          </ul>
         </li>
-        <li >
-          <a routerLink="/userProfile" routerLinkActive="active" >
-            <span translate="profile">Profile</span>
-          </a>
-        </li>
-        <li >
-          <a href="#" >
-            <span>Hi, {{loginUserName}}</span>
-          </a>
-        </li>
-        <li ><a (click)="logout()" >logout</a></li>
       </ul>
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">
