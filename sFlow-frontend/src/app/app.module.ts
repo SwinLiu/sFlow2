@@ -11,27 +11,19 @@ import { AppConfigModule } from './app-config.module';
 import { LoginComponent }   from './components/login/login.component';
 import { PageNotFoundComponent }   from './components/not-found/not-found.component';
 
+import { AppTranslateService }          from './services/app-translate.service';
 import { AuthService }          from './services/auth.service';
 import { TestService }          from './services/test.service';
 import { ConsoleService }          from './services/console.service';
 import { LoggerService }          from './services/logger.service';
 
 import { AppRoutingModule }     from './app-routing.module';
-
-export function createTranslateHttpLoader(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { AppTranslateModule }     from './app-translate.module';
 
 @NgModule({
   imports: [
     BrowserModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateHttpLoader),
-        deps: [Http]
-      }
-    }),
+    AppTranslateModule,
     FormsModule,
     HttpModule,
     AppConfigModule,
@@ -43,6 +35,7 @@ export function createTranslateHttpLoader(http: Http) {
     PageNotFoundComponent
   ],
   providers: [
+    AppTranslateService,
     AuthService,
     TestService,
     ConsoleService,

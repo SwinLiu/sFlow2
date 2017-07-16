@@ -1,3 +1,7 @@
 {
-    "dashboard" : "Dashboard"
+    "dashboard" : "Dashboard",
+    "settings" : "Settings",
+    "profile" : "Profile",
+    "login" : "Login",
+    "logout" : "Logout"
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 
 import { LoggerService }   from './services/logger.service';
+import { AppTranslateService }   from './services/app-translate.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
 
   systemLang : string;
 
-  constructor(public translateService: TranslateService,
+  constructor(public appTranslateService: AppTranslateService,
     private loggerService : LoggerService) {
     this.loggerService.debug("sFlow AppComponent Start ...");
   }
@@ -20,13 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.loggerService.debug("Start Setup i18n ");
     // --- set i18n begin ---
-    this.translateService.addLangs(["zh", "en"]);
-    this.translateService.setDefaultLang("zh");
-    const browserLang = this.translateService.getBrowserLang();
-    this.loggerService.debug("Browser Lang : " + browserLang);
-    this.systemLang = browserLang.match(/zh|en/) ? browserLang : 'zh';
-    this.translateService.use(this.systemLang);
-    this.loggerService.debug("Setup Lang : " + this.systemLang);
+    this.appTranslateService.setLang();
     // --- set i18n end ---
   }
 
