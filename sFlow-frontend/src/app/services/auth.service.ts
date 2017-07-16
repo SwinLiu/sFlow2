@@ -28,6 +28,11 @@ export class AuthService {
     private loggerService : LoggerService
   ) {
     this.apiUrl = config.apiUrl;
+    const idToken = localStorage.getItem('id_token');
+    if(idToken != null){
+      this.isLoggedIn = true;
+      this.loginUserName = localStorage.getItem('loginUserName');
+    }
   }
 
   getTest(): void {
@@ -42,11 +47,15 @@ export class AuthService {
   setLoginInfo(): void{
     this.isLoggedIn = true;
     this.loginUserName = "Swin Liu";
+    localStorage.setItem('id_token', '123456789');
+    localStorage.setItem('loginUserName', 'loginUserName');
   }
 
   setLogoutInfo(): void{
     this.isLoggedIn = false;
     this.loginUserName = "";
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('loginUserName');
   }
 
   login(): Observable<boolean> {
