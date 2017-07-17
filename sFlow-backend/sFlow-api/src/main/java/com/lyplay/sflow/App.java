@@ -1,4 +1,4 @@
-package com.lyplay;
+package com.lyplay.sflow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
