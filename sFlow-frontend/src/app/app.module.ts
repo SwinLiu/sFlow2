@@ -11,6 +11,8 @@ import { AppConfigModule } from './app-config.module';
 import { LoginComponent }   from './components/login/login.component';
 import { PageNotFoundComponent }   from './components/not-found/not-found.component';
 
+import { MainModule }   from './components/main/main.module';
+
 import { AppTranslateService }          from './services/app-translate.service';
 import { AuthService }          from './services/auth.service';
 import { TestService }          from './services/test.service';
@@ -27,6 +29,7 @@ import { AppTranslateModule }     from './app-translate.module';
     AppTranslateModule,
     FormsModule,
     HttpModule,
+    MainModule,
     AppConfigModule,
     AppRoutingModule
   ],

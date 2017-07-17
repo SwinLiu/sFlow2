@@ -18,15 +18,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // --- set i18n begin ---
-    this.translateService.addLangs(["zh", "en"]);
-    this.translateService.setDefaultLang("zh");
-    const browserLang = this.translateService.getBrowserLang();
-    this.loggerService.debug("Browser Lang : " + browserLang);
-    this.systemLang = browserLang.match(/zh|en/) ? browserLang : 'zh';
-    this.translateService.use(this.systemLang);
-    this.loggerService.debug("Setup Lang : " + this.systemLang);
-    // --- set i18n end ---
   }
 
 }
