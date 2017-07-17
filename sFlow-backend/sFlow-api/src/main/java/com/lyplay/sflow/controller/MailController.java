@@ -2,13 +2,14 @@ package com.lyplay.sflow.controller;
 
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.common.dto.RestResult;
 
@@ -17,7 +18,8 @@ import com.lyplay.sflow.common.dto.RestResult;
  * @author lyplay
  *
  */
-@Controller("mailController")
+@RestController
+@EnableAutoConfiguration
 public class MailController {
 
 	@RequestMapping(value = "/api/sendmail", method = RequestMethod.POST, produces = "application/json")

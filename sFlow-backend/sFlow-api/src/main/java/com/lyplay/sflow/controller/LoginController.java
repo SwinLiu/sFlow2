@@ -36,33 +36,13 @@ import io.swagger.annotations.ApiOperation;
 public class LoginController {
 
 
-	@RequestMapping(value = "/api/hello1", method = RequestMethod.GET)
-	@ResponseBody
-	public String home() {
-        return "hello";
-    }
-	
-	@RequestMapping(value = "/todos", method = RequestMethod.OPTIONS)
-	@ResponseBody
-	public String todos() {
-        return "Hello M1y World1!";
-    }
-	
-	// 显示用户json数据
-	@ApiOperation(value = "获取用户列表，支持分页", notes = "json方法获取用户列表")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "page", value = "当前页码", required = true, dataType = "int"),
-			@ApiImplicitParam(name = "rows", value = "每页条数", required = true, dataType = "int") })
-	@RequestMapping(value = "/api/json", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> json(@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "rows", defaultValue = "10") int rows) {
-
-		return new HashMap<String, Object>();
-	}
-	
-	
-
 	@AuthPassport(validate = false)
+	@ApiOperation(value = "用户登录认证", notes = "用户帐号密码检查")
+	@ApiImplicitParams({ 
+			@ApiImplicitParam(name = "loginAccount", value = "用户名/邮箱", required = true, dataType = "String"),
+			@ApiImplicitParam(name = "passwd", value = "用户密码", required = true, dataType = "String"),
+			@ApiImplicitParam(name = "captchaCode", value = "验证码", required = true, dataType = "String")
+	})
 	@RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public RestResult login(
@@ -109,13 +89,6 @@ public class LoginController {
 //			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
 //		}
 
-	}
-	
-	// TODO add filter for login check
-	@RequestMapping(value = "/api/auth", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public RestResult auth() throws Exception {
-		return success();
 	}
 	
 	// TODO add filter for login check
