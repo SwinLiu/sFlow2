@@ -3,17 +3,49 @@
 
   <form class="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
+
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input type="text" id="inputEmail" class="form-control" placeholder="User name / Email / Phone number"
+             maxlength="40" >
+
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+             maxlength="20">
+
+    <label for="captchaCode" class="sr-only">Captcha Code</label>
+    <input type="text" id="captchaCode" class="form-control" placeholder="Captcha Code"
+             maxlength="6"  />
+    <!-- -->
+    <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" >
+
     <div class="checkbox">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()" >Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()" >Sign in</button>
   </form>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <span>其它帐号登录：</span>
+      <a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=1105878186&redirect_uri=localhost:8443/sflow/#/qqlogin&scope=get_user_info">
+        <img id="qqLoginImg" src="./assets/images/oauth/QQ.png" />
+      </a>
+      <a href="http://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id=VqP1XlSIge7Wh68eZ63vYOPc&redirect_uri=https://localhost:8443/sflow/#/qqlogin">
+        <img id="qqLoginImg" src="./assets/images/oauth/baidu_16.png" />
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <a href="/forget" class="pull-left">Forgot your password?</a>
+    </div>
+    <div class="col-lg-6">
+      <a href="/register" class="pull-right">Create new account</a>
+    </div>
+  </div>
 
 </div>
 <!-- /Login Page -->

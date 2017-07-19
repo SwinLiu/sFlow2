@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/map';
 
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 
@@ -33,14 +34,18 @@ export class AuthService {
       this.isLoggedIn = true;
       this.loginUserName = localStorage.getItem('loginUserName');
     }
+
   }
 
-  getTest(): void {
-    const url = `${this.apiUrl}/api/hello1`;// `${this.heroesUrl}/13`;//`${this.testUrl}`;
-    console.log(url);
-    this.http.get(url)
+  getCaptchaSrc(): string {
+    return `${this.apiUrl}/api/captcha/160x30x6x0`;
+  }
+
+  getRSAPublicKey(): Promise<string> {
+    const url = `${this.apiUrl}/api/secret`;
+    return this.http.get(url)
       .toPromise()
-      .then(res => this.loggerService.log(res))
+      .then(response => response.json().result)
       .catch(this.loggerService.handleError);
   }
 

@@ -15,7 +15,6 @@ import { MainModule }   from './components/main/main.module';
 
 import { AppTranslateService }          from './services/app-translate.service';
 import { AuthService }          from './services/auth.service';
-import { TestService }          from './services/test.service';
 import { ConsoleService }          from './services/console.service';
 import { LoggerService }          from './services/logger.service';
 import { AuthGuard }            from './services/auth-guard.service';
@@ -41,7 +40,6 @@ import { AppTranslateModule }     from './app-translate.module';
   providers: [
     AppTranslateService,
     AuthService,
-    TestService,
     ConsoleService,
     LoggerService,
     AuthGuard

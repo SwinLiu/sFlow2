@@ -9,12 +9,24 @@ import { AuthService }      from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  loginAccount : string;
+  password : string;
+  captchaCode : string;
+  captchaSrc : string;
+  rsaPublicKey : string;
+
+
   constructor(public authService: AuthService,
     private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.captchaSrc = this.authService.getCaptchaSrc();
+    this.authService.getRSAPublicKey().then(data => this.rsaPublicKey =  data);
+
+  }
 
   login(): void {
+
     this.authService.login().subscribe(() => {
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
