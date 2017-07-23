@@ -1,7 +1,8 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent }   from './components/login/login.component';
+import { SignInComponent }   from './components/sign-in/sign-in.component';
+import { SignUpComponent }   from './components/sign-up/sign-up.component';
 import { PageNotFoundComponent }   from './components/not-found/not-found.component';
 import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 
@@ -11,7 +12,8 @@ const appRoutes: Routes = [
     loadChildren: 'app/components/main/main.module#MainModule',
     data: { preload: true }
   },
-  { path: 'login',  component: LoginComponent },
+  { path: 'signin',  component: SignInComponent },
+  { path: 'signup',  component: SignUpComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -30,7 +30,7 @@ export class TopNavComponent implements OnInit {
 
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
-        let redirect = 'login';
+        let redirect = 'signin';
 
         // Set our navigation extras object
         // that passes on our global query params and fragment

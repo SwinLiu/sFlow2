@@ -23,7 +23,9 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()" >Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()" >
+      <span translate="sign-in">Sign in</span>
+    </button>
   </form>
 
   <div class="row">
@@ -43,7 +45,7 @@
       <a href="/forget" class="pull-left">Forgot your password?</a>
     </div>
     <div class="col-lg-6">
-      <a href="/register" class="pull-right">Create new account</a>
+      <a  routerLink="/signup" class="pull-right">Create new account</a>
     </div>
   </div>
 

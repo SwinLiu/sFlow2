@@ -8,7 +8,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent }         from './app.component';
 import { AppConfigModule } from './app-config.module';
 
-import { LoginComponent }   from './components/login/login.component';
+import { SignInComponent }   from './components/sign-in/sign-in.component';
+import { SignUpComponent }   from './components/sign-up/sign-up.component';
 import { PageNotFoundComponent }   from './components/not-found/not-found.component';
 
 import { MainModule }   from './components/main/main.module';
@@ -34,7 +35,8 @@ import { AppTranslateModule }     from './app-translate.module';
   ],
   declarations: [
     AppComponent,
-    LoginComponent,
+    SignInComponent,
+    SignUpComponent,
     PageNotFoundComponent
   ],
   providers: [

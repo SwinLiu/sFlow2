@@ -4,10 +4,10 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AuthService }      from '../../services/auth.service';
 
 @Component({
-  selector: 'sFlow-login',
-  templateUrl: './login.component.html'
+  selector: 'sFlow-sign-in',
+  templateUrl: './sign-in.component.html'
 })
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
 
   loginAccount : string;
   password : string;

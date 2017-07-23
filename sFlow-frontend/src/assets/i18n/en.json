@@ -2,6 +2,7 @@
     "dashboard" : "Dashboard",
     "settings" : "Settings",
     "profile" : "Profile",
-    "login" : "Login",
-    "logout" : "Logout"
+    "sign-in" : "Sign in",
+    "sign-up" : "Sign up",
+    "sign-out" : "Sign out"
 }
