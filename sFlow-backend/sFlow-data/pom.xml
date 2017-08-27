@@ -5,55 +5,41 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>sFlow</artifactId>
-        <groupId>com.lyplay</groupId>
-        <version>1.0</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.3.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <artifactId>sFlow-data</artifactId>
-    <version>1.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
+    	<!--引入jpa starter-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring-version}</version>
         </dependency>
+        
+        <!--引入test starter-->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-test</artifactId>
+		  <scope>test</scope>
+		</dependency>
+
+        <!-- mysql驱动:com.mysql.jdbc.Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.42</version>
+		</dependency>
+		
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>4.2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj-core-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>${javax-el-version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>
