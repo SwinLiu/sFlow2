@@ -32,12 +32,14 @@
 		<dependencies>
 		
 			<dependency>
-	            <groupId>junit</groupId>
-	            <artifactId>junit</artifactId>
-	            <version>${junit-version}</version>
-	            <scope>test</scope>
-	        </dependency>
-	        
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
 			<!-- Log -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
