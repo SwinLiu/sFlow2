@@ -6,6 +6,6 @@ import com.lyplay.sflow.domain.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-	Employee findById(String id);
+	Employee findById(Long id);
 
 }
