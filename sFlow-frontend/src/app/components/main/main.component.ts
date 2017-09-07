@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
+import { LoggerService } from "app/services/logger.service";
 
-import { LoggerService }   from '../../services/logger.service';
+
+
 
 @Component({
   selector: 'sFlow-main',
@@ -10,10 +12,10 @@ import { LoggerService }   from '../../services/logger.service';
 })
 export class MainComponent implements OnInit {
 
-  systemLang : string;
+  systemLang: string;
 
   constructor(public translateService: TranslateService,
-    private loggerService : LoggerService) {
+    private loggerService: LoggerService) {
     this.loggerService.debug("sFlow MainComponent Start ...");
   }
 
