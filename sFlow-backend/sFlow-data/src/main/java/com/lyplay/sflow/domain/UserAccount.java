@@ -4,33 +4,31 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name="sf_usr_account")
 public class UserAccount implements Serializable{
 
 	private static final long serialVersionUID = -7282784267212221103L;
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@Column(name = "uid", nullable = false, length = 20)
+	private String id;
 	
-	@Column(name = "user_name")
+	@Column(name = "user_name", nullable = false, length = 40)
 	private String userName;
 	
-	@Column(name = "email")
+	@Column(name = "email", length = 100)
 	private String email;
 	
-	@Column(name = "phone_number")
+	@Column(name = "phone_number", length = 20)
 	private String phoneNumber;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -57,5 +55,5 @@ public class UserAccount implements Serializable{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 }

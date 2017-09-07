@@ -1,13 +1,35 @@
--- Delete table sflow_test
-Drop table  IF EXISTS sflow_test ;
+-- Delete table sf_sys_sequence
+Drop table  IF EXISTS sf_sys_sequence ;
 
--- Create table sflow_test 
-CREATE TABLE sflow_test ( 
-	id	varchar(20) ,
-	user_id	varchar(20) NOT NULL ,
-	org_id	varchar(20) NOT NULL ,
-	pos_id	varchar(20) NOT NULL 
+-- Create table sf_sys_sequence 
+CREATE TABLE `sf_sys_sequence` (
+  `sequence_name` varchar(20) NOT NULL,
+  `curr_value` bigint(20) NOT NULL,
+  `increment` int(11) DEFAULT NULL,
+  `lpad_char` char(1) DEFAULT NULL,
+  `lpad_length` int(11) DEFAULT NULL,
+  `prefix` varchar(10) DEFAULT NULL,
+  `suffix` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`sequence_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Create Primary Key for Table sflow_test 
-ALTER TABLE sflow_test ADD CONSTRAINT pk_sflow_test PRIMARY KEY (id); 
+
+LOCK TABLES `sf_sys_sequence` WRITE;
+
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_USER',0,1,'0',5,'U',NULL);
+
+commit;
+UNLOCK TABLES;
+
+
+
+
+
+
+
+
+
+
+
+

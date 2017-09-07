@@ -25,11 +25,7 @@ public class Employee implements Serializable{
 	private static final long serialVersionUID = 2337490945537439497L;
 
 	@Id
-    //@GeneratedValue(strategy=GenerationType.AUTO)
-	//MySQL，SQLSErver自增长方式
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//Oracle序列方式生成/主键
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="SEQ")
 	@Column(name = "emp_id", nullable = false, length = 20)
 	private Long id;
 	
