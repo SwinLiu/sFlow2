@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ import com.lyplay.sflow.common.util.Constant;
 import com.lyplay.sflow.common.util.JsonUtil;
 import com.lyplay.sflow.common.util.PasswdUtil;
 import com.lyplay.sflow.common.util.TokenUtil;
+import com.lyplay.sflow.service.UserAccountService;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,6 +37,8 @@ import io.swagger.annotations.ApiOperation;
 @EnableAutoConfiguration
 public class LoginController {
 
+	@Autowired
+	UserAccountService userAccountService;
 
 	@AuthPassport(validate = false)
 	@ApiOperation(value = "用户登录认证", notes = "用户帐号密码检查")
