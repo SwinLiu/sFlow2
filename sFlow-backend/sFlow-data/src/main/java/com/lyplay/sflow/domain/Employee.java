@@ -10,14 +10,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.lyplay.sflow.enums.EmployeeStatus;
 import com.lyplay.sflow.enums.Gender;
 
-@Entity(name="sf_em_employee")
+@Entity(name="sf_emp_employee")
 //Oracle中序列方式生成主键
 //@SequenceGenerator(name = "SEQ", sequenceName = "SEQ_SYS_FUNC_MENU", initialValue = 0, allocationSize = 1)   
 public class Employee implements Serializable{
@@ -56,17 +60,14 @@ public class Employee implements Serializable{
 	@Column(name = "status", nullable = true, length = 10)
 	private EmployeeStatus status;
 	
-	// 日期类型，格式：yyyy-MM-dd HH:mm:ss
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time")
-    private Date createTime; 
+    private Long createTime; 
 	
 	@Column(name = "changer", length = 20)
 	private String changer;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_time")
-	private Date updateTime;
+	private Long updateTime;
 
 	@Column(name = "test_flag")
 	private Boolean testFlag;
@@ -135,11 +136,11 @@ public class Employee implements Serializable{
 		this.status = status;
 	}
 
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 
@@ -151,11 +152,11 @@ public class Employee implements Serializable{
 		this.changer = changer;
 	}
 
-	public Date getUpdateTime() {
+	public Long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
 
@@ -165,6 +166,23 @@ public class Employee implements Serializable{
 
 	public void setTestFlag(Boolean testFlag) {
 		this.testFlag = testFlag;
+	}
+	
+	@PreUpdate
+    public void preUpdate() {
+    	updateTime = (new Date()).getTime();
+    }
+    
+    @PrePersist
+    public void prePersist() {
+        Date now = new Date();
+        createTime = now.getTime();
+        updateTime = now.getTime();
+    }
+    
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

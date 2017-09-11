@@ -5,10 +5,20 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 
 import com.lyplay.sflow.model.BaseDomain;
 
 @Entity(name="sf_sys_sequence")
+@NamedStoredProcedureQuery(name = "sys.sequence", procedureName = "nextval", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "sequence_name", type = String.class),
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "prefix", type = String.class),
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "curr_value", type = Long.class),
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "lpad_char", type = Character.class),
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "lpad_length", type = Integer.class),
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "suffix", type = String.class) })
 public class Sequence extends BaseDomain implements Serializable{
 	
 	private static final long serialVersionUID = -6805723584886767992L;
@@ -26,13 +36,13 @@ public class Sequence extends BaseDomain implements Serializable{
 	@Column(name = "suffix", length = 10)
 	private String suffix;
 
-	@Column(name = "lpad_length", length = 3)
+	@Column(name = "lpad_length", length = 2)
 	private Integer lpadLength;
 	
 	@Column(name = "lpad_char", length = 1)
-	private char lpadChar;
+	private Character lpadChar;
 
-	@Column(name = "increment", length = 3)
+	@Column(name = "increment", length = 2)
 	private Integer increment;
 
 	public String getSequenceName() {
@@ -75,11 +85,11 @@ public class Sequence extends BaseDomain implements Serializable{
 		this.lpadLength = lpadLength;
 	}
 
-	public char getLpadChar() {
+	public Character getLpadChar() {
 		return lpadChar;
 	}
 
-	public void setLpadChar(char lpadChar) {
+	public void setLpadChar(Character lpadChar) {
 		this.lpadChar = lpadChar;
 	}
 

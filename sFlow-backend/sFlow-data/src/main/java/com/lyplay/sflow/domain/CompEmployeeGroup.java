@@ -6,12 +6,14 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.lyplay.sflow.pk.CompEmployeeGroupPK;
 
-@Entity(name="sf_em_company_employee")
+@Entity(name="sf_com_emp_grp")
 public class CompEmployeeGroup implements Serializable{
 
 	private static final long serialVersionUID = -4759861195453752222L;
@@ -19,16 +21,14 @@ public class CompEmployeeGroup implements Serializable{
 	@EmbeddedId
 	private CompEmployeeGroupPK id;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time")
-    private Date createTime; 
+    private Long createTime; 
 	
 	@Column(name = "changer", length = 20)
 	private String changer;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_time")
-	private Date updateTime;
+	private Long updateTime;
 
 	public CompEmployeeGroupPK getId() {
 		return id;
@@ -38,11 +38,11 @@ public class CompEmployeeGroup implements Serializable{
 		this.id = id;
 	}
 
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 
@@ -54,12 +54,29 @@ public class CompEmployeeGroup implements Serializable{
 		this.changer = changer;
 	}
 
-	public Date getUpdateTime() {
+	public Long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	@PreUpdate
+    public void preUpdate() {
+    	updateTime = (new Date()).getTime();
+    }
+    
+    @PrePersist
+    public void prePersist() {
+        Date now = new Date();
+        createTime = now.getTime();
+        updateTime = now.getTime();
+    }
+    
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

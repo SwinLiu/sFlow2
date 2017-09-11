@@ -15,7 +15,7 @@ public class SequenceRepositoryTest extends BaseTest{
 	public void sequenceTest() {
 		
 		Sequence sequence = new Sequence();
-		sequence.setSequenceName("SEQ_USER");
+		sequence.setSequenceName("SEQ_USER2");
 		sequence.setPrefix("U");
 		sequence.setLpadLength(5);
 		sequence.setLpadChar('0');
@@ -24,6 +24,19 @@ public class SequenceRepositoryTest extends BaseTest{
 		
 		sequenceRepository.save(sequence);
 		
+	}
+	
+	@Test
+	public void nextValTest() {
+		
+		Sequence seq = sequenceRepository.nextval("SEQ_USER");
+		
+		System.out.println(seq.getSequenceName());
+		System.out.println(seq.getPrefix());
+		System.out.println(seq.getCurrValue());
+		System.out.println(seq.getLpadChar());
+		System.out.println(seq.getLpadLength());
+		System.out.println(seq.getSuffix());
 		
 	}
 	

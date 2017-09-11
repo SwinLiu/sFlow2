@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
-@Entity(name="sf_em_company")
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+@Entity(name="sf_com_company")
 public class Company implements Serializable{
 
 	private static final long serialVersionUID = -4759861195453752222L;
@@ -27,16 +29,14 @@ public class Company implements Serializable{
 	@Column(name = "address", nullable = true, length = 200)
 	private String address;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time")
-    private Date createTime; 
+    private Long createTime; 
 	
 	@Column(name = "changer", length = 20)
 	private String changer;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_time")
-	private Date updateTime;
+	private Long updateTime;
 
 	public Long getId() {
 		return id;
@@ -62,11 +62,11 @@ public class Company implements Serializable{
 		this.address = address;
 	}
 
-	public Date getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 
@@ -78,12 +78,29 @@ public class Company implements Serializable{
 		this.changer = changer;
 	}
 
-	public Date getUpdateTime() {
+	public Long getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	@PreUpdate
+    public void preUpdate() {
+    	updateTime = (new Date()).getTime();
+    }
+    
+    @PrePersist
+    public void prePersist() {
+        Date now = new Date();
+        createTime = now.getTime();
+        updateTime = now.getTime();
+    }
+    
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 	
 }
