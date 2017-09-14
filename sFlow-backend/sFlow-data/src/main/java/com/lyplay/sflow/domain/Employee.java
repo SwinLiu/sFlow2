@@ -37,7 +37,7 @@ public class Employee implements Serializable{
 	private String surName;
 	
 	@Column(name = "given_name", nullable = true, length = 100)
-	private String given_name;
+	private String givenName;
 	
 	@Transient
 	private String fullName;
@@ -53,7 +53,7 @@ public class Employee implements Serializable{
 	private Date birthday;
 	
 	@Column(name = "work_email", nullable = true, length = 100)
-	private String work_email;
+	private String workEmail;
 	
 	
 	@Enumerated(EnumType.STRING)
@@ -88,16 +88,16 @@ public class Employee implements Serializable{
 		this.surName = surName;
 	}
 
-	public String getGiven_name() {
-		return given_name;
+	public String getGivenName() {
+		return givenName;
 	}
 
-	public void setGiven_name(String given_name) {
-		this.given_name = given_name;
+	public void setGivenName(String givenName) {
+		this.givenName = givenName;
 	}
 
 	public String getFullName() {
-		return this.getSurName() + " " + this.getGiven_name();
+		return this.getSurName() + " " + this.getGivenName();
 	}
 
 	public void setFullName(String fullName) {
@@ -120,12 +120,12 @@ public class Employee implements Serializable{
 		this.birthday = birthday;
 	}
 
-	public String getWork_email() {
-		return work_email;
+	public String getWorkEmail() {
+		return workEmail;
 	}
 
-	public void setWork_email(String work_email) {
-		this.work_email = work_email;
+	public void setWorkEmail(String workEmail) {
+		this.workEmail = workEmail;
 	}
 
 	public EmployeeStatus getStatus() {

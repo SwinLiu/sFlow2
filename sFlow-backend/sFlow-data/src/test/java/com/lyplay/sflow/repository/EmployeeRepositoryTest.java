@@ -17,9 +17,9 @@ public class EmployeeRepositoryTest extends BaseTest{
 		
 		Employee employee = new Employee();
 		employee.setSurName("Liu");
-		employee.setGiven_name("Swin");
+		employee.setGivenName("Swin");
 		employee.setGender(Gender.MALE);
-		employee.setWork_email("i@lyplay.com");
+		employee.setWorkEmail("i@lyplay.com");
 		
 		employeeRepository.save(employee);
 		
@@ -37,9 +37,9 @@ public class EmployeeRepositoryTest extends BaseTest{
 	public void updateEmployee(Employee employee) {
 		
 		employee.setSurName("Liu01");
-		employee.setGiven_name("Swin01");
+		employee.setGivenName("Swin01");
 		employee.setGender(Gender.FEMALE);
-		employee.setWork_email("ly@lyplay.com");
+		employee.setWorkEmail("ly@lyplay.com");
 		
 		employeeRepository.save(employee);
 		

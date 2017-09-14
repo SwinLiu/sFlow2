@@ -18,6 +18,16 @@ public class CompEmployeeGroupPK implements Serializable{
 	@Column(name = "emp_id", nullable = false, length = 20)
 	private Long employeeId;
 
+	public CompEmployeeGroupPK() {
+		super();
+	}
+
+	public CompEmployeeGroupPK(Long companyId, Long employeeId) {
+		super();
+		this.companyId = companyId;
+		this.employeeId = employeeId;
+	}
+
 	public Long getCompanyId() {
 		return companyId;
 	}

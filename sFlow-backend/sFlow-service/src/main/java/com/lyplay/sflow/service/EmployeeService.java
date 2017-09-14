@@ -4,5 +4,6 @@ import com.lyplay.sflow.dto.EmployeeDto;
 
 public interface EmployeeService {
 
-	boolean addEmployee(EmployeeDto employee);
+	boolean addEmployee(EmployeeDto employeeDto);
+	
 }
