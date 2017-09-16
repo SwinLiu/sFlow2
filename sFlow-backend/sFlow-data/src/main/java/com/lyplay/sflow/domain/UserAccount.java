@@ -5,11 +5,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.lyplay.sflow.enums.UserAccountStatus;
 
 @Entity(name="sf_usr_account")
 public class UserAccount implements Serializable{
@@ -28,6 +32,10 @@ public class UserAccount implements Serializable{
 	
 	@Column(name = "phone_number", length = 20)
 	private String phoneNumber;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "status", nullable = false, length = 1)
+	private UserAccountStatus status;
 	
 	@Column(name = "create_time")
     private Long createTime; 
@@ -68,6 +76,14 @@ public class UserAccount implements Serializable{
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public UserAccountStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserAccountStatus status) {
+		this.status = status;
 	}
 
 	public Long getCreateTime() {
