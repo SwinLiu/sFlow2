@@ -1,4 +1,4 @@
-package com.lyplay.sflow.domain;
+package com.lyplay.sflow.domain.user;
 
 import java.io.Serializable;
 import java.util.Date;

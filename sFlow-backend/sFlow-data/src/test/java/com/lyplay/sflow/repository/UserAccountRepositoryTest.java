@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lyplay.sflow.BaseTest;
-import com.lyplay.sflow.domain.UserAccount;
+import com.lyplay.sflow.domain.user.UserAccount;
 import com.lyplay.sflow.enums.UserAccountStatus;
 
 public class UserAccountRepositoryTest extends BaseTest{

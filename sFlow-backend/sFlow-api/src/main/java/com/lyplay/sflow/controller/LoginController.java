@@ -3,9 +3,6 @@ package com.lyplay.sflow.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,16 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.auth.AuthPassport;
-import com.lyplay.sflow.common.UserAccount;
-import com.lyplay.sflow.common.UserSession;
 import com.lyplay.sflow.common.dto.RestResult;
-import com.lyplay.sflow.common.enums.AccountStatusEnum;
 import com.lyplay.sflow.common.enums.ErrorCode;
-import com.lyplay.sflow.common.util.Constant;
-import com.lyplay.sflow.common.util.JsonUtil;
 import com.lyplay.sflow.common.util.PasswdUtil;
-import com.lyplay.sflow.common.util.TokenUtil;
-import com.lyplay.sflow.service.UserAccountService;
+import com.lyplay.sflow.dto.UserDto;
+import com.lyplay.sflow.model.UserSession;
+import com.lyplay.sflow.service.UserService;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -38,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 public class LoginController {
 
 	@Autowired
-	UserAccountService userAccountService;
+	UserService userService;
 
 	@AuthPassport(validate = false)
 	@ApiOperation(value = "用户登录认证", notes = "用户帐号密码检查")
@@ -55,53 +48,32 @@ public class LoginController {
 			@RequestParam(value = "captchaCode") String captchaCode,
 			HttpSession session) throws Exception {
 
-		if(PasswdUtil.checkCaptchaCode(session, captchaCode)){
-			return fail(ErrorCode.CAPTCHA_ERROR); 
+		if(!PasswdUtil.checkCaptchaCode(session, captchaCode)){
+			return fail(ErrorCode.CAPTCHA_ERROR);
 		}
 		
 		String pwd = PasswdUtil.getPasswd(session, loginAccount, passwd);
 		if(StringUtils.isEmpty(pwd)){
 			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
 		}
-		UserAccount userAccount = new UserAccount();
-		userAccount.setId("T001");
-		userAccount.setUserName("Swin.Liu");
-		userAccount.setEmail("test@test.com");
-		userAccount.setPhone("123123123");
-		userAccount.setStatus(AccountStatusEnum.ACTIVE.getStatus());
 		
-		UserSession sserSession = new UserSession();
-		sserSession.setUserAccount(userAccount);
+		UserDto userDto = new UserDto();
 		
-		session.setAttribute(Constant.USER_SESSION, sserSession);
-		
-		Map<String,Object> result = new HashMap<String,Object>();
-		
-		Map<String, Object> claims = new HashMap<String, Object>(1);
-		claims.put(Constant.USER_SESSION, JsonUtil.bean2Json(sserSession));
-		
-		result.put(Constant.USER_TOKEN, TokenUtil.getJWTString(claims, null));
-		result.put(Constant.USER_SESSION, sserSession);
-		
-		return success(result);
-//		
-//		UserAccount userAccount = userAccountService.login(loginAccount, pwd);
-//		if (userAccount != null) {
-//			session.setAttribute("userAccount", userAccount);
-//			return success();
-//		} else {
-//			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
-//		}
+		UserSession userSession = userService.login(userDto);
+		if (userSession != null) {
+			session.setAttribute("userSccount", userSession);
+			return success();
+		} else {
+			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
+		}
 
 	}
 	
-	// TODO add filter for login check
 	@RequestMapping(value = "/api/logout", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public RestResult logout(HttpSession session) throws Exception {
 		//清除Session  
         session.invalidate();
-        
         return success();
 	}
 

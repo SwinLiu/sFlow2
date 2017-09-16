@@ -31,9 +31,7 @@ public class PasswdUtil {
 	
 	public static boolean checkCaptchaCode(HttpSession session, String captchaCode){
 		String sessionCaptchaCode = (String) session.getAttribute(Constant.CAPTCHA_CODE);
-		//return !StringUtils.equals(sessionCaptchaCode, captchaCode);
-		// for test
-		return false;
+		return StringUtils.equals(sessionCaptchaCode, captchaCode);
 	}
 	
 }
