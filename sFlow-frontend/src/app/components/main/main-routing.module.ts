@@ -8,6 +8,7 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
 import { CompanyManagementComponent } from "app/components/company-management/company-management.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 const mainRoutes: Routes = [
   {
@@ -22,7 +23,7 @@ const mainRoutes: Routes = [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'user/profile', component: UserProfileComponent },
-          { path: 'user/management', loadChildren: 'app/components/user-management/user-management.module#UserManagementModule' },
+          { path: 'user', loadChildren: 'app/components/user-management/user-management.module#UserManagementModule' },
           { path: 'company/management', component: CompanyManagementComponent },
           { path: 'employee/management', component: EmployeeManagementComponent }
         ]
@@ -36,7 +37,10 @@ const mainRoutes: Routes = [
     RouterModule.forChild(mainRoutes)
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    TranslateModule
+  ],
+  providers: [
   ]
 })
 export class MainRoutingModule { }

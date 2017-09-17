@@ -1,7 +1,7 @@
 <div>
   <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-      <h3>User List</h3>
+      <h3><span translate="user.list"></span></h3>
     </div>
   </div>
   <div class="row placeholders">
@@ -9,13 +9,13 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <td>User Id</td>
-            <td>User Name</td>
-            <td>Phone Number</td>
-            <td>Email</td>
-            <td>Status</td>
-            <td>Create Time</td>
-            <td>Action</td>
+            <td><span translate="user.id"></span></td>
+            <td><span translate="user.name"></span></td>
+            <td><span translate="user.phone"></span></td>
+            <td><span translate="user.email"></span></td>
+            <td><span translate="user.status"></span></td>
+            <td><span translate="user.createTime"></span></td>
+            <td><span translate="user.action"></span></td>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +59,9 @@
         <tfoot>
           <tr>
             <td colspan="7">
-              <button type="button" class="btn btn-primary pull-right" routerLink="/user/management/add" >Add New</button>
+              <button type="button" class="btn btn-primary pull-right" routerLink="/user/management/add" >
+                <span translate="user.addNew"></span>
+              </button>
             </td>
           </tr>
         </tfoot>

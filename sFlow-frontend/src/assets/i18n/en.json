@@ -9,5 +9,14 @@
     "lang-zh" : "Chinese",
     "user-management" : "User Management",
     "employee-management" : "Employee Management",
-    "company-management" : "Company Management"
+    "company-management" : "Company Management",
+    "user.list" : "User List",
+    "user.id" : "User Id",
+    "user.name" : "User Name",
+    "user.phone" : "Phone Number",
+    "user.email" : "Email",
+    "user.status" : "Status",
+    "user.createTime" : "Create Time",
+    "user.action" : "Action",
+    "user.addNew" : "Add New"
 }

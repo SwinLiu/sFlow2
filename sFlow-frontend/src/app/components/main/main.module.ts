@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { Http } from '@angular/http';
 
 import { MainComponent } from './main.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -17,19 +14,8 @@ import { CompanyManagementComponent } from "app/components/company-management/co
 import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
 import { UserManagementModule } from "app/components/user-management/user-management.module";
 
-export function createTranslateHttpLoader(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
 @NgModule({
   imports: [
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateHttpLoader),
-        deps: [Http]
-      }
-    }),
     CommonModule,
     FormsModule,
     UserManagementModule,

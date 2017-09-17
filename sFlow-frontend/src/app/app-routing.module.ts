@@ -1,9 +1,9 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SignInComponent }   from './components/sign-in/sign-in.component';
-import { SignUpComponent }   from './components/sign-up/sign-up.component';
-import { PageNotFoundComponent }   from './components/not-found/not-found.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { PageNotFoundComponent } from './components/not-found/not-found.component';
 import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 
 const appRoutes: Routes = [
@@ -18,10 +18,12 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(
+  imports: [
+    RouterModule.forRoot(
       appRoutes,
       { preloadingStrategy: SelectivePreloadingStrategy }
-  ) ],
+    )
+  ],
   exports: [
     RouterModule
   ],

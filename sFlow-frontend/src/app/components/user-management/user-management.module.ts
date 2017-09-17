@@ -7,7 +7,6 @@ import { UserListComponent } from "app/components/user-management/user-list/user
 import { UserAddComponent } from "app/components/user-management/user-add/user-add.component";
 import { UserRoutingModule } from "app/components/user-management/user-routing.module";
 
-
 @NgModule({
   imports: [
     CommonModule,

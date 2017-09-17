@@ -4,10 +4,11 @@ import { AuthGuard } from "app/services/auth-guard.service";
 import { UserManagementComponent } from "app/components/user-management/user-management.component";
 import { UserListComponent } from "app/components/user-management/user-list/user-list.component";
 import { UserAddComponent } from "app/components/user-management/user-add/user-add.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 const userRoutes: Routes = [
   {
-    path: '',
+    path: 'management',
     canActivate: [AuthGuard],
     component: UserManagementComponent,
     children: [
@@ -29,7 +30,10 @@ const userRoutes: Routes = [
     RouterModule.forChild(userRoutes)
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    TranslateModule
+  ],
+  providers: [
   ]
 })
 export class UserRoutingModule { }
