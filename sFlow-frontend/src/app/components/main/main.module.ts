@@ -13,9 +13,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 import { MainRoutingModule } from './main-routing.module';
-import { UserManagermentComponent } from "app/components/user-managerment/user-managerment.component";
-import { CompanyManagermentComponent } from "app/components/company-managerment/company-managerment.component";
-import { EmployeeManagermentComponent } from "app/components/employee-managerment/employee-managerment.component";
+import { CompanyManagementComponent } from "app/components/company-management/company-management.component";
+import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
+import { UserManagementModule } from "app/components/user-management/user-management.module";
 
 export function createTranslateHttpLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,6 +32,7 @@ export function createTranslateHttpLoader(http: Http) {
     }),
     CommonModule,
     FormsModule,
+    UserManagementModule,
     MainRoutingModule
   ],
   declarations: [
@@ -40,9 +41,8 @@ export function createTranslateHttpLoader(http: Http) {
     LeftNavComponent,
     DashboardComponent,
     UserProfileComponent,
-    UserManagermentComponent,
-    CompanyManagermentComponent,
-    EmployeeManagermentComponent
+    CompanyManagementComponent,
+    EmployeeManagementComponent
   ],
   providers: [ ]
 })

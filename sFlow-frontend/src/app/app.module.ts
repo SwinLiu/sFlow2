@@ -14,14 +14,15 @@ import { PageNotFoundComponent }   from './components/not-found/not-found.compon
 
 import { MainModule }   from './components/main/main.module';
 
-import { AppTranslateService }          from './services/app-translate.service';
-import { AuthService }          from './services/auth.service';
-import { ConsoleService }          from './services/console.service';
-import { LoggerService }          from './services/logger.service';
-import { AuthGuard }            from './services/auth-guard.service';
+import { AppTranslateService } from './services/app-translate.service';
+import { AuthService } from './services/auth.service';
+import { ConsoleService } from './services/console.service';
+import { LoggerService } from './services/logger.service';
+import { AuthGuard } from './services/auth-guard.service';
 
-import { AppRoutingModule }     from './app-routing.module';
-import { AppTranslateModule }     from './app-translate.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppTranslateModule } from './app-translate.module';
+import { UserManagementModule } from "app/components/user-management/user-management.module";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { AppTranslateModule }     from './app-translate.module';
     FormsModule,
     HttpModule,
     MainModule,
+    UserManagementModule,
     AppConfigModule,
     AppRoutingModule
   ],

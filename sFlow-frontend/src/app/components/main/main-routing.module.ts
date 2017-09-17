@@ -6,9 +6,8 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 import { AuthGuard } from '../../services/auth-guard.service';
-import { UserManagermentComponent } from "app/components/user-managerment/user-managerment.component";
-import { EmployeeManagermentComponent } from "app/components/employee-managerment/employee-managerment.component";
-import { CompanyManagermentComponent } from "app/components/company-managerment/company-managerment.component";
+import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
+import { CompanyManagementComponent } from "app/components/company-management/company-management.component";
 
 const mainRoutes: Routes = [
   {
@@ -23,9 +22,9 @@ const mainRoutes: Routes = [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'user/profile', component: UserProfileComponent },
-          { path: 'user/managerment', component: UserManagermentComponent },
-          { path: 'company/managerment', component: CompanyManagermentComponent },
-          { path: 'employee/managerment', component: EmployeeManagermentComponent }
+          { path: 'user/management', loadChildren: 'app/components/user-management/user-management.module#UserManagementModule' },
+          { path: 'company/management', component: CompanyManagementComponent },
+          { path: 'employee/management', component: EmployeeManagementComponent }
         ]
       }
     ]

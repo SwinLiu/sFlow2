@@ -3,9 +3,9 @@ import {Component, NgModule, OnInit} from '@angular/core';
 
 @Component({
   selector: 'sFlow-main-container',
-  templateUrl: './company-managerment.component.html'
+  templateUrl: './employee-management.component.html'
 })
-export class CompanyManagermentComponent implements OnInit {
+export class EmployeeManagementComponent implements OnInit {
 
   constructor(private location: Location) { }
 
