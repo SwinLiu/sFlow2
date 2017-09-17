@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lyplay.sflow.BaseTest;
-import com.lyplay.sflow.dto.EmployeeDto;
-import com.lyplay.sflow.enums.Gender;
+import com.lyplay.sflow.data.enums.Gender;
+import com.lyplay.sflow.service.dto.EmployeeDto;
 
 public class EmployeeServiceTest extends BaseTest{
 

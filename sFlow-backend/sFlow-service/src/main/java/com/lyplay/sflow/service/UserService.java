@@ -1,12 +1,17 @@
 package com.lyplay.sflow.service;
 
-import com.lyplay.sflow.dto.UserDto;
-import com.lyplay.sflow.model.UserSession;
+import java.util.List;
+
+import com.lyplay.sflow.service.dto.UserDto;
+import com.lyplay.sflow.service.dto.UserViewDto;
+import com.lyplay.sflow.service.model.UserSession;
 
 public interface UserService {
 
 	UserSession login(UserDto userDto);
 	
 	boolean addNewUser(UserDto userDto);
+	
+	List<UserViewDto> getUserList();
 	
 }

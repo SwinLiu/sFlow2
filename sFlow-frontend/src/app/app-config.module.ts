@@ -8,7 +8,7 @@ export class AppConfig {
 }
 
 export const APP_DI_CONFIG: AppConfig = {
-  apiUrl: 'http://api.lyplay.com',
+  apiUrl: 'http://localhost:8080',
   enableLog : true
 };
 

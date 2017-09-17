@@ -1,6 +1,6 @@
 package com.lyplay.sflow.service;
 
-import com.lyplay.sflow.dto.CompanyDto;
+import com.lyplay.sflow.service.dto.CompanyDto;
 
 public interface CompanyService {
 

@@ -5,13 +5,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lyplay.sflow.domain.CompEmployeeGroup;
-import com.lyplay.sflow.domain.Employee;
-import com.lyplay.sflow.dto.EmployeeDto;
-import com.lyplay.sflow.pk.CompEmployeeGroupPK;
-import com.lyplay.sflow.repository.CompEmployeeGroupRepository;
-import com.lyplay.sflow.repository.EmployeeRepository;
+import com.lyplay.sflow.data.domain.CompEmployeeGroup;
+import com.lyplay.sflow.data.domain.Employee;
+import com.lyplay.sflow.data.pk.CompEmployeeGroupPK;
+import com.lyplay.sflow.data.repository.CompEmployeeGroupRepository;
+import com.lyplay.sflow.data.repository.EmployeeRepository;
 import com.lyplay.sflow.service.EmployeeService;
+import com.lyplay.sflow.service.dto.EmployeeDto;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
