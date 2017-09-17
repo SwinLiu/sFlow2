@@ -26,11 +26,11 @@ export class AuthService {
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: Http,
-    private loggerService : LoggerService
+    private loggerService: LoggerService
   ) {
     this.apiUrl = config.apiUrl;
     const idToken = localStorage.getItem('id_token');
-    if(idToken != null){
+    if (idToken != null) {
       this.isLoggedIn = true;
       this.loginUserName = localStorage.getItem('loginUserName');
     }

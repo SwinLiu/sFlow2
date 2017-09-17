@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 
-import { LoggerService }   from './services/logger.service';
-import { AppTranslateService }   from './services/app-translate.service';
+import { LoggerService } from './services/logger.service';
+import { AppTranslateService } from './services/app-translate.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import { AppTranslateService }   from './services/app-translate.service';
 })
 export class AppComponent implements OnInit {
 
-  systemLang : string;
+  systemLang: string;
 
   constructor(public appTranslateService: AppTranslateService,
-    private loggerService : LoggerService) {
+    private loggerService: LoggerService) {
     this.loggerService.debug("sFlow AppComponent Start ...");
   }
 

@@ -19,6 +19,18 @@
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false"><span translate="{{systemLangHtml}}"></span><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li (click)="setLang('en')">
+              <span translate="lang-en">English</span>
+            </li>
+            <li (click)="setLang('zh')">
+              <span translate="lang-zh">Chinese</span>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false">Hi, {{loginUserName}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li >

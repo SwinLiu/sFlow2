@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { AuthService }      from '../../../services/auth.service';
-import { LoggerService }   from '../../../services/logger.service';
+import { AuthService } from '../../../services/auth.service';
+import { LoggerService } from '../../../services/logger.service';
+import { AppTranslateService } from "app/services/app-translate.service";
 
 @Component({
   selector: 'sFlow-top-nav',
@@ -12,15 +13,24 @@ export class TopNavComponent implements OnInit {
 
   title = 'sFlow2';
   loginUserName = "";
+  systemLangHtml = "";
+
 
   constructor(public authService: AuthService,
     private router: Router,
-    private loggerService : LoggerService
+    private loggerService: LoggerService,
+    public appTranslateService: AppTranslateService
     ) {
   }
 
   ngOnInit(): void {
       this.loginUserName = this.authService.loginUserName;
+      this.systemLangHtml = this.appTranslateService.getLang();
+  }
+
+  setLang(lang?: string): void {
+    this.appTranslateService.setLang(lang);
+    this.systemLangHtml = this.appTranslateService.getLang();
   }
 
   logout(): void {
@@ -30,11 +40,11 @@ export class TopNavComponent implements OnInit {
 
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
-        let redirect = 'signin';
+        const redirect = 'signin';
 
         // Set our navigation extras object
         // that passes on our global query params and fragment
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
           preserveQueryParams: true,
           preserveFragment: true
         };
