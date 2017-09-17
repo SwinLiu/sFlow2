@@ -4,5 +4,8 @@
     "profile" : "Profile",
     "sign-in" : "Sign in",
     "sign-up" : "Sign up",
-    "sign-out" : "Sign out"
+    "sign-out" : "Sign out",
+    "user-managerment" : "User Managerment",
+    "employee-managerment" : "Employee Managerment",
+    "company-managerment" : "Company Managerment"
 }

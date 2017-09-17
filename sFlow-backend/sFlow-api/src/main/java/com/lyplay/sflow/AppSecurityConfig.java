@@ -1,4 +1,4 @@
-package com.lyplay.sflow.api;
+package com.lyplay.sflow;
 
 import org.springframework.context.annotation.Configuration;
 

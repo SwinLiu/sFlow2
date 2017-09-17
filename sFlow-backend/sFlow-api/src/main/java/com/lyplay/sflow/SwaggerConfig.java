@@ -1,4 +1,4 @@
-package com.lyplay.sflow.api;
+package com.lyplay.sflow;
 
 import org.springframework.boot.autoconfigure.web.BasicErrorController;
 import org.springframework.context.annotation.Bean;

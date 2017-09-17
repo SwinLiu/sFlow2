@@ -4,5 +4,8 @@
     "profile" : "个人信息",
     "sign-in" : "登录",
     "sign-up" : "注册",
-    "sign-out" : "登出"
+    "sign-out" : "登出",
+    "user-managerment" : "用户管理",
+    "employee-managerment" : "员工管理",
+    "company-managerment" : "公司管理"
 }

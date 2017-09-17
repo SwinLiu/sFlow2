@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.common.dto.RestResult;
-import com.lyplay.sflow.service.UserService;
+import com.lyplay.sflow.service.EmployeeService;
 
 @RestController
 @EnableAutoConfiguration
 public class EmployeeController {
 
 	@Autowired
-	UserService userAccountService;
+	EmployeeService employeeService;
 
 	@RequestMapping(value = "/api/employee/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
