@@ -22,6 +22,7 @@ import { AuthGuard } from './services/auth-guard.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppTranslateModule } from './app-translate.module';
+import { UserAccountService } from "app/services/user/user-account.service";
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { AppTranslateModule } from './app-translate.module';
   providers: [
     AppTranslateService,
     AuthService,
+    UserAccountService,
     ConsoleService,
     LoggerService,
     AuthGuard

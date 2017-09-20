@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		
 		if(StringUtils.isNotEmpty(userDto.getPassword())){
 			UserPassword userPassword = new UserPassword();
-			userPassword.setUid(userAccount.getUid());
+			userPassword.setUid(String.valueOf(userAccount.getUid()));
 			userPassword.setChanger(userDto.getChanger());
 			userPassword.setPassword(userDto.getPassword());
 			userPasswordRepository.save(userPassword);
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 			List<UserViewDto> userViewList = new ArrayList<>();
 			for(UserAccount userAccount : userAccountList){
 				UserViewDto userViewDto = new UserViewDto();
-				userViewDto.setUid(userAccount.getUid());
+				userViewDto.setUid(String.valueOf(userAccount.getUid()));
 				userViewDto.setUserName(userAccount.getUserName());
 				userViewDto.setPhoneNumber(userAccount.getPhoneNumber());
 				userViewDto.setEmail(userAccount.getEmail());

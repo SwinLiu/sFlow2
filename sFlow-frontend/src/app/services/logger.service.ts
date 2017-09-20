@@ -7,32 +7,32 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class LoggerService {
-    enable : boolean;
+    enable: boolean;
     constructor(@Inject(APP_CONFIG) private config: AppConfig, private consoleService: ConsoleService) {
         this.enable = config.enableLog;
     }
-    log(message:any) {
-        if(this.enable){
+    log(message: any) {
+        if (this.enable) {
             this.consoleService.log(message);
         }
     }
-    warn(message:any) {
-        if(this.enable){
+    warn(message: any) {
+        if (this.enable) {
             this.consoleService.warn(message);
         }
     }
-    error(message:any) {
-        if(this.enable){
+    error(message: any) {
+        if (this.enable) {
             this.consoleService.error(message);
         }
     }
-    info(message:any) {
-        if(this.enable){
+    info(message: any) {
+        if (this.enable) {
             this.consoleService.info(message);
         }
     }
-    debug(message:any) {
-        if(this.enable){
+    debug(message: any) {
+        if (this.enable) {
             this.consoleService.debug(message);
         }
     }

@@ -2,6 +2,8 @@ package com.lyplay.sflow.service.dto;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class UserDto implements Serializable{
 
 	private static final long serialVersionUID = 5598995411757451341L;
@@ -45,4 +47,8 @@ public class UserDto implements Serializable{
 		this.changer = changer;
 	}
 	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

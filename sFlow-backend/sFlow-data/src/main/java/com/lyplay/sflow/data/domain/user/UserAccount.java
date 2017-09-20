@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -21,8 +23,9 @@ public class UserAccount implements Serializable{
 	private static final long serialVersionUID = -7282784267212221103L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid", nullable = false, length = 20)
-	private String uid;
+	private Long uid;
 	
 	@Column(name = "user_name", nullable = false, length = 40)
 	private String userName;
@@ -47,11 +50,11 @@ public class UserAccount implements Serializable{
 	private Long updateTime;
 
 
-	public String getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(String uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 
