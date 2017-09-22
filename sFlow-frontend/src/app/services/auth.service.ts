@@ -16,7 +16,7 @@ import 'rxjs/add/operator/toPromise';
 export class AuthService {
 
   private apiUrl: string;
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers;
 
   loginUserName: string = "";
   isLoggedIn: boolean = false;
@@ -30,11 +30,37 @@ export class AuthService {
   ) {
     this.apiUrl = config.apiUrl;
     const idToken = localStorage.getItem('id_token');
+    const sessionId = localStorage.getItem('id_session');
+    this.headers = new Headers({
+      'Content-Type' : 'application/json',
+      'access-token' : idToken,
+      'seesion-id' : sessionId
+    });
     if (idToken != null) {
-      this.isLoggedIn = true;
-      this.loginUserName = localStorage.getItem('loginUserName');
+      // sessionId
+      const url = `${this.apiUrl}/api/session/id`;
+      this.http.get(url, {headers: this.headers})
+        .toPromise()
+        .then(response => this.checkToken(response.json()))
+        .catch(this.loggerService.handleError);
+
     }
 
+  }
+
+  checkToken(data): void {
+    if (data.isSuccess) {
+      this.isLoggedIn = true;
+      localStorage.setItem('id_session', data.result);
+      const idToken = localStorage.getItem('id_token');
+      const sessionId = localStorage.getItem('id_session');
+      this.headers = new Headers({
+        'Content-Type' : 'application/json',
+        'access-token' : idToken,
+        'seesion-id' : sessionId
+      });
+      this.loginUserName = localStorage.getItem('loginUserName');
+    }
   }
 
   getCaptchaSrc(): string {
@@ -43,7 +69,7 @@ export class AuthService {
 
   getRSAPublicKey(): Promise<string> {
     const url = `${this.apiUrl}/api/secret`;
-    return this.http.get(url)
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json().result)
       .catch(this.loggerService.handleError);
@@ -60,6 +86,7 @@ export class AuthService {
     this.isLoggedIn = false;
     this.loginUserName = "";
     localStorage.removeItem('id_token');
+    localStorage.removeItem('session_id');
     localStorage.removeItem('loginUserName');
   }
 

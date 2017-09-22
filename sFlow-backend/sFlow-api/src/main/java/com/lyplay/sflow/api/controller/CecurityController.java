@@ -89,5 +89,11 @@ public class CecurityController {
 		return success(rsaPublicKey);
 	}
 	
+	@RequestMapping(value = "/api/session/id", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public RestResult getSessionId(HttpSession session) throws Exception {
+		return success(session.getId());
+	}
+	
 	
 }

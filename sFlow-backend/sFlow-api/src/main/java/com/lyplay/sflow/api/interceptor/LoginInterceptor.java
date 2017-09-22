@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,7 +61,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 		
 		if(!returnFlag){
-			response.setStatus(401);
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		}
             
 		return returnFlag;   
