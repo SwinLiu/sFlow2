@@ -6,6 +6,6 @@ import com.lyplay.sflow.data.domain.user.UserAccount;
 
 public interface UserAccountRepository extends JpaRepository<UserAccount, String> {
 
-	
+	UserAccount findByUserName(String userName);
 
 }

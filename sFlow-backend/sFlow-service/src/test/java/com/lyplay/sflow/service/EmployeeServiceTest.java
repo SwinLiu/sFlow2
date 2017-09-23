@@ -25,7 +25,7 @@ public class EmployeeServiceTest extends BaseTest{
 		employeeDto.setWorkEmail("haa@123.com");
 		employeeDto.setBirthday(new Date());
 		employeeDto.setGender(Gender.FEMALE);
-		employeeDto.setCompId(1l);
+		employeeDto.setCompId("compId");
 		
 		employeeService.addEmployee(employeeDto);
 	}

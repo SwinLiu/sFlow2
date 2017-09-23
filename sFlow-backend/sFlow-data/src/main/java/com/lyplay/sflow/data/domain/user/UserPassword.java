@@ -17,16 +17,16 @@ public class UserPassword implements Serializable{
 	private static final long serialVersionUID = 1949404693016737504L;
 
 	@Id
-	@Column(name = "uid", nullable = false, length = 20)
+	@Column(name = "uid")
 	private String uid;
 	
-	@Column(name = "password", length = 40)
+	@Column(name = "password")
 	private String password;
 	
 	@Column(name = "create_time")
     private Long createTime; 
 	
-	@Column(name = "changer", length = 20)
+	@Column(name = "changer")
 	private String changer;
 	
 	@Column(name = "update_time")

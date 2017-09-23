@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.lyplay.sflow.data.enums.UserAccountStatus;
 
@@ -23,38 +23,39 @@ public class UserAccount implements Serializable{
 	private static final long serialVersionUID = -7282784267212221103L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "uid", nullable = false, length = 20)
-	private Long uid;
+	@GeneratedValue(generator="sFlowUidKeyGenerator")
+	@GenericGenerator(name = "sFlowUidKeyGenerator", strategy = "com.lyplay.sflow.data.util.UserAccountKeyGenerator")
+	@Column(name = "uid")
+	private String uid;
 	
-	@Column(name = "user_name", nullable = false, length = 40)
+	@Column(name = "user_name")
 	private String userName;
 	
-	@Column(name = "email", length = 100)
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "phone_number", length = 20)
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "status", nullable = false, length = 1)
+	@Column(name = "status")
 	private UserAccountStatus status;
 	
 	@Column(name = "create_time")
     private Long createTime; 
 	
-	@Column(name = "changer", length = 20)
+	@Column(name = "changer")
 	private String changer;
 	
 	@Column(name = "update_time")
 	private Long updateTime;
 
 
-	public Long getUid() {
+	public String getUid() {
 		return uid;
 	}
 
-	public void setUid(Long uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 

@@ -14,7 +14,7 @@ public class UserLog implements Serializable{
 	private static final long serialVersionUID = -1259707079967868807L;
 
 	@Id
-	@Column(name = "uid", nullable = false, length = 20)
+	@Column(name = "uid")
 	private String uid;
 	
 	@Id

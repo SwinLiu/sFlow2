@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lyplay.sflow.data.domain.Company;
 
-public interface CompanyRepository extends JpaRepository<Company, Long> {
+public interface CompanyRepository extends JpaRepository<Company, String> {
 
-	Company findById(Long id);
+	Company findByCompId(String compId);
 
 }

@@ -16,6 +16,7 @@ public class EmployeeRepositoryTest extends BaseTest{
 	public void employeeTest() {
 		
 		Employee employee = new Employee();
+		employee.setEmployeeId("E0001");
 		employee.setSurName("Liu");
 		employee.setGivenName("Swin");
 		employee.setGender(Gender.MALE);
@@ -25,11 +26,11 @@ public class EmployeeRepositoryTest extends BaseTest{
 		
 		updateEmployee(employee);
 		
-		Employee empTemp = employeeRepository.findById(employee.getId());
+		Employee empTemp = employeeRepository.findByEmpId(employee.getEmpId());
 		
 		System.out.println(empTemp);
 		
-		//deleteEmployee(empTemp.getId());
+		deleteEmployee(empTemp.getEmpId());
 		
 	}
 	
@@ -45,7 +46,7 @@ public class EmployeeRepositoryTest extends BaseTest{
 		
 	}
 	
-	public void deleteEmployee(Long id) {
+	public void deleteEmployee(String id) {
 		employeeRepository.delete(id);
 	}
 	

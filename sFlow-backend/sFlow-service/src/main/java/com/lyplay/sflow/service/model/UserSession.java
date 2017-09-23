@@ -10,6 +10,8 @@ public class UserSession implements Serializable{
 	private String userName;
 	private String email;
 	
+	private String jwtToken;
+	
 	public String getUid() {
 		return uid;
 	}
@@ -27,6 +29,12 @@ public class UserSession implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getJwtToken() {
+		return jwtToken;
+	}
+	public void setJwtToken(String jwtToken) {
+		this.jwtToken = jwtToken;
 	}
 	
 }

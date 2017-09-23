@@ -6,5 +6,6 @@ import com.lyplay.sflow.data.domain.user.UserPassword;
 
 public interface UserPasswordRepository extends JpaRepository<UserPassword, String> {
 
+	UserPassword findByUidAndPassword(String uid, String password);
 
 }

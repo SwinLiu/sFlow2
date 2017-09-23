@@ -28,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public boolean addEmployee(EmployeeDto employeeDto) {
 		
 		Employee employee = new Employee();
+		employee.setEmployeeId(employeeDto.getEmployeeId());
 		employee.setSurName(employeeDto.getSurName());
 		employee.setGivenName(employeeDto.getGivenName());
 		employee.setGender(employeeDto.getGender());
@@ -38,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.save(employee);
 		
 		CompEmployeeGroup compEmployeeGroup = new CompEmployeeGroup();
-		CompEmployeeGroupPK compEmployeeGroupPK = new CompEmployeeGroupPK(employeeDto.getCompId(), employee.getId());
+		CompEmployeeGroupPK compEmployeeGroupPK = new CompEmployeeGroupPK(employeeDto.getCompId(), employee.getEmpId());
 		compEmployeeGroup.setId(compEmployeeGroupPK);
 		compEmployeeGroup.setChanger(employeeDto.getChanger());
 		compEmployeeGroupRepository.save(compEmployeeGroup);

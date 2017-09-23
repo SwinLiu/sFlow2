@@ -3,14 +3,14 @@ package com.lyplay.sflow.api.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +18,9 @@ import com.lyplay.sflow.api.auth.AuthPassport;
 import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.common.enums.ErrorCode;
 import com.lyplay.sflow.common.util.Constant;
-import com.lyplay.sflow.common.util.PasswdUtil;
+import com.lyplay.sflow.common.util.TokenUtil;
 import com.lyplay.sflow.service.UserService;
-import com.lyplay.sflow.service.dto.UserDto;
+import com.lyplay.sflow.service.dto.UserParam;
 import com.lyplay.sflow.service.model.UserSession;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,33 +37,20 @@ public class LoginController {
 	@AuthPassport(validate = false)
 	@ApiOperation(value = "用户登录认证", notes = "用户帐号密码检查")
 	@ApiImplicitParams({ 
-			@ApiImplicitParam(name = "loginAccount", value = "用户名/邮箱", required = true, dataType = "String"),
-			@ApiImplicitParam(name = "passwd", value = "用户密码", required = true, dataType = "String"),
-			@ApiImplicitParam(name = "captchaCode", value = "验证码", required = true, dataType = "String")
+		@ApiImplicitParam(name = "userParam", value = "userParam", required = true)
 	})
 	@RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public RestResult login(
-			@RequestParam(value = "loginAccount", required = true) String loginAccount,
-			@RequestParam(value = "passwd", required = true) String passwd,
-			@RequestParam(value = "captchaCode") String captchaCode,
-			HttpSession session) throws Exception {
+	public RestResult login(@RequestBody UserParam userParam) throws Exception {
 
-		if(!PasswdUtil.checkCaptchaCode(session, captchaCode)){
-			return fail(ErrorCode.CAPTCHA_ERROR);
-		}
-		
-		String pwd = PasswdUtil.getPasswd(session, loginAccount, passwd);
-		if(StringUtils.isEmpty(pwd)){
-			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
-		}
-		
-		UserDto userDto = new UserDto();
-		
-		UserSession userSession = userService.login(userDto);
+		UserSession userSession = userService.login(userParam);
 		if (userSession != null) {
-			session.setAttribute(Constant.USER_SESSION, userSession);
-			return success();
+			
+			Map<String, Object> claims = new HashMap<String, Object>(1);
+			claims.put(Constant.USER_ID, userSession.getUid());
+			claims.put(Constant.USER_ID, userSession.getUid());
+			userSession.setJwtToken(TokenUtil.getJWTString(claims, null));
+			return success(userSession);
 		} else {
 			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
 		}
@@ -72,9 +59,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/api/logout", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public RestResult logout(HttpSession session) throws Exception {
-		//清除Session  
-        session.invalidate();
+	public RestResult logout() throws Exception {
         return success();
 	}
 

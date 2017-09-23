@@ -6,44 +6,45 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name="sf_com_company")
 public class Company implements Serializable{
 
 	private static final long serialVersionUID = -4759861195453752222L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "comp_id", nullable = false, length = 20)
-	private Long id;
+	@Id	
+	@GeneratedValue(generator="sFlowCompIdKeyGenerator")
+	@GenericGenerator(name = "sFlowCompIdKeyGenerator", strategy = "com.lyplay.sflow.data.util.CompIdKeyGenerator")
+	@Column(name = "comp_id")
+	private String compId;
 	
-	@Column(name = "comp_name", nullable = true, length = 100)
+	@Column(name = "comp_name")
 	private String companyName;
 	
-	@Column(name = "address", nullable = true, length = 200)
+	@Column(name = "address")
 	private String address;
 	
 	@Column(name = "create_time")
     private Long createTime; 
 	
-	@Column(name = "changer", length = 20)
+	@Column(name = "changer")
 	private String changer;
 	
 	@Column(name = "update_time")
 	private Long updateTime;
 
-	public Long getId() {
-		return id;
+	public String getCompId() {
+		return compId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCompId(String compId) {
+		this.compId = compId;
 	}
 
 	public String getCompanyName() {

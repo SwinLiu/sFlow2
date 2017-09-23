@@ -24,7 +24,7 @@ public class CompEmployeeGroup implements Serializable{
 	@Column(name = "create_time")
     private Long createTime; 
 	
-	@Column(name = "changer", length = 20)
+	@Column(name = "changer")
 	private String changer;
 	
 	@Column(name = "update_time")

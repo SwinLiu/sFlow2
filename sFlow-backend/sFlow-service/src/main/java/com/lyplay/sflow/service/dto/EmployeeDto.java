@@ -7,9 +7,11 @@ import com.lyplay.sflow.data.enums.Gender;
 
 public class EmployeeDto {
 
-	private Long compId;
+	private String compId;
 
-	private Long empId;
+	private String empId;
+	
+	private String employeeId;
 
 	private String surName;
 
@@ -25,20 +27,28 @@ public class EmployeeDto {
 	
 	private String changer;
 
-	public Long getCompId() {
+	public String getCompId() {
 		return compId;
 	}
 
-	public void setCompId(Long compId) {
+	public void setCompId(String compId) {
 		this.compId = compId;
 	}
 
-	public Long getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(Long empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
+	}
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public String getSurName() {
