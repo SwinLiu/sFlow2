@@ -1,4 +1,4 @@
-package com.lyplay.sflow.common;
+package com.lyplay.sflow.service.model;
 
 
 public class UserSessionContext implements AutoCloseable{

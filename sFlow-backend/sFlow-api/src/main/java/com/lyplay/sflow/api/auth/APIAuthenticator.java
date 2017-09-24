@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lyplay.sflow.api.exception.AuthenticateException;
-import com.lyplay.sflow.common.UserSession;
 import com.lyplay.sflow.common.util.Constant;
 import com.lyplay.sflow.common.util.JsonUtil;
 import com.lyplay.sflow.common.util.TokenUtil;
+import com.lyplay.sflow.service.model.UserSession;
 
 import io.jsonwebtoken.Claims;
 

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lyplay.sflow.api.exception.AuthenticateException;
-import com.lyplay.sflow.common.UserSession;
+import com.lyplay.sflow.service.model.UserSession;
 
 public class BasicAuthenticator implements Authenticator {
 

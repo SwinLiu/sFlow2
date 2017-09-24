@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lyplay.sflow.api.auth.APIAuthenticator;
 import com.lyplay.sflow.api.auth.AuthPassport;
-import com.lyplay.sflow.common.UserSession;
-import com.lyplay.sflow.common.UserSessionContext;
+import com.lyplay.sflow.service.model.UserSession;
+import com.lyplay.sflow.service.model.UserSessionContext;
 
 public class LoginInterceptor implements HandlerInterceptor {
 

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.api.auth.AuthPassport;
-import com.lyplay.sflow.common.UserAccount;
 import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.common.enums.ErrorCode;
 import com.lyplay.sflow.common.util.PasswdUtil;
@@ -49,11 +48,6 @@ public class RegisterController {
 		if(StringUtils.isEmpty(pwd)){
 			return fail(); // userAccount or Password have issue.
 		}
-		
-		UserAccount userAccount = new UserAccount();
-		userAccount.setEmail(registerUser.getEmail());
-		userAccount.setPhone(registerUser.getPhone());
-		userAccount.setUserName(registerUser.getUserName());
 		
 
 		return success();

@@ -13,8 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lyplay.sflow.api.auth.Authenticator;
-import com.lyplay.sflow.common.UserSession;
-import com.lyplay.sflow.common.UserSessionContext;
+import com.lyplay.sflow.service.model.UserSession;
+import com.lyplay.sflow.service.model.UserSessionContext;
 
 public class GlobalFilter implements Filter {
 
