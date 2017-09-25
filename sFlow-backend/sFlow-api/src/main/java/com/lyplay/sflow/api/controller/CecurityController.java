@@ -5,6 +5,7 @@ import static com.lyplay.sflow.common.dto.RestResult.success;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,7 +72,7 @@ public class CecurityController {
 		CaptchaImageCode captchaImageCode = new CaptchaImageCode(params[0], params[1],
 				params[2], params[3]);
 		String captchaUuid = UUID.randomUUID().toString();
-		cacheService.setString(captchaUuid, captchaImageCode.getCode());
+		cacheService.setString(captchaUuid, captchaImageCode.getCode(), 180, TimeUnit.SECONDS);
 		return success(new CaptchaDto(captchaUuid, captchaImageCode.getBase64Str()));
 
 	}

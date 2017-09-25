@@ -6,6 +6,7 @@ import static com.lyplay.sflow.common.dto.RestResult.success;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.api.auth.AuthPassport;
+import com.lyplay.sflow.api.dto.UserParam;
 import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.common.enums.ErrorCode;
 import com.lyplay.sflow.common.util.Constant;
+import com.lyplay.sflow.common.util.PasswdUtil;
+import com.lyplay.sflow.common.util.RSAUtil;
 import com.lyplay.sflow.common.util.TokenUtil;
 import com.lyplay.sflow.service.CacheService;
 import com.lyplay.sflow.service.UserService;
-import com.lyplay.sflow.service.dto.UserParam;
 import com.lyplay.sflow.service.model.UserSession;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -47,7 +50,21 @@ public class LoginController {
 	@ResponseBody
 	public RestResult login(@RequestBody UserParam userParam) throws Exception {
 
-		UserSession userSession = userService.login(userParam);
+		String captchaCode = cacheService.getString(userParam.getCaptchaCodeId());
+		if(StringUtils.isEmpty(captchaCode)){
+			return fail("Please reflush captcha code."); 
+		}
+		if(!StringUtils.equals(StringUtils.lowerCase(captchaCode), StringUtils.lowerCase(userParam.getCaptchaCode()))){
+			return fail(ErrorCode.CAPTCHA_ERROR); 
+		}
+		
+		String privateRsaKey = cacheService.getString(RSAUtil.PRIVATE_KEY + "_" + userParam.getRsaKeyId());
+		String pwd = PasswdUtil.getPasswd(privateRsaKey, userParam.getUserName(), userParam.getPassword());
+		if(StringUtils.isEmpty(pwd)){
+			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
+		}
+		
+		UserSession userSession = userService.login(userParam.getUserName(), pwd);
 		if (userSession != null) {
 			Map<String, Object> claims = new HashMap<String, Object>(1);
 			claims.put(Constant.USER_ID, userSession.getUid());

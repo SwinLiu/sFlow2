@@ -36,6 +36,17 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency> 
 		
+		<!--Start : Validation jars -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+		<!--End : Validation jars -->
+		
         <!--引入test starter-->
         <dependency>
 		  <groupId>org.springframework.boot</groupId>

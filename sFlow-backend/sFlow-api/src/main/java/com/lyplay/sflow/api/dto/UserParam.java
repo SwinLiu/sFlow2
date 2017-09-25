@@ -1,16 +1,25 @@
-package com.lyplay.sflow.service.dto;
+package com.lyplay.sflow.api.dto;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author lyplay
  */
 public class UserParam {
 	
+	@NotBlank(message="{login.userName}")
     private String userName;
+	
+	@NotBlank(message="{login.password}")
     private String password;
     
+	@NotBlank(message="{login.captchaCodeId}")
     private String captchaCodeId;
+	
+	@NotBlank(message="{login.captchaCode}")
     private String captchaCode;
     
+	@NotBlank(message="{login.rsaKeyId}")
     private String rsaKeyId;
 
     public String getUserName() {

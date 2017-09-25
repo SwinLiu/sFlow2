@@ -1,5 +1,7 @@
 package com.lyplay.sflow.service.impl;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class RedisCacheServiceImpl implements CacheService {
 	public void setString(String key, String value) {
 		valOpsStr.set(key,value);
 	}
+	
+	@Override
+	public void setString(String key, String value, long timeout, TimeUnit unit) {
+		valOpsStr.set(key,value, timeout, unit);
+	}
 
 	@Override
 	public void deleteStr(String key) {
@@ -50,6 +57,11 @@ public class RedisCacheServiceImpl implements CacheService {
 		valOpsObj.set(key, value);
 	}
 
+	@Override
+	public void setObject(Object key, Object value, long timeout, TimeUnit unit) {
+		valOpsObj.set(key, value, timeout, unit);
+	}
+	
 	@Override
 	public void deleteObject(Object key) {
 		redisTemplate.delete(key);

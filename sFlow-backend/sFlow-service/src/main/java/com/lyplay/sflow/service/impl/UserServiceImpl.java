@@ -16,7 +16,6 @@ import com.lyplay.sflow.data.repository.UserAccountRepository;
 import com.lyplay.sflow.data.repository.UserPasswordRepository;
 import com.lyplay.sflow.service.UserService;
 import com.lyplay.sflow.service.dto.UserDto;
-import com.lyplay.sflow.service.dto.UserParam;
 import com.lyplay.sflow.service.dto.UserViewDto;
 import com.lyplay.sflow.service.model.UserSession;
 
@@ -30,14 +29,14 @@ public class UserServiceImpl implements UserService {
 	UserPasswordRepository userPasswordRepository;
 	
 	@Override
-	public UserSession login(UserParam userParam) {
+	public UserSession login(String userName, String password) {
 		
-		UserAccount userAccount = userAccountRepository.findByUserName(userParam.getUserName());
+		UserAccount userAccount = userAccountRepository.findByUserName(userName);
 		
 		if(userAccount == null){
 			return null;
 		}else{
-			UserPassword userPwd = userPasswordRepository.findByUidAndPassword(userAccount.getUid(), userParam.getPassword());
+			UserPassword userPwd = userPasswordRepository.findByUidAndPassword(userAccount.getUid(), password);
 			if(userPwd != null){
 				UserSession userSession = new UserSession();
 				userSession.setEmail(userAccount.getEmail());
