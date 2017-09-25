@@ -18,8 +18,8 @@ export class AuthService {
   private apiUrl: string;
   private headers;
 
-  loginUserName: string = "";
-  isLoggedIn: boolean = false;
+  loginUserName = "";
+  isLoggedIn = false;
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
@@ -30,52 +30,39 @@ export class AuthService {
   ) {
     this.apiUrl = config.apiUrl;
     const idToken = localStorage.getItem('id_token');
-    const sessionId = localStorage.getItem('id_session');
     this.headers = new Headers({
       'Content-Type' : 'application/json',
-      'access-token' : idToken,
-      'seesion-id' : sessionId
+      'X-API-Token' : idToken
     });
     if (idToken != null) {
       // sessionId
-      const url = `${this.apiUrl}/api/session/id`;
-      this.http.get(url, {headers: this.headers})
-        .toPromise()
-        .then(response => this.checkToken(response.json()))
-        .catch(this.loggerService.handleError);
-
+      this.isLoggedIn = true;
+      this.loginUserName = localStorage.getItem('loginUserName');
     }
 
   }
 
   checkToken(data): void {
-    if (data.isSuccess) {
-      this.isLoggedIn = true;
-      localStorage.setItem('id_session', data.result);
-      const idToken = localStorage.getItem('id_token');
-      const sessionId = localStorage.getItem('id_session');
-      this.headers = new Headers({
-        'Content-Type' : 'application/json',
-        'access-token' : idToken,
-        'seesion-id' : sessionId
-      });
-      this.loginUserName = localStorage.getItem('loginUserName');
-    }
+
   }
 
-  getCaptchaSrc(): string {
-    return `${this.apiUrl}/api/captcha/160x30x6x0`;
+  getCaptchaSrc(): Promise<string> {
+    const url = `${this.apiUrl}/api/captcha/160x30x6x0`;
+    return this.http.get(url, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.loggerService.handleError);
   }
 
   getRSAPublicKey(): Promise<string> {
     const url = `${this.apiUrl}/api/secret`;
     return this.http.get(url, {headers: this.headers})
       .toPromise()
-      .then(response => response.json().result)
+      .then(response => response.json())
       .catch(this.loggerService.handleError);
   }
 
-  setLoginInfo(): void{
+  setLoginInfo(): void {
     this.isLoggedIn = true;
     this.loginUserName = "Swin Liu";
     localStorage.setItem('id_token', '123456789');
@@ -90,8 +77,12 @@ export class AuthService {
     localStorage.removeItem('loginUserName');
   }
 
-  login(): Observable<boolean> {
-    return Observable.of(true).do(val => this.setLoginInfo());
+  login(data): Promise<string> {
+    const url = `${this.apiUrl}/api/login`;
+    return this.http.post(url, data)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.loggerService.handleError);
   }
 
   logout(): Observable<boolean> {

@@ -20,30 +20,30 @@ export class SignUpComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.captchaSrc = this.authService.getCaptchaSrc();
+    // this.captchaSrc = this.authService.getCaptchaSrc();
     this.authService.getRSAPublicKey().then(data => this.rsaPublicKey =  data);
 
   }
 
   login(): void {
 
-    this.authService.login().subscribe(() => {
-      if (this.authService.isLoggedIn) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+    // this.authService.login().subscribe(() => {
+    //   if (this.authService.isLoggedIn) {
+    //     // Get the redirect URL from our auth service
+    //     // If no redirect has been set, use the default
+    //     let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
-        // Set our navigation extras object
-        // that passes on our global query params and fragment
-        let navigationExtras: NavigationExtras = {
-          preserveQueryParams: true,
-          preserveFragment: true
-        };
+    //     // Set our navigation extras object
+    //     // that passes on our global query params and fragment
+    //     let navigationExtras: NavigationExtras = {
+    //       preserveQueryParams: true,
+    //       preserveFragment: true
+    //     };
 
-        // Redirect the user
-        this.router.navigate([redirect], navigationExtras);
-      }
-    });
+    //     // Redirect the user
+    //     this.router.navigate([redirect], navigationExtras);
+    //   }
+    // });
   }
 
 }

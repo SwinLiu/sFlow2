@@ -7,15 +7,15 @@
     <h2 class="form-signin-heading">Please sign in</h2>
 
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="inputEmail" class="form-control" placeholder="User name / Email / Phone number"
+    <input type="text" [(ngModel)]="loginParam.userName" name="inputEmail" id="inputEmail" class="form-control" placeholder="User name / Email / Phone number"
              maxlength="40" >
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+    <input type="password" [(ngModel)]="unEncryptPwd" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password"
              maxlength="20">
 
     <label for="captchaCode" class="sr-only">Captcha Code</label>
-    <input type="text" id="captchaCode" class="form-control" placeholder="Captcha Code"
+    <input type="text" [(ngModel)]="loginParam.captchaCode" name="captchaCode" id="captchaCode" class="form-control" placeholder="Captcha Code"
              maxlength="6"  />
     <!-- -->
     <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" >
