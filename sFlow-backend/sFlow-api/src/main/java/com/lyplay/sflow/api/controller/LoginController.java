@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.api.auth.AuthPassport;
 import com.lyplay.sflow.api.dto.UserParam;
+import com.lyplay.sflow.api.util.TranslatorHelper;
 import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.common.enums.ErrorCode;
 import com.lyplay.sflow.common.util.Constant;
@@ -52,19 +53,19 @@ public class LoginController {
 
 		String captchaCode = cacheService.getString(userParam.getCaptchaCodeId());
 		if(StringUtils.isEmpty(captchaCode)){
-			return fail("Please reflush captcha code."); 
+			return fail(TranslatorHelper.get("login.error.captchaCode.timeout"));
 		}
 		if(!StringUtils.equals(StringUtils.lowerCase(captchaCode), StringUtils.lowerCase(userParam.getCaptchaCode()))){
-			return fail(ErrorCode.CAPTCHA_ERROR); 
+			return fail(TranslatorHelper.get("login.error.captchaCode.unmatch")); 
 		}
 		
-		String privateRsaKey = cacheService.getString(RSAUtil.PRIVATE_KEY + "_" + userParam.getRsaKeyId());
-		String pwd = PasswdUtil.getPasswd(privateRsaKey, userParam.getUserName(), userParam.getPassword());
-		if(StringUtils.isEmpty(pwd)){
-			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
-		}
+//		String privateRsaKey = cacheService.getString(RSAUtil.PRIVATE_KEY + "_" + userParam.getRsaKeyId());
+//		String pwd = PasswdUtil.getPasswd(privateRsaKey, userParam.getUserName(), userParam.getPassword());
+//		if(StringUtils.isEmpty(pwd)){
+//			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
+//		}
 		
-		UserSession userSession = userService.login(userParam.getUserName(), pwd);
+		UserSession userSession = userService.login(userParam.getUserName(), userParam.getPassword());
 		if (userSession != null) {
 			Map<String, Object> claims = new HashMap<String, Object>(1);
 			claims.put(Constant.USER_ID, userSession.getUid());
@@ -74,7 +75,7 @@ public class LoginController {
 			cacheService.setObject(token, userSession);
 			return success(userSession);
 		} else {
-			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.
+			return fail(TranslatorHelper.get("login.error.password")); // userAccount or Password have issue.
 		}
 
 	}

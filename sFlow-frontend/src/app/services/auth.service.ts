@@ -11,6 +11,7 @@ import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { LoggerService } from './logger.service';
 
 import 'rxjs/add/operator/toPromise';
+import { UserSession } from "app/beans/userSession";
 
 @Injectable()
 export class AuthService {
@@ -62,14 +63,14 @@ export class AuthService {
       .catch(this.loggerService.handleError);
   }
 
-  setLoginInfo(): void {
+  setLoginInfo(userSession: UserSession): void {
     this.isLoggedIn = true;
-    this.loginUserName = "Swin Liu";
-    localStorage.setItem('id_token', '123456789');
+    this.loginUserName = userSession.userName;
+    localStorage.setItem('id_token', userSession.jwtToken);
     localStorage.setItem('loginUserName', this.loginUserName);
   }
 
-  setLogoutInfo(): void{
+  setLogoutInfo(): void {
     this.isLoggedIn = false;
     this.loginUserName = "";
     localStorage.removeItem('id_token');
@@ -77,7 +78,7 @@ export class AuthService {
     localStorage.removeItem('loginUserName');
   }
 
-  login(data): Promise<string> {
+  login(data): Promise<any> {
     const url = `${this.apiUrl}/api/login`;
     return this.http.post(url, data)
       .toPromise()

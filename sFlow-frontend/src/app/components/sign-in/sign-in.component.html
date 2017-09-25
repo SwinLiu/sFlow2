@@ -18,8 +18,8 @@
     <input type="text" [(ngModel)]="loginParam.captchaCode" name="captchaCode" id="captchaCode" class="form-control" placeholder="Captcha Code"
              maxlength="6"  />
     <!-- -->
-    <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" >
-
+    <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" (click)="refreshCaptcha()" >
+    <div><label>{{loginMsg}}</label></div>
     <div class="checkbox">
       <label>
         <input type="checkbox" value="remember-me"> Remember me

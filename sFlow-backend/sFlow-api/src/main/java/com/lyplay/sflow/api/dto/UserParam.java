@@ -19,8 +19,8 @@ public class UserParam {
 	@NotBlank(message="{login.captchaCode}")
     private String captchaCode;
     
-	@NotBlank(message="{login.rsaKeyId}")
-    private String rsaKeyId;
+//	@NotBlank(message="{login.rsaKeyId}")
+//    private String rsaKeyId;
 
     public String getUserName() {
         return userName;
@@ -54,13 +54,13 @@ public class UserParam {
 		this.captchaCode = captchaCode;
 	}
 
-	public String getRsaKeyId() {
-		return rsaKeyId;
-	}
-
-	public void setRsaKeyId(String rsaKeyId) {
-		this.rsaKeyId = rsaKeyId;
-	}
+//	public String getRsaKeyId() {
+//		return rsaKeyId;
+//	}
+//
+//	public void setRsaKeyId(String rsaKeyId) {
+//		this.rsaKeyId = rsaKeyId;
+//	}
     
     
 }

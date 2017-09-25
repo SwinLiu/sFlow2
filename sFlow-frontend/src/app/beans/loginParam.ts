@@ -3,5 +3,5 @@ export class LoginParam {
   password: string;
   captchaCodeId: string;
   captchaCode: string;
-  rsaKeyId: string;
+  // rsaKeyId: string;
 }
