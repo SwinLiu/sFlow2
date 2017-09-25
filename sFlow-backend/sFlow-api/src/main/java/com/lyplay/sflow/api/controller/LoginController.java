@@ -19,6 +19,7 @@ import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.common.enums.ErrorCode;
 import com.lyplay.sflow.common.util.Constant;
 import com.lyplay.sflow.common.util.TokenUtil;
+import com.lyplay.sflow.service.CacheService;
 import com.lyplay.sflow.service.UserService;
 import com.lyplay.sflow.service.dto.UserParam;
 import com.lyplay.sflow.service.model.UserSession;
@@ -34,6 +35,9 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	CacheService cacheService;
+	
 	@AuthPassport(validate = false)
 	@ApiOperation(value = "用户登录认证", notes = "用户帐号密码检查")
 	@ApiImplicitParams({ 
@@ -45,11 +49,12 @@ public class LoginController {
 
 		UserSession userSession = userService.login(userParam);
 		if (userSession != null) {
-			
 			Map<String, Object> claims = new HashMap<String, Object>(1);
 			claims.put(Constant.USER_ID, userSession.getUid());
-			claims.put(Constant.USER_ID, userSession.getUid());
-			userSession.setJwtToken(TokenUtil.getJWTString(claims, null));
+			claims.put(Constant.USER_NAME, userSession.getUserName());
+			String token = TokenUtil.getJWTString(claims, null);
+			userSession.setJwtToken(token);
+			cacheService.setObject(token, userSession);
 			return success(userSession);
 		} else {
 			return fail(ErrorCode.LOGIN_ERROR); // userAccount or Password have issue.

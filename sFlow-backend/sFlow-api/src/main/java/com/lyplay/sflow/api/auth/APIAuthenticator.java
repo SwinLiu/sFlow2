@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lyplay.sflow.api.exception.AuthenticateException;
-import com.lyplay.sflow.common.util.Constant;
-import com.lyplay.sflow.common.util.JsonUtil;
 import com.lyplay.sflow.common.util.TokenUtil;
+import com.lyplay.sflow.service.CacheService;
 import com.lyplay.sflow.service.model.UserSession;
 
 import io.jsonwebtoken.Claims;
@@ -19,6 +19,9 @@ public class APIAuthenticator implements Authenticator {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private static final String API_HEADER_TOKEN = "X-API-Token";
+	
+	@Autowired
+	CacheService cacheService;
 	
 	@Override
 	public UserSession authenticate(HttpServletRequest request,
@@ -35,8 +38,7 @@ public class APIAuthenticator implements Authenticator {
 		Claims claims = TokenUtil.parseJWT(token);
 		if(claims != null){
 			try {
-				String userSessionJson = (String) claims.get(Constant.USER_SESSION);
-				return JsonUtil.json2Bean(userSessionJson, UserSession.class);
+				return (UserSession) cacheService.getObject(token);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 				return null;

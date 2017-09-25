@@ -4,13 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CaptchaImageCode {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static String CAPTCHA_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
 	
@@ -203,6 +210,26 @@ public class CaptchaImageCode {
 	public void write(OutputStream sos) throws IOException {
 		ImageIO.write(buffImg, "png", sos);
 		sos.close();
+	}
+	
+	public String getBase64Str(){
+		ByteArrayOutputStream outputStream = null;  
+	    try {  
+	      outputStream = new ByteArrayOutputStream();  
+	      ImageIO.write(buffImg, "png", outputStream);
+	      return Base64.encodeBase64String(outputStream.toByteArray());
+	    } catch (Exception e) {  
+	    	logger.error(e.getMessage(), e);
+	    }  finally {
+	    	if(outputStream != null){
+	    		try {
+					outputStream.close();
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
+	    	}
+		}
+	    return null;
 	}
 
 	public BufferedImage getBuffImg() {

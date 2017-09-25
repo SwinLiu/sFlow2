@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-import { AuthService }      from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'sFlow-sign-in',
@@ -9,11 +9,11 @@ import { AuthService }      from '../../services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  loginAccount : string;
-  password : string;
-  captchaCode : string;
-  captchaSrc : string;
-  rsaPublicKey : string;
+  loginAccount: string;
+  password: string;
+  captchaCode: string;
+  captchaSrc: string;
+  rsaPublicKey: string;
 
 
   constructor(public authService: AuthService,
@@ -22,7 +22,6 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.captchaSrc = this.authService.getCaptchaSrc();
     this.authService.getRSAPublicKey().then(data => this.rsaPublicKey =  data);
-
   }
 
   login(): void {
@@ -31,11 +30,11 @@ export class SignInComponent implements OnInit {
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+        const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
         // Set our navigation extras object
         // that passes on our global query params and fragment
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
           preserveQueryParams: true,
           preserveFragment: true
         };
