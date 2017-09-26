@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { LoginParam } from "app/beans/loginParam";
 import * as crypto from 'crypto-browserify';
 import { UserSession } from "app/beans/userSession";
+// import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 // declare const Buffer;
 
@@ -14,15 +15,31 @@ import { UserSession } from "app/beans/userSession";
 })
 export class SignInComponent implements OnInit {
 
+  // form: FormGroup;
   unEncryptPwd = "";
   captchaSrc: string;
   loginMsg = "";
   // rsaPublicKey: string;
   loginParam: LoginParam = new LoginParam();
-
+  submitted = false;
+  // public userName: AbstractControl;
+  // public password: AbstractControl;
+  // public captchaCode: AbstractControl;
 
   constructor(public authService: AuthService,
-    private router: Router) { }
+    // fb: FormBuilder,
+    private router: Router) {
+
+    // this.form = fb.group({
+    //   'userName': ['', Validators.compose([Validators.required])],
+    //   'password': ['', Validators.compose([Validators.required])],
+    //   'captchaCode': ['', Validators.compose([Validators.required])]
+    // });
+
+    // this.userName = this.form.controls['userName'];
+    // this.password = this.form.controls['password'];
+    // this.captchaCode = this.form.controls['captchaCode'];
+  }
 
   ngOnInit(): void {
     this.refreshCaptcha();
@@ -45,6 +62,14 @@ export class SignInComponent implements OnInit {
   //   this.rsaPublicKey = keyBeginStr + data.result.rsaPublicKey + keyEndStr;
   // }
 
+
+
+  onSubmit(values: Object): void {
+    // this.submitted = true;
+    // if (this.form.valid) {
+    //   this.login();
+    // }
+  }
 
   login(): void {
 

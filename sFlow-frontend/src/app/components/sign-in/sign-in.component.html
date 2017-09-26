@@ -3,29 +3,44 @@
 
 <div class="">
 
-  <form class="form-signin">
+  <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login()">
     <h2 class="form-signin-heading">Please sign in</h2>
 
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" [(ngModel)]="loginParam.userName" name="inputEmail" id="inputEmail" class="form-control" placeholder="User name / Email / Phone number"
-             maxlength="40" >
+    <label for="inputAccount" class="sr-only">Email address</label>
+    <input type="text" [(ngModel)]="loginParam.userName" name="inputAccount" id="inputAccount" class="form-control" placeholder="User name / Email / Phone number"
+      #inputAccount=ngModel required maxlength="40" >
+
+    <div [hidden]="inputAccount.valid || inputAccount.pristine" >
+        <span [style.color]="'red'" >Login account is required</span>
+    </div>
 
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" [(ngModel)]="unEncryptPwd" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password"
-             maxlength="20">
+      #inputPassword=ngModel required maxlength="20">
 
-    <label for="captchaCode" class="sr-only">Captcha Code</label>
-    <input type="text" [(ngModel)]="loginParam.captchaCode" name="captchaCode" id="captchaCode" class="form-control" placeholder="Captcha Code"
-             maxlength="6"  />
+    <div [hidden]="inputPassword.valid || inputPassword.pristine" >
+        <span [style.color]="'red'" >Password is required</span>
+    </div>
+
+    <label for="inputCaptchaCode" class="sr-only">Captcha Code</label>
+    <input type="text" [(ngModel)]="loginParam.captchaCode" name="inputCaptchaCode" id="inputCaptchaCode" class="form-control" placeholder="Captcha Code"
+      #inputCaptchaCode=ngModel required maxlength="6"  />
+    
+    <div [hidden]="inputCaptchaCode.valid || inputCaptchaCode.pristine" >
+        <span [style.color]="'red'" >Captcha code is required</span>
+    </div>
+      
     <!-- -->
     <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" (click)="refreshCaptcha()" >
-    <div><label>{{loginMsg}}</label></div>
     <div class="checkbox">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login()" >
+
+    <div><label [style.color]="'red'" >{{loginMsg}}</label></div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid" >
       <span translate="sign-in">Sign in</span>
     </button>
   </form>
