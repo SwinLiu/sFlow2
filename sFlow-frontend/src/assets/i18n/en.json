@@ -22,5 +22,15 @@
         "action" : "Action",
         "addNew" : "Add New",
         "add" : "Add"
+    },
+    "company" : {
+        "list" : "Company List",
+        "addNew" : "Add New",
+        "add" : "Add"
+    },
+    "employee" : {
+        "list" : "Employee List",
+        "addNew" : "Add New",
+        "add" : "add"
     }
 }

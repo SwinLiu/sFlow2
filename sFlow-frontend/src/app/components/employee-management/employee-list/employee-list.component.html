@@ -1,0 +1,44 @@
+<div>
+  <div class="row placeholders">
+    <div class="col-xs-12 col-sm-12 placeholder">
+      <h3><span translate="employee.list"></span></h3>
+    </div>
+  </div>
+  <div class="row placeholders">
+    <div class="col-xs-12 col-sm-12 placeholder">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td><span translate="user.id"></span></td>
+            <td><span translate="user.name"></span></td>
+            <td><span translate="user.phone"></span></td>
+            <td><span translate="user.email"></span></td>
+            <td><span translate="user.status"></span></td>
+            <td><span translate="user.createTime"></span></td>
+            <td><span translate="user.action"></span></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userAccount of userAccounts" >
+            <td>{{userAccount.uid}}</td>
+            <td>{{userAccount.userName}}</td>
+            <td>{{userAccount.phoneNumber}}</td>
+            <td>{{userAccount.email}}</td>
+            <td>{{userAccount.status}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">
+              <button type="button" class="btn btn-primary pull-right" routerLink="/employee/management/add" >
+                <span translate="employee.addNew"></span>
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

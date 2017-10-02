@@ -6,8 +6,6 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 import { AuthGuard } from '../../services/auth-guard.service';
-import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
-import { CompanyManagementComponent } from "app/components/company-management/company-management.component";
 import { TranslateModule } from "@ngx-translate/core";
 
 const mainRoutes: Routes = [
@@ -24,8 +22,8 @@ const mainRoutes: Routes = [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'user/profile', component: UserProfileComponent },
           { path: 'user', loadChildren: 'app/components/user-management/user-management.module#UserManagementModule' },
-          { path: 'company/management', component: CompanyManagementComponent },
-          { path: 'employee/management', component: EmployeeManagementComponent }
+          { path: 'company', loadChildren: 'app/components/company-management/company-management.module#CompanyManagementModule' },
+          { path: 'employee', loadChildren: 'app/components/employee-management/employee-management.module#EmployeeManagementModule' }
         ]
       }
     ]

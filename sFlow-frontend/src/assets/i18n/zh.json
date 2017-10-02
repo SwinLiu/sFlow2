@@ -5,11 +5,14 @@
     "sign-in" : "登录",
     "sign-up" : "注册",
     "sign-out" : "登出",
+
     "lang-en" : "英语",
     "lang-zh" : "中文",
+
     "user-management" : "用户管理",
     "employee-management" : "员工管理",
     "company-management" : "公司管理",
+
     "user" : {
         "list" : "用户列表",
         "id" : "用户编号",
@@ -22,5 +25,15 @@
         "action" : "操作",
         "addNew" : "新增用户",
         "add" : "新增"
-    }    
+    },
+    "company" : {
+        "list" : "公司列表",
+        "addNew" : "新增公司",
+        "add" : "新增"
+    },
+    "employee" : {
+        "list" : "员工列表",
+        "addNew" : "新增员工",
+        "add" : "新增"
+    }
 }

@@ -10,15 +10,17 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 import { MainRoutingModule } from './main-routing.module';
-import { CompanyManagementComponent } from "app/components/company-management/company-management.component";
-import { EmployeeManagementComponent } from "app/components/employee-management/employee-management.component";
 import { UserManagementModule } from "app/components/user-management/user-management.module";
+import { CompanyManagementModule } from "app/components/company-management/company-management.module";
+import { EmployeeManagementModule } from "app/components/employee-management/employee-management.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UserManagementModule,
+    CompanyManagementModule,
+    EmployeeManagementModule,
     MainRoutingModule
   ],
   declarations: [
@@ -26,9 +28,7 @@ import { UserManagementModule } from "app/components/user-management/user-manage
     TopNavComponent,
     LeftNavComponent,
     DashboardComponent,
-    UserProfileComponent,
-    CompanyManagementComponent,
-    EmployeeManagementComponent
+    UserProfileComponent
   ],
   providers: [ ]
 })
