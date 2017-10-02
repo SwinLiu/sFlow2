@@ -22,8 +22,18 @@ export class UserAccountService {
 
     addNewUser(body): Promise<RestResult> {
         const returnFlag = false;
-        const url = `${this.apiUrl}/api/user/add`;
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.user.add}`;
         return this.http.post(url, body)
+            .toPromise()
+            .then(response => response)
+            .catch(this.loggerService.handleError);
+
+    }
+
+    getUserList(): Promise<RestResult> {
+        const returnFlag = false;
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.user.list}`;
+        return this.http.get(url)
             .toPromise()
             .then(response => response)
             .catch(this.loggerService.handleError);

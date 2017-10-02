@@ -59,7 +59,12 @@ public class UserController {
 //			userDto.setPassword(pwd);
 //		}
 		userDto.setChanger("Test");
-		userService.addNewUser(userDto);
+		try {
+			userService.addNewUser(userDto);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return fail("Save failed.");
+		}
 		return success();
 	}
 	

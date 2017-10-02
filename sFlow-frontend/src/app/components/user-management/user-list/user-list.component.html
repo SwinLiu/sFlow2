@@ -19,39 +19,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>U001</td>
-            <td>Swin Liu</td>
-            <td>+86 131 1234 1456</td>
-            <td>i@lyplay.com</td>
-            <td>Active</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>U002</td>
-            <td>Swin Liu</td>
-            <td>+86 131 1234 1456</td>
-            <td>i@lyplay.com</td>
-            <td>Active</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>U003</td>
-            <td>Swin Liu</td>
-            <td>+86 131 1234 1456</td>
-            <td>i@lyplay.com</td>
-            <td>Active</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>U004</td>
-            <td>Swin Liu</td>
-            <td>+86 131 1234 1456</td>
-            <td>i@lyplay.com</td>
-            <td>Active</td>
+          <tr *ngFor="let userAccount of userAccounts" >
+            <td>{{userAccount.uid}}</td>
+            <td>{{userAccount.userName}}</td>
+            <td>{{userAccount.phoneNumber}}</td>
+            <td>{{userAccount.email}}</td>
+            <td>{{userAccount.status}}</td>
             <td></td>
             <td></td>
           </tr>

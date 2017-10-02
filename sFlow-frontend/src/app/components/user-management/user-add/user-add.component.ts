@@ -15,7 +15,7 @@ declare const Buffer;
 })
 export class UserAddComponent implements OnInit {
 
-  rsaPublicKey: string;
+  // rsaPublicKey: string;
 
   newUser = {
     userName : "",
@@ -28,7 +28,8 @@ export class UserAddComponent implements OnInit {
 
   errorMsg = "";
 
-  constructor(private authService: AuthService,
+  constructor(
+    // private authService: AuthService,
     private userAccountService: UserAccountService,
     private loggerService: LoggerService,
     private location: Location,
@@ -36,9 +37,9 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit() {
 
-    const keyBeginStr = "-----BEGIN PUBLIC KEY-----\n";
-    const keyEndStr = "\n-----END PUBLIC KEY-----";
-    this.authService.getRSAPublicKey().then(data => this.rsaPublicKey =  keyBeginStr + data + keyEndStr);
+    // const keyBeginStr = "-----BEGIN PUBLIC KEY-----\n";
+    // const keyEndStr = "\n-----END PUBLIC KEY-----";
+    // this.authService.getRSAPublicKey().then(data => this.rsaPublicKey =  keyBeginStr + data + keyEndStr);
 
     // const sha1Str: string = crypto.createHash('sha1').update('test').digest('hex');
     // console.log("sha1 = %s", sha1Str);
@@ -68,25 +69,22 @@ export class UserAddComponent implements OnInit {
 
   addNew() {
     this.errorMsg = "";
-    this.loggerService.log("rsaPublicKey : \n" + this.rsaPublicKey);
-    if (this.rsaPublicKey == null) {
-      return;
-    }
+    // this.loggerService.log("rsaPublicKey : \n" + this.rsaPublicKey);
+    // if (this.rsaPublicKey == null) {
+    //   return;
+    // }
 
     const sha1Str: string = crypto.createHash('sha1').update(this.unEncryptPwd).digest('hex');
-    this.loggerService.log("sha1 = " + sha1Str);
 
     // const passwd = this.newUser + '_@_' + sha1Str + '_@_test';
     // const encrypted = crypto.publicEncrypt(this.rsaPublicKey, new Buffer(passwd)).toString('hex');
 
     this.newUser.password = sha1Str;
     // this.loggerService.log("RSA encrypted = " + encrypted);
-    this.loggerService.log(this.newUser);
 
     const result: any = null;
     this.userAccountService.addNewUser(this.newUser).then(
       data => {
-        this.loggerService.log(data);
         if (data.success) {
           this.router.navigate([CONSTANTS.ROUTE_URL.user.list]);
         } else {
