@@ -1,16 +1,16 @@
 package com.lyplay.sflow.common.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
 import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * @ClassName: TokenUtil
@@ -23,21 +23,12 @@ public class TokenUtil {
 	
 	private static Logger logger = LoggerFactory.getLogger(TokenUtil.class);
 	
+	static final String SECRET = "swin0101@sFlow";
+	
 	/**
 	 * SECONDS
 	 */
 	public static long DEFAULT_EXPIRES = DateUtil.HOURS_IN_A_DAY * DateUtil.MINUTES_IN_AN_HOUR * DateUtil.SECONDS_IN_A_MINUTE;
-	
-	public static Map<String, Object> keyPair;
-	
-	static {
-		try {
-			keyPair = RSAUtil.genKeyPair();
-		} catch (Exception e) {
-			logger.error("Load local RSA key failed.");
-			logger.error(e.getMessage(), e);
-		}
-	}
 	
 	public static String getJWTString(Map<String, Object> claims) {
 		return getJWTString(claims, null);
@@ -50,7 +41,7 @@ public class TokenUtil {
 		
 		claims.put("secret", RandomUtil.generateString(6));
 		
-		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.RS256;
+		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
 		
 		long nowMillis = System.currentTimeMillis();
 		long expiresMillis = nowMillis;
@@ -67,7 +58,7 @@ public class TokenUtil {
 				.setClaims(claims)
 				.setIssuedAt(now)
 				.setExpiration(expirationDate)
-				.signWith(signatureAlgorithm, RSAUtil.getPrivateKey(keyPair))
+				.signWith(signatureAlgorithm, SECRET)
 				.compact();
 		return jwtString;
 	}
@@ -75,7 +66,7 @@ public class TokenUtil {
 	public static Claims parseJWT(String jwt) {
 		if(isValid(jwt)){
 			return Jwts.parser()        
-				   .setSigningKey(RSAUtil.getPrivateKey(keyPair))
+				   .setSigningKey(SECRET)
 				   .parseClaimsJws(jwt).getBody();
 		} else {
 			return null;
@@ -84,7 +75,7 @@ public class TokenUtil {
 	
 	public static boolean isValid(String token) {
 		try {
-			Jwts.parser().setSigningKey(RSAUtil.getPrivateKey(keyPair)).parseClaimsJws(token.trim());
+			Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token.trim());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -93,7 +84,7 @@ public class TokenUtil {
 
 	public static String getName(String jwsToken) {
 		if (isValid(jwsToken)) {
-			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(RSAUtil.getPrivateKey(keyPair))
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET)
 					.parseClaimsJws(jwsToken);
 			String name = String.valueOf(claimsJws.getBody().get("name"));
 			return name;
@@ -103,7 +94,7 @@ public class TokenUtil {
 
 	public static String[] getRoles(String jwsToken) {
 		if (isValid(jwsToken)) {
-			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(RSAUtil.getPrivateKey(keyPair))
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET)
 					.parseClaimsJws(jwsToken);
 			return claimsJws.getBody().getAudience().split(",");
 		}
@@ -112,7 +103,7 @@ public class TokenUtil {
 
 	public static int getVersion(String jwsToken) {
 		if (isValid(jwsToken)) {
-			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(RSAUtil.getPrivateKey(keyPair))
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET)
 					.parseClaimsJws(jwsToken);
 			return Integer.parseInt(claimsJws.getBody().getId());
 		}

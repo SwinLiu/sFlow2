@@ -1,5 +1,7 @@
 package com.lyplay.sflow.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		compEmployeeGroupRepository.save(compEmployeeGroup);
 		
 		return false;
+	}
+	
+	@Override
+	public List<EmployeeDto> getEmployeeList(String compId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
