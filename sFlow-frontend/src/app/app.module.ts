@@ -23,13 +23,15 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppTranslateModule } from './app-translate.module';
 import { UserAccountService } from "app/services/user/user-account.service";
+import { JwtInterceptor } from "app/jwt.interceptor";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
     AppTranslateModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     MainModule,
     AppConfigModule,
     AppRoutingModule
@@ -46,7 +48,12 @@ import { UserAccountService } from "app/services/user/user-account.service";
     UserAccountService,
     ConsoleService,
     LoggerService,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [ AppComponent ]
 })

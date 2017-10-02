@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ConsoleService {
-    log(message:any) : void {
+    log(message: any): void {
         console.log(message);
     }
-    warn(message:any) : void {
+    warn(message: any): void {
         console.warn(message);
     }
-    error(message:any) : void {
+    error(message: any): void {
         console.error(message);
     }
-    info(message:any) : void {
+    info(message: any): void {
         console.info(message);
     }
-    debug(message:any) : void {
+    debug(message: any): void {
         console.debug(message);
     }
 }

@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lyplay.sflow.api.auth.APIAuthenticator;
 import com.lyplay.sflow.api.auth.AuthPassport;
+import com.lyplay.sflow.api.exception.AuthenticateException;
 import com.lyplay.sflow.service.model.UserSession;
 import com.lyplay.sflow.service.model.UserSessionContext;
 
@@ -43,7 +43,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler) throws Exception {
-		boolean returnFlag = true;
 		if(handler.getClass().isAssignableFrom(HandlerMethod.class)){
 			
             AuthPassport authPassport = ((HandlerMethod) handler).getMethodAnnotation(AuthPassport.class);
@@ -55,16 +54,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         	   if(userSession != null){
         		   UserSessionContext.setUserSession(userSession);
         	   }else{
-        		   returnFlag = false;
+        		   throw new AuthenticateException();
         	   }
            }
         }
-		
-		if(!returnFlag){
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		}
-            
-		return returnFlag;   
+		return true;   
 	}
 	
 	private UserSession tryGetAuthenticatedUser(HttpServletRequest request,

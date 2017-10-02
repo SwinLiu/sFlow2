@@ -57,6 +57,9 @@
         <div class="col-sm-offset-2 col-sm-4">
           <button type="button" (click)="addNew()" class="btn btn-default">{{ 'user.add' | translate }}</button>
         </div>
+        <div class="col-sm-6">
+          {{errorMsg}}
+        </div>
       </div>
     </form>
   </div>

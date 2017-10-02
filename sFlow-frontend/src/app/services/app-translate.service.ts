@@ -1,6 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Injectable } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 
 import { LoggerService } from './logger.service';

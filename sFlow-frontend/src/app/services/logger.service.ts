@@ -38,7 +38,7 @@ export class LoggerService {
     }
 
     handleError(error: any): Promise<any> {
-        this.error(error); // for demo purposes only
+        this.error(error);
         return Promise.reject(error.message || error);
     }
 

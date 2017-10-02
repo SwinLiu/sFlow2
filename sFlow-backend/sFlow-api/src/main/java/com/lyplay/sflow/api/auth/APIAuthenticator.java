@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lyplay.sflow.api.exception.AuthenticateException;
+import com.lyplay.sflow.api.util.SpringUtil;
 import com.lyplay.sflow.common.util.TokenUtil;
 import com.lyplay.sflow.service.CacheService;
 import com.lyplay.sflow.service.model.UserSession;
@@ -20,9 +20,12 @@ public class APIAuthenticator implements Authenticator {
 	
 	private static final String API_HEADER_TOKEN = "X-API-Token";
 	
-	@Autowired
-	CacheService cacheService;
+	private CacheService cacheService;
 	
+	public APIAuthenticator() {
+		cacheService = SpringUtil.getBean(CacheService.class);
+	}
+
 	@Override
 	public UserSession authenticate(HttpServletRequest request,
 			HttpServletResponse response) throws AuthenticateException {

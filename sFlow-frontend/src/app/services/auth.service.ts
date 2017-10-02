@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
@@ -12,12 +11,12 @@ import { LoggerService } from './logger.service';
 
 import 'rxjs/add/operator/toPromise';
 import { UserSession } from "app/beans/userSession";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class AuthService {
 
   private apiUrl: string;
-  private headers;
 
   loginUserName = "";
   isLoggedIn = false;
@@ -26,40 +25,35 @@ export class AuthService {
 
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
-    private http: Http,
+    private http: HttpClient,
     private loggerService: LoggerService
   ) {
     this.apiUrl = config.apiUrl;
     const idToken = localStorage.getItem('id_token');
-    this.headers = new Headers({
-      'Content-Type' : 'application/json',
-      'X-API-Token' : idToken
-    });
     if (idToken != null) {
       // sessionId
       this.isLoggedIn = true;
       this.loginUserName = localStorage.getItem('loginUserName');
     }
-
   }
 
   checkToken(data): void {
 
   }
 
-  getCaptchaSrc(): Promise<string> {
+  getCaptchaSrc(): any {
     const url = `${this.apiUrl}/api/captcha/160x30x6x0`;
-    return this.http.get(url, {headers: this.headers})
+    return this.http.get(url)
       .toPromise()
-      .then(response => response.json())
+      .then(data => data)
       .catch(this.loggerService.handleError);
   }
 
   getRSAPublicKey(): Promise<string> {
     const url = `${this.apiUrl}/api/secret`;
-    return this.http.get(url, {headers: this.headers})
+    return this.http.get(url)
       .toPromise()
-      .then(response => response.json())
+      .then(response => response)
       .catch(this.loggerService.handleError);
   }
 
@@ -82,7 +76,7 @@ export class AuthService {
     const url = `${this.apiUrl}/api/login`;
     return this.http.post(url, data)
       .toPromise()
-      .then(response => response.json())
+      .then(response => response)
       .catch(this.loggerService.handleError);
   }
 

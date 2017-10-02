@@ -4,6 +4,8 @@ import * as crypto from 'crypto-browserify';
 import { AuthService } from "app/services/auth.service";
 import { LoggerService } from "app/services/logger.service";
 import { UserAccountService } from "app/services/user/user-account.service";
+import { Router } from "@angular/router";
+import { CONSTANTS } from "app/app.const";
 
 declare const Buffer;
 
@@ -24,10 +26,13 @@ export class UserAddComponent implements OnInit {
 
   unEncryptPwd = "";
 
+  errorMsg = "";
+
   constructor(private authService: AuthService,
     private userAccountService: UserAccountService,
     private loggerService: LoggerService,
-    private location: Location) { }
+    private location: Location,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -62,6 +67,7 @@ export class UserAddComponent implements OnInit {
   }
 
   addNew() {
+    this.errorMsg = "";
     this.loggerService.log("rsaPublicKey : \n" + this.rsaPublicKey);
     if (this.rsaPublicKey == null) {
       return;
@@ -79,8 +85,16 @@ export class UserAddComponent implements OnInit {
 
     const result: any = null;
     this.userAccountService.addNewUser(this.newUser).then(
-      data => this.loggerService.log(data)
+      data => {
+        this.loggerService.log(data);
+        if (data.success) {
+          this.router.navigate([CONSTANTS.ROUTE_URL.user.list]);
+        } else {
+          this.errorMsg = data.message;
+        }
+      }
     );
+    // this.loggerService.log(this.userAccountService.addNewUser(this.newUser));
   }
 
   goToBack() {

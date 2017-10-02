@@ -3,6 +3,12 @@
  * HTTPStatus:http状态
  */
 export const CONSTANTS = {
+  ROUTE_URL: {
+    signin: "/signin",
+    user: {
+      list: "/user/management/list"
+    }
+  },
   API_URL: {
     //登录地址
     login: "/api/login",
