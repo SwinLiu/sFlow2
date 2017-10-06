@@ -1,9 +1,12 @@
 package com.lyplay.sflow.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,8 +54,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public List<EmployeeDto> getEmployeeList(String compId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Employee> employeeList = employeeRepository.findAll();
+		if(CollectionUtils.isNotEmpty(employeeList)){
+			List<EmployeeDto> employeeDtoList = new ArrayList<EmployeeDto>();
+			for(Employee employee : employeeList){
+				EmployeeDto employeeDto = new EmployeeDto();
+				
+				employeeDtoList.add(employeeDto);
+			}
+			return employeeDtoList;
+		} else {
+			return Collections.emptyList();
+		}
 	}
 
 }

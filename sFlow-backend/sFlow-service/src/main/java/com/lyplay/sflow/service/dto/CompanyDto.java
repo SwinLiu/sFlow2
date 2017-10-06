@@ -3,7 +3,7 @@ package com.lyplay.sflow.service.dto;
 
 public class CompanyDto {
 
-	private Long id;
+	private String compId;
 	
 	private String companyName;
 	
@@ -11,12 +11,12 @@ public class CompanyDto {
 	
 	private String changer;
 
-	public Long getId() {
-		return id;
+	public String getCompId() {
+		return compId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCompId(String compId) {
+		this.compId = compId;
 	}
 
 	public String getCompanyName() {
