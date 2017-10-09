@@ -2,8 +2,6 @@ package com.lyplay.sflow.api.controller;
 
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/api/employee/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public RestResult addEmployee(HttpSession session) throws Exception {
+	public RestResult addEmployee() throws Exception {
 
 
 		return success();

@@ -23,6 +23,7 @@ import com.lyplay.sflow.common.util.TokenUtil;
 import com.lyplay.sflow.service.CacheService;
 import com.lyplay.sflow.service.UserService;
 import com.lyplay.sflow.service.model.UserSession;
+import com.lyplay.sflow.service.model.UserSessionContext;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -79,6 +80,10 @@ public class LoginController {
 	@RequestMapping(value = "/api/logout", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public RestResult logout() throws Exception {
+		UserSession userSession = UserSessionContext.getUserSession();
+		String userKeys = userSession.getJwtToken() + "*";
+		cacheService.deleteStr(userKeys);
+		cacheService.deleteObject(userKeys);
         return success();
 	}
 

@@ -3,8 +3,6 @@ package com.lyplay.sflow.api.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class CompanyController {
 
 	@RequestMapping(value = "/api/company/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public RestResult register(@RequestBody CompanyDto companyDto, HttpSession session) throws Exception {
+	public RestResult register(@RequestBody CompanyDto companyDto) throws Exception {
 		UserSession userSession = UserSessionContext.getUserSession();
 		companyDto.setChanger(userSession.getUid());
 		try {
