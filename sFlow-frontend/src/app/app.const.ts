@@ -6,7 +6,16 @@ export const CONSTANTS = {
   ROUTE_URL: {
     signin: "/signin",
     user: {
-      list: "/user/management/list"
+      list: "/user/management/list",
+      add: "/user/management/add"
+    },
+    company: {
+      list: "/company/management/list",
+      add: "/company/management/add"
+    },
+    employee: {
+      list: "/employee/management/list",
+      add: "/employee/management/add"
     }
   },
   API_URL: {
@@ -16,6 +25,15 @@ export const CONSTANTS = {
     user: {
       add: "/api/user/add", //添加用户信息
       list: "/api/user/list"//用户信息列表
+    },
+    company: {
+      add: "/api/company/add",
+      list: "/api/company/list",
+      select: "/api/company/select"
+    },
+    employee: {
+      add: "/api/employee/add",
+      list: "/api/employee/list"
     }
   },
   HTTPStatus: {

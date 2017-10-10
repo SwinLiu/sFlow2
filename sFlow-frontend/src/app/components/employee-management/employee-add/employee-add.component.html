@@ -10,49 +10,62 @@
   <div class="row placeholders">
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="inputUserName" class="col-sm-2 control-label">{{ 'user.name' | translate }}</label>
+        <label for="inputEmployeeId" class="col-sm-2 control-label">{{ 'employee.id' | translate }}</label>
         <div class="col-sm-4">
-          <input type="text" [(ngModel)]="newUser.userName" class="form-control" id="inputUserName"
-            name="inputUserName" #inputUserName=ngModel minlength="4" maxlength="40" required placeholder="Swin.Liu" />
+          <input type="text" [(ngModel)]="newEmployee.employeeId" class="form-control" id="inputEmployeeId"
+            name="inputEmployeeId" #inputEmployeeId=ngModel maxlength="50" required placeholder="E0001" />
         </div>
-        <div class="col-sm-6" *ngIf="inputUserName.invalid && (inputUserName.dirty || inputUserName.touched)" >
-          <span [style.color]="inputUserName.valid ? 'black':'red'" >
-            <span *ngIf="inputUserName.errors.required">User name is required.</span>
-            <span *ngIf="inputUserName.errors.minlength">User name must be at least 4 characters long.</span>
+        <div class="col-sm-6" *ngIf="inputEmployeeId.invalid && (inputEmployeeId.dirty || inputEmployeeId.touched)" >
+          <span [style.color]="inputEmployeeId.valid ? 'black':'red'" >
+            <span *ngIf="inputEmployeeId.errors.required">Employee ID is required.</span>
           </span>
         </div>
       </div>
       <div class="form-group">
-        <label for="inputUserPhone" class="col-sm-2 control-label">{{ 'user.phone' | translate }}</label>
+        <label for="inputSurName" class="col-sm-2 control-label">{{ 'employee.surName' | translate }}</label>
         <div class="col-sm-4">
-          <input type="text" [(ngModel)]="newUser.phoneNumber" class="form-control" id="inputUserPhone" 
-            name="inputUserPhone" placeholder="+86 131 1234 1234" maxlength="40" />
+          <input type="text" [(ngModel)]="newEmployee.surName" class="form-control" id="inputSurName" 
+            name="inputSurName" placeholder="SurName" maxlength="100" />
         </div>
       </div>
       <div class="form-group">
-        <label for="inputUserEmail" class="col-sm-2 control-label">{{ 'user.email' | translate }}</label>
+        <label for="inputGivenName" class="col-sm-2 control-label">{{ 'employee.givenName' | translate }}</label>
         <div class="col-sm-4">
-          <input type="email" [(ngModel)]="newUser.email" class="form-control" id="inputUserEmail" 
-            name="inputUserEmail" #inputUserEmail=ngModel placeholder="i@lyplay.com" maxlength="100" />
-        </div>
-        <div class="col-sm-6" *ngIf="inputUserEmail.invalid && (inputUserEmail.dirty || inputUserEmail.touched)" >
-          <span [style.color]="inputUserEmail.valid ? 'black':'red'" >
-            <span *ngIf="inputUserEmail.errors.email">Please input correct email address.</span>
-          </span>
+          <input type="text" [(ngModel)]="newEmployee.givenName" class="form-control" id="inputGivenName" 
+            name="inputGivenName" placeholder="Given Name" maxlength="100" />
         </div>
       </div>
       <div class="form-group">
-        <label for="inputUserPassword" class="col-sm-2 control-label">{{ 'user.password' | translate }}</label>
+        <label for="inputGender" class="col-sm-2 control-label">{{ 'employee.gender' | translate }}</label>
         <div class="col-sm-4">
-          <input type="password" [(ngModel)]="unEncryptPwd" class="form-control" id="inputUserPassword"
-            name="inputUserPassword" #inputUserPassword=ngModel placeholder="" minlength="6" maxlength="40" />
-        </div>
-        <div class="col-sm-6" *ngIf="inputUserPassword.invalid && (inputUserPassword.dirty || inputUserPassword.touched)" >
-          <span [style.color]="inputUserPassword.valid ? 'black':'red'" >
-            <span *ngIf="inputUserPassword.errors.minlength">Password must be at least 6 characters long.</span>
-          </span>
+          <div class="radio">
+            <label>
+              <input type="radio" [(ngModel)]="newEmployee.gender" name="inputGender" id="inputGenderMale" value="0" checked>
+              {{ 'gender.male' | translate }}
+            </label>
+            <label>
+              <input type="radio" [(ngModel)]="newEmployee.gender" name="inputGender" id="inputGenderFemale" value="1">
+              {{ 'gender.female' | translate }}
+            </label>
+          </div>
         </div>
       </div>
+      <div class="form-group">
+        <label for="inputBirthday" class="col-sm-2 control-label">{{ 'employee.birthday' | translate }}</label>
+        <div class="col-sm-4">
+          <input type="email" [(ngModel)]="newEmployee.birthday" class="form-control" id="inputBirthday" 
+            name="inputBirthday" placeholder="dd/mm/yyyy" maxlength="10" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputWorkEmail" class="col-sm-2 control-label">{{ 'employee.workEmail' | translate }}</label>
+        <div class="col-sm-4">
+          <input type="email" [(ngModel)]="newEmployee.workEmail" class="form-control" id="inputWorkEmail" 
+            name="inputWorkEmail" placeholder="xxxx@xxx.xx" maxlength="100" />
+        </div>
+      </div>
+
+
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
           <button type="button" (click)="addNew()" class="btn btn-default">{{ 'employee.add' | translate }}</button>

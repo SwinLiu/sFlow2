@@ -18,7 +18,7 @@ const employeeRoutes: Routes = [
         children: [
           { path: '', redirectTo: 'list', pathMatch: 'full' },
           { path: 'list', component: EmployeeListComponent },
-          { path: 'add', component: EmployeeAddComponent }
+          { path: 'add/:compId', component: EmployeeAddComponent }
         ]
       }
     ]

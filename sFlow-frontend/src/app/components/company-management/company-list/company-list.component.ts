@@ -1,7 +1,7 @@
 import {Location} from '@angular/common';
 import {Component, NgModule, OnInit} from '@angular/core';
-import { UserAccountService } from "app/services/user/user-account.service";
 import { LoggerService } from "app/services/logger.service";
+import { CompanyService } from "app/services/company/company.service";
 
 @Component({
   selector: 'sFlow-company-container',
@@ -9,20 +9,20 @@ import { LoggerService } from "app/services/logger.service";
 })
 export class CompanyListComponent implements OnInit {
 
-  private userAccounts;
+  private companyList;
 
-  constructor(private userAccountService: UserAccountService,
+  constructor(private companyService: CompanyService,
     private loggerService: LoggerService,
     private location: Location) { }
 
   ngOnInit() {
 
-    this.userAccountService.getUserList().then(data => this.renderListPage(data));
+    this.companyService.getCompanyList().then(data => this.renderListPage(data));
 
   }
 
   renderListPage(res) {
-    this.userAccounts = res.result;
+    this.companyList = res.result;
   }
 
   goToBack() {

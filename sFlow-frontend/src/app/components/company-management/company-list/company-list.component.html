@@ -9,31 +9,25 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <td><span translate="user.id"></span></td>
-            <td><span translate="user.name"></span></td>
-            <td><span translate="user.phone"></span></td>
-            <td><span translate="user.email"></span></td>
-            <td><span translate="user.status"></span></td>
-            <td><span translate="user.createTime"></span></td>
-            <td><span translate="user.action"></span></td>
+            <td><span translate="company.id"></span></td>
+            <td><span translate="company.name"></span></td>
+            <td><span translate="company.address"></span></td>
+            <td><span translate="company.action"></span></td>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let userAccount of userAccounts" >
-            <td>{{userAccount.uid}}</td>
-            <td>{{userAccount.userName}}</td>
-            <td>{{userAccount.phoneNumber}}</td>
-            <td>{{userAccount.email}}</td>
-            <td>{{userAccount.status}}</td>
-            <td></td>
+          <tr *ngFor="let companyBean of companyList" >
+            <td>{{companyBean.compId}}</td>
+            <td>{{companyBean.companyName}}</td>
+            <td>{{companyBean.address}}</td>
             <td></td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="7">
+            <td colspan="4">
               <button type="button" class="btn btn-primary pull-right" routerLink="/company/management/add" >
-                <span translate="employee.addNew"></span>
+                <span translate="company.addNew"></span>
               </button>
             </td>
           </tr>

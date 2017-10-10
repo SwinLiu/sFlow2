@@ -12,7 +12,7 @@
     "company-management" : "Company Management",
     "user" : {
         "list" : "User List",
-        "id" : "User Id",
+        "id" : "User ID",
         "name" : "User Name",
         "phone" : "Phone Number",
         "email" : "Email",
@@ -24,13 +24,30 @@
         "add" : "Add"
     },
     "company" : {
+        "select" : "Company : ",
         "list" : "Company List",
         "addNew" : "Add New",
-        "add" : "Add"
+        "add" : "Add",
+        "action" : "Action",
+        "id" : "Company ID",
+        "name" : "Company Name",
+        "address" : "Company Address"  
     },
     "employee" : {
         "list" : "Employee List",
         "addNew" : "Add New",
-        "add" : "add"
+        "add" : "add",
+        "action" : "Action",
+        "id" : "Employee ID",
+        "surName" : "Surname",
+        "givenName" : "Given Name",
+        "gender" : "Gender",
+        "birthday" : "Day of birth",
+        "workEmail" : "Work E-Mail",
+        "status" : "Status"
+    },
+    "gender" : {
+        "male" : "male",
+        "female" : "female"
     }
 }

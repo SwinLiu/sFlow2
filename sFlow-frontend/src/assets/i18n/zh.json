@@ -27,13 +27,30 @@
         "add" : "新增"
     },
     "company" : {
+        "select" : "公司 : ",
         "list" : "公司列表",
         "addNew" : "新增公司",
-        "add" : "新增"
+        "add" : "新增",
+        "action" : "操作",
+        "id" : "公司编号",
+        "name" : "公司名",
+        "address" : "公司地址"  
     },
     "employee" : {
         "list" : "员工列表",
         "addNew" : "新增员工",
-        "add" : "新增"
+        "add" : "新增",
+        "action" : "操作",
+        "id" : "员工编号",
+        "surName" : "姓",
+        "givenName" : "名",
+        "gender" : "性别",
+        "birthday" : "生日",
+        "workEmail" : "工作邮箱",
+        "status" : "状态"
+    },
+    "gender" : {
+        "male" : "男",
+        "female" : "女"
     }
 }

@@ -3,9 +3,9 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import * as crypto from 'crypto-browserify';
 import { AuthService } from "app/services/auth.service";
 import { LoggerService } from "app/services/logger.service";
-import { UserAccountService } from "app/services/user/user-account.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { CONSTANTS } from "app/app.const";
+import { EmployeeService } from "app/services/employee/employee.service";
 
 declare const Buffer;
 
@@ -15,42 +15,37 @@ declare const Buffer;
 })
 export class EmployeeAddComponent implements OnInit {
 
-  // rsaPublicKey: string;
-
-  newUser = {
-    userName : "",
-    phoneNumber : "",
-    email : "",
-    password : ""
+  newEmployee = {
+    compId : "",
+    employeeId : "",
+    surName : "",
+    givenName : "",
+    gender : "",
+    birthday : "",
+    workEmail : ""
   }
-
-  unEncryptPwd = "";
 
   errorMsg = "";
 
   constructor(
-    // private authService: AuthService,
-    private userAccountService: UserAccountService,
+    private routerIonfo: ActivatedRoute,
+    private employeeService: EmployeeService,
     private loggerService: LoggerService,
     private location: Location,
     private router: Router) { }
 
   ngOnInit() {
 
+    this.newEmployee.compId = this.routerIonfo.snapshot.params["compId"];
 
   }
 
   addNew() {
-    this.errorMsg = "";
-    const sha1Str: string = crypto.createHash('sha1').update(this.unEncryptPwd).digest('hex');
 
-    this.newUser.password = sha1Str;
-
-    const result: any = null;
-    this.userAccountService.addNewUser(this.newUser).then(
+    this.employeeService.addEmployee(this.newEmployee).then(
       data => {
         if (data.success) {
-          this.router.navigate([CONSTANTS.ROUTE_URL.user.list]);
+          this.router.navigate([CONSTANTS.ROUTE_URL.employee.list]);
         } else {
           this.errorMsg = data.message;
         }

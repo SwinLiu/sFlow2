@@ -25,6 +25,8 @@ import { AppTranslateModule } from './app-translate.module';
 import { UserAccountService } from "app/services/user/user-account.service";
 import { JwtInterceptor } from "app/jwt.interceptor";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { CompanyService } from "app/services/company/company.service";
+import { EmployeeService } from "app/services/employee/employee.service";
 
 @NgModule({
   imports: [
@@ -46,6 +48,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
     AppTranslateService,
     AuthService,
     UserAccountService,
+    CompanyService,
+    EmployeeService,
     ConsoleService,
     LoggerService,
     AuthGuard,

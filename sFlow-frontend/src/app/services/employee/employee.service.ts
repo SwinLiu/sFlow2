@@ -6,7 +6,7 @@ import { CONSTANTS } from "app/app.const";
 import { RestResult } from "app/beans/restResult";
 
 @Injectable()
-export class UserAccountService {
+export class EmployeeService {
 
     private apiUrl: string;
 
@@ -18,17 +18,17 @@ export class UserAccountService {
         this.apiUrl = config.apiUrl;
     }
 
-    addNewUser(body): Promise<RestResult> {
-        const url = `${this.apiUrl}${CONSTANTS.API_URL.user.add}`;
-        return this.http.post(url, body)
+    addEmployee(data): Promise<RestResult> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.employee.add}`;
+        return this.http.post(url, data)
             .toPromise()
             .then(response => response)
             .catch(this.loggerService.handleError);
 
     }
 
-    getUserList(): Promise<RestResult> {
-        const url = `${this.apiUrl}${CONSTANTS.API_URL.user.list}`;
+    getEmployeeList(compId: string): Promise<RestResult> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.employee.list}?compId=${compId}`;
         return this.http.get(url)
             .toPromise()
             .then(response => response)
