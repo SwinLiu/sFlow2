@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.lyplay.sflow.data.domain.CompEmployeeGroup;
 import com.lyplay.sflow.data.domain.Employee;
+import com.lyplay.sflow.data.enums.EmployeeStatus;
 import com.lyplay.sflow.data.pk.CompEmployeeGroupPK;
 import com.lyplay.sflow.data.repository.CompEmployeeGroupRepository;
 import com.lyplay.sflow.data.repository.EmployeeRepository;
@@ -41,6 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setStatus(employeeDto.getStatus());
 		employee.setBirthday(employeeDto.getBirthday());
 		employee.setChanger(employeeDto.getChanger());
+		employee.setStatus(EmployeeStatus.ACTIVE);
 		employeeRepository.save(employee);
 		
 		CompEmployeeGroup compEmployeeGroup = new CompEmployeeGroup();
@@ -54,12 +56,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public List<EmployeeDto> getEmployeeList(String compId) {
+		// TODO find by compId
 		List<Employee> employeeList = employeeRepository.findAll();
 		if(CollectionUtils.isNotEmpty(employeeList)){
 			List<EmployeeDto> employeeDtoList = new ArrayList<EmployeeDto>();
 			for(Employee employee : employeeList){
 				EmployeeDto employeeDto = new EmployeeDto();
-				
+				employeeDto.setCompId(compId);
+				employeeDto.setEmpId(employee.getEmpId());
+				employeeDto.setEmployeeId(employee.getEmployeeId());
+				employeeDto.setSurName(employee.getSurName());
+				employeeDto.setGivenName(employee.getGivenName());
+				employeeDto.setGender(employee.getGender());
+				employeeDto.setBirthday(employee.getBirthday());
+				employeeDto.setWorkEmail(employee.getWorkEmail());
+				employeeDto.setStatus(employee.getStatus());
 				employeeDtoList.add(employeeDto);
 			}
 			return employeeDtoList;

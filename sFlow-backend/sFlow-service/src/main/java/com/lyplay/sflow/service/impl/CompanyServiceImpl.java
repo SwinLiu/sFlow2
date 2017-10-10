@@ -12,6 +12,7 @@ import com.lyplay.sflow.data.domain.Company;
 import com.lyplay.sflow.data.repository.CompanyRepository;
 import com.lyplay.sflow.service.CompanyService;
 import com.lyplay.sflow.service.dto.CompanyDto;
+import com.lyplay.sflow.service.dto.ValueLabelBean;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -31,6 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public List<CompanyDto> getCompanyList() {
+		// TODO add order by
 		List<Company> compList = companyRepository.findAll();
 		if(CollectionUtils.isNotEmpty(compList)){
 			List<CompanyDto> compDtoList = new ArrayList<CompanyDto>();
@@ -43,6 +45,24 @@ public class CompanyServiceImpl implements CompanyService {
 				compDtoList.add(companyDto);
 			}
 			return compDtoList;
+		} else {
+			return Collections.emptyList();
+		}
+	}
+	
+	@Override
+	public List<ValueLabelBean> getCompanyDropdownList(String uid) {
+		//TODO user mapping data & order by condition
+		List<Company> compList = companyRepository.findAll();
+		if(CollectionUtils.isNotEmpty(compList)){
+			List<ValueLabelBean> vlBeanList = new ArrayList<ValueLabelBean>();
+			for(Company company : compList){
+				ValueLabelBean vlBean = new ValueLabelBean();
+				vlBean.setValue(company.getCompId());
+				vlBean.setLabel(company.getCompanyName());
+				vlBeanList.add(vlBean);
+			}
+			return vlBeanList;
 		} else {
 			return Collections.emptyList();
 		}

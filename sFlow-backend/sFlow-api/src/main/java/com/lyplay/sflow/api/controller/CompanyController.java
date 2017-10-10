@@ -38,7 +38,7 @@ public class CompanyController {
 
 	@RequestMapping(value = "/api/company/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public RestResult register(@RequestBody CompanyDto companyDto) throws Exception {
+	public RestResult addCompany(@RequestBody CompanyDto companyDto) throws Exception {
 		UserSession userSession = UserSessionContext.getUserSession();
 		companyDto.setChanger(userSession.getUid());
 		try {
@@ -52,10 +52,15 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/api/company/list", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public RestResult getUserList() throws Exception {
+	public RestResult getCompanyInfoList() throws Exception {
 		return success(companyService.getCompanyList());
 	}
 	
-
+	@RequestMapping(value = "/api/company/select", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public RestResult getCompanyDropdownList() throws Exception {
+		UserSession userSession = UserSessionContext.getUserSession();
+		return success(companyService.getCompanyDropdownList(userSession.getUid()));
+	}
 	
 }
