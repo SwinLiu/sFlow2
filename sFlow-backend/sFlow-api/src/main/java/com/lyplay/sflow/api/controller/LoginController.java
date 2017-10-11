@@ -6,6 +6,7 @@ import static com.lyplay.sflow.common.dto.RestResult.success;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,13 +49,13 @@ public class LoginController {
 	@ResponseBody
 	public RestResult login(@RequestBody UserParam userParam) throws Exception {
 
-//		String captchaCode = cacheService.getString(userParam.getCaptchaCodeId());
-//		if(StringUtils.isEmpty(captchaCode)){
-//			return fail(TranslatorHelper.get("login.error.captchaCode.timeout"));
-//		}
-//		if(!StringUtils.equals(StringUtils.lowerCase(captchaCode), StringUtils.lowerCase(userParam.getCaptchaCode()))){
-//			return fail(TranslatorHelper.get("login.error.captchaCode.unmatch")); 
-//		}
+		String captchaCode = cacheService.getString(userParam.getCaptchaCodeId());
+		if(StringUtils.isEmpty(captchaCode)){
+			return fail(TranslatorHelper.get("login.error.captchaCode.timeout"));
+		}
+		if(!StringUtils.equals(StringUtils.lowerCase(captchaCode), StringUtils.lowerCase(userParam.getCaptchaCode()))){
+			return fail(TranslatorHelper.get("login.error.captchaCode.unmatch")); 
+		}
 		
 //		String privateRsaKey = cacheService.getString(RSAUtil.PRIVATE_KEY + "_" + userParam.getRsaKeyId());
 //		String pwd = PasswdUtil.getPasswd(privateRsaKey, userParam.getUserName(), userParam.getPassword());

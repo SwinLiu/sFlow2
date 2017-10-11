@@ -20,7 +20,7 @@ export class EmployeeAddComponent implements OnInit {
     employeeId : "",
     surName : "",
     givenName : "",
-    gender : "",
+    gender : "0",
     birthday : "",
     workEmail : ""
   }

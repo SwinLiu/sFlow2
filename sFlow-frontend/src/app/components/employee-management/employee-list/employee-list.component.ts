@@ -13,9 +13,9 @@ import { CONSTANTS } from "app/app.const";
 })
 export class EmployeeListComponent implements OnInit {
 
-  private companyList;
-  private selectedComp;
-  private employeeList;
+  public companyList;
+  public selectedComp;
+  public employeeList;
 
   constructor(private employeeService: EmployeeService,
     private companyService: CompanyService,

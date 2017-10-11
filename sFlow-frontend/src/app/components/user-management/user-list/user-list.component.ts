@@ -9,7 +9,7 @@ import { LoggerService } from "app/services/logger.service";
 })
 export class UserListComponent implements OnInit {
 
-  private userAccounts;
+  public userAccounts;
 
   constructor(private userAccountService: UserAccountService,
     private loggerService: LoggerService,
