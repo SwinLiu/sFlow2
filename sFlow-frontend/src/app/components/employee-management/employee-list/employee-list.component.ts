@@ -6,6 +6,7 @@ import { LoggerService } from "app/services/logger.service";
 import { EmployeeService } from "app/services/employee/employee.service";
 import { CompanyService } from "app/services/company/company.service";
 import { CONSTANTS } from "app/app.const";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'sFlow-employee-container',
@@ -17,7 +18,8 @@ export class EmployeeListComponent implements OnInit {
   public selectedComp;
   public employeeList;
 
-  constructor(private employeeService: EmployeeService,
+  constructor(private toastr: ToastrService,
+    private employeeService: EmployeeService,
     private companyService: CompanyService,
     private loggerService: LoggerService,
     private location: Location,
@@ -57,7 +59,7 @@ export class EmployeeListComponent implements OnInit {
     if (this.selectedComp) {
       this.router.navigate([CONSTANTS.ROUTE_URL.employee.add, this.selectedComp]);
     } else {
-      console.log("No company data.");
+      this.toastr.warning("No company data.");
     }
 
   }

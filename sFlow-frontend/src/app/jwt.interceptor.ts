@@ -5,11 +5,13 @@ import { HttpHeaders } from "@angular/common/http";
 import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { CONSTANTS } from "app/app.const";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor(private toastr: ToastrService,
+    private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -20,11 +22,11 @@ export class JwtInterceptor implements HttpInterceptor {
             if (err.status === CONSTANTS.HTTPStatus.UNAUTHORIZED) {
               this.router.navigate([CONSTANTS.ROUTE_URL.signin]);
             } else if (err.status === CONSTANTS.HTTPStatus.FORBIDDEN) {
-              console.error("No Access!");
+              this.toastr.error("No Access!");
             } else if (err.status === CONSTANTS.HTTPStatus.GATEWAY_TIMEOUT) {
-              console.error("API server timeout!");
+              this.toastr.error("API server timeout!");
             } else if (err.status === CONSTANTS.HTTPStatus.INTERNAL_SERVER_ERROR) {
-              console.error("API server 500 error!");
+              this.toastr.error("API server 500 error!");
             } else if (err.status === CONSTANTS.HTTPStatus.SUCCESS) {
             } else {
             }

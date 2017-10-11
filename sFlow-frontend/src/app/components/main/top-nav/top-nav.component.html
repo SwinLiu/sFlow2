@@ -17,33 +17,38 @@
             <span translate="dashboard">Dashboard</span>
           </a>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false"><span translate="{{systemLangHtml}}"></span><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a routerLink="#" (click)="setLang('en')" >
+        <li dropdown>
+          <a href dropdownToggle (click)="false">
+            <span translate="{{systemLangHtml}}"></span><span class="caret"></span>
+          </a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem">
+              <a class="dropdown-item" routerLink="#" (click)="setLang('en')" >
                 <span translate="lang-en">English</span>
               </a>
             </li>
-            <li>
-              <a routerLink="#" (click)="setLang('zh')" >
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem">
+              <a class="dropdown-item" routerLink="#" (click)="setLang('zh')" >
                 <span translate="lang-zh">Chinese</span>
               </a>
             </li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Hi, {{loginUserName}} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li >
-              <a routerLink="/user/profile" routerLinkActive="active" >
+        <li dropdown>
+          <a href dropdownToggle (click)="false">
+            <span>Hi, {{loginUserName}} </span><span class="caret"></span>
+          </a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem">
+              <a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active" >
                 <span translate="profile">Profile</span>
               </a>
             </li>
-            <li role="separator" class="divider"></li>
-            <li ><a (click)="logout()" ><span translate="sign-out">logout</span></a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="logout()" ><span translate="sign-out">logout</span></a>
+            </li>
           </ul>
         </li>
       </ul>

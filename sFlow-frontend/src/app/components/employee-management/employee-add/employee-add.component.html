@@ -53,8 +53,10 @@
       <div class="form-group">
         <label for="inputBirthday" class="col-sm-2 control-label">{{ 'employee.birthday' | translate }}</label>
         <div class="col-sm-4">
-          <input type="email" [(ngModel)]="newEmployee.birthday" class="form-control" id="inputBirthday" 
-            name="inputBirthday" placeholder="dd/mm/yyyy" maxlength="10" />
+          <input type="email" [(ngModel)]="newEmployee.birthday" class="form-control theme-default" id="inputBirthday" 
+            name="inputBirthday" placeholder="dd/mm/yyyy" maxlength="10" 
+            bsDatepicker [bsConfig]="bsConfig" #dp="bsDatepicker" [minDate]="datePickerConfig.minDate" [maxDate]="datePickerConfig.maxDate"
+            (click)="renderDatePicker(dp)" />
         </div>
       </div>
       <div class="form-group">

@@ -3,6 +3,9 @@ import { TranslateService } from "@ngx-translate/core";
 
 import { LoggerService } from './logger.service';
 
+import { defineLocale } from 'ngx-bootstrap/bs-moment';
+import { zhCn } from 'ngx-bootstrap/locale';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -11,6 +14,9 @@ export class AppTranslateService {
   constructor(private translateService: TranslateService,
     private loggerService: LoggerService
   ) {
+
+    defineLocale('zh', zhCn);
+
     this.translateService.addLangs(["zh", "en"]);
     this.translateService.setDefaultLang("zh");
     const browserLang = this.translateService.getBrowserLang();
@@ -32,10 +38,14 @@ export class AppTranslateService {
   }
 
   getLang(): string {
+    return "lang-" + this.getSystemLang();
+  }
+
+  getSystemLang(): string {
     let lang = localStorage.getItem('systemLang');
     lang = lang || this.translateService.getBrowserLang();
     lang = lang.match(/zh|en/) ? lang : 'zh';
-    return "lang-" + lang;
+    return lang;
   }
 
 }

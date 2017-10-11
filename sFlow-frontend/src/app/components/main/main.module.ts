@@ -13,11 +13,13 @@ import { MainRoutingModule } from './main-routing.module';
 import { UserManagementModule } from "app/components/user-management/user-management.module";
 import { CompanyManagementModule } from "app/components/company-management/company-management.module";
 import { EmployeeManagementModule } from "app/components/employee-management/employee-management.module";
+import { BsDropdownModule } from "ngx-bootstrap";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    BsDropdownModule.forRoot(),
     UserManagementModule,
     CompanyManagementModule,
     EmployeeManagementModule,

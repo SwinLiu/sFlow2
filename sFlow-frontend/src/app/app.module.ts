@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AppConfigModule } from './app-config.module';
@@ -33,6 +35,8 @@ import { EmployeeService } from "app/services/employee/employee.service";
     BrowserModule,
     AppTranslateModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     MainModule,
     AppConfigModule,
