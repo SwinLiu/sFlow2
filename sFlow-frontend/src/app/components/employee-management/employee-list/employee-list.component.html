@@ -40,7 +40,11 @@
             <td>{{employeeBean.birthday}}</td>
             <td>{{employeeBean.workEmail}}</td>
             <td>{{employeeBean.status}}</td>
-            <td></td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteEmployee(employeeBean.empId)">
+                <span translate="employee.delete"></span>
+              </button>
+            </td>
           </tr>
         </tbody>
         <tfoot>

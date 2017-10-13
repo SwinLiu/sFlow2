@@ -20,7 +20,11 @@
             <td>{{companyBean.compId}}</td>
             <td>{{companyBean.companyName}}</td>
             <td>{{companyBean.address}}</td>
-            <td></td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteCompany(companyBean.compId)">
+                <span translate="company.delete"></span>
+              </button>
+            </td>
           </tr>
         </tbody>
         <tfoot>

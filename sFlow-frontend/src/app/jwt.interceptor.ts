@@ -16,7 +16,9 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const idToken = localStorage.getItem('id_token') || "";
-    const authReq = req.clone({headers: req.headers.set('Content-Type', 'application/json').set('X-API-Token', idToken)});
+    const authReq = req.clone({headers: req.headers.set('Content-Type', 'application/json;charset=UTF-8')
+    .set("dataType", "json")
+    .set('X-API-Token', idToken)});
     return next.handle(authReq).catch(err => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === CONSTANTS.HTTPStatus.UNAUTHORIZED) {

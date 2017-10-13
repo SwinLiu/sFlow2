@@ -24,15 +24,18 @@ export const CONSTANTS = {
     //菜单模块地址
     user: {
       add: "/api/user/add", //添加用户信息
+      delete: "/api/user/delete",
       list: "/api/user/list"//用户信息列表
     },
     company: {
       add: "/api/company/add",
+      delete: "/api/company/delete",
       list: "/api/company/list",
       select: "/api/company/select"
     },
     employee: {
       add: "/api/employee/add",
+      delete: "/api/employee/delete",
       list: "/api/employee/list"
     }
   },

@@ -21,13 +21,15 @@
         "createTime" : "Create Time",
         "action" : "Action",
         "addNew" : "Add New",
-        "add" : "Add"
+        "add" : "Add",
+        "delete" : "Delete"
     },
     "company" : {
         "select" : "Company : ",
         "list" : "Company List",
         "addNew" : "Add New",
         "add" : "Add",
+        "delete" : "Delete",
         "action" : "Action",
         "id" : "Company ID",
         "name" : "Company Name",
@@ -37,6 +39,7 @@
         "list" : "Employee List",
         "addNew" : "Add New",
         "add" : "add",
+        "delete" : "Delete",
         "action" : "Action",
         "id" : "Employee ID",
         "surName" : "Surname",

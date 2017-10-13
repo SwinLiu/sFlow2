@@ -27,6 +27,14 @@ export class CompanyService {
 
     }
 
+    deleteCompany(compId): Promise<RestResult> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.company.delete}/${compId}`;
+        return this.http.delete(url)
+            .toPromise()
+            .then(response => response)
+            .catch(this.loggerService.handleError);
+    }
+
     getCompanyList(): Promise<RestResult> {
         const url = `${this.apiUrl}${CONSTANTS.API_URL.company.list}`;
         return this.http.get(url)

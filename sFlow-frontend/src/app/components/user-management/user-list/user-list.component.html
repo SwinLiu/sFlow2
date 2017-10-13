@@ -26,7 +26,11 @@
             <td>{{userAccount.email}}</td>
             <td>{{userAccount.status}}</td>
             <td></td>
-            <td></td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteUser(userAccount.uid)">
+                <span translate="user.delete"></span>
+              </button>
+            </td>
           </tr>
         </tbody>
         <tfoot>

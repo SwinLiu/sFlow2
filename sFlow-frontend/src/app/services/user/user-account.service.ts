@@ -27,6 +27,14 @@ export class UserAccountService {
 
     }
 
+    deleteUser(uid): Promise<RestResult> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.user.delete}/${uid}`;
+        return this.http.delete(url)
+            .toPromise()
+            .then(response => response)
+            .catch(this.loggerService.handleError);
+    }
+
     getUserList(): Promise<RestResult> {
         const url = `${this.apiUrl}${CONSTANTS.API_URL.user.list}`;
         return this.http.get(url)

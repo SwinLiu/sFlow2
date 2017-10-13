@@ -55,6 +55,16 @@ export class EmployeeListComponent implements OnInit {
     this.location.back();
   }
 
+  deleteEmployee(empId: string) {
+    this.employeeService.deleteEmployee(empId).then(data => {
+      if (data.success) {
+        this.renderEmployeeList();
+      } else {
+        this.toastr.error(data.message);
+      }
+    });
+  }
+
   showAddNew() {
     if (this.selectedComp) {
       this.router.navigate([CONSTANTS.ROUTE_URL.employee.add, this.selectedComp]);
