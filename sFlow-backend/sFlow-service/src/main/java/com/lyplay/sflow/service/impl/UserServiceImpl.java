@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	@Transactional
 	@Override
 	public boolean addNewUser(UserDto userDto) {
 		
@@ -90,6 +93,15 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return Collections.emptyList();
 		}
+	}
+	
+	@Transactional
+	@Override
+	public boolean deleteUser(String uid) {
+		// TODO Auto-generated method stub
+		userPasswordRepository.delete(uid);
+		userAccountRepository.delete(uid);
+		return true;
 	}
 
 }

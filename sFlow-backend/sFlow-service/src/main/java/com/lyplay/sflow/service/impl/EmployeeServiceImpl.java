@@ -56,8 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public List<EmployeeDto> getEmployeeList(String compId) {
-		// TODO find by compId
-		List<Employee> employeeList = employeeRepository.findAll();
+		List<Employee> employeeList = employeeRepository.findByCompId(compId);
 		if(CollectionUtils.isNotEmpty(employeeList)){
 			List<EmployeeDto> employeeDtoList = new ArrayList<EmployeeDto>();
 			for(Employee employee : employeeList){
@@ -77,6 +76,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} else {
 			return Collections.emptyList();
 		}
+	}
+	
+	@Transactional
+	@Override
+	public boolean deleteEmployee(String empId) {
+		// TODO Auto-generated method stub
+		compEmployeeGroupRepository.deleteEmployee(empId);
+		employeeRepository.delete(empId);
+		return true;
+	}
+	
+	@Override
+	public boolean deleteEmployee(String compId, String employeeId) {
+		String empId = employeeRepository.getEmpIdBy(compId, employeeId);
+		return deleteEmployee(empId);
 	}
 
 }

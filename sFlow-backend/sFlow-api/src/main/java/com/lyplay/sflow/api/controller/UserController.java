@@ -3,10 +3,12 @@ package com.lyplay.sflow.api.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +66,17 @@ public class UserController {
 		return success(userService.getUserList());
 	}
 	
-
+	@RequestMapping(value = "/api/user/delete/{uid}", method = RequestMethod.DELETE, produces = "application/json")
+	@ResponseBody
+	public RestResult deleteUser(@PathVariable(required = true)  String uid) throws Exception {
+		if(StringUtils.equals(uid, "U00001")){
+			return fail("Unable to delete Admin account.");
+		}
+		if(userService.deleteUser(uid)){
+			return success();
+		} else {
+			return fail("Delete failed.");
+		}
+	}
 	
 }

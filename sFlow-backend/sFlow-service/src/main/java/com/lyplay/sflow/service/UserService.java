@@ -14,4 +14,6 @@ public interface UserService {
 	
 	List<UserViewDto> getUserList();
 	
+	boolean deleteUser(String uid);
+	
 }

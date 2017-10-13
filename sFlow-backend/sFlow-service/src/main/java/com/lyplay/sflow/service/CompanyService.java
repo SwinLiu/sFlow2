@@ -13,4 +13,6 @@ public interface CompanyService {
 
 	List<ValueLabelBean> getCompanyDropdownList(String uid);
 	
+	boolean deleteCompany(String compId);
+	
 }

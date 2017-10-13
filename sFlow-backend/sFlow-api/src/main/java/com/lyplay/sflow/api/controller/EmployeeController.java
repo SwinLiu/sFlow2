@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +48,17 @@ public class EmployeeController {
 	@ResponseBody
 	public RestResult getCompanyInfoList(String compId) throws Exception {
 		return success(employeeService.getEmployeeList(compId));
+	}
+	
+	@RequestMapping(value = "/api/employee/delete/{empId}", method = RequestMethod.DELETE, produces = "application/json")
+	@ResponseBody
+	public RestResult deleteEmployee(@PathVariable(required = true) String empId) throws Exception {
+		if(employeeService.deleteEmployee(empId)){
+			return success();
+		} else {
+			return fail("Delete failed.");
+		}
+
 	}
 
 }

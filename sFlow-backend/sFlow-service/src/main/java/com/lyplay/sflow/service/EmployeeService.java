@@ -10,4 +10,8 @@ public interface EmployeeService {
 	
 	List<EmployeeDto> getEmployeeList(String compId);
 	
+	boolean deleteEmployee(String empId);
+	
+	boolean deleteEmployee(String compId, String empployeeId);
+	
 }

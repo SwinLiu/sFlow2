@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lyplay.sflow.data.domain.Company;
+import com.lyplay.sflow.data.repository.CompEmployeeGroupRepository;
 import com.lyplay.sflow.data.repository.CompanyRepository;
+import com.lyplay.sflow.data.repository.EmployeeRepository;
 import com.lyplay.sflow.service.CompanyService;
 import com.lyplay.sflow.service.dto.CompanyDto;
 import com.lyplay.sflow.service.dto.ValueLabelBean;
@@ -19,6 +23,10 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	CompanyRepository companyRepository;
+	@Autowired
+	CompEmployeeGroupRepository compEmployeeGroupRepository;
+	@Autowired
+	EmployeeRepository employeeRepository;
 	
 	@Override
 	public boolean createCompany(CompanyDto companyInfo) {
@@ -66,6 +74,15 @@ public class CompanyServiceImpl implements CompanyService {
 		} else {
 			return Collections.emptyList();
 		}
+	}
+	
+	@Transactional
+	@Override
+	public boolean deleteCompany(String compId) {
+		employeeRepository.deleteByCompId(compId);
+		compEmployeeGroupRepository.deleteCompany(compId);
+		companyRepository.delete(compId);
+		return true;
 	}
 
 }
