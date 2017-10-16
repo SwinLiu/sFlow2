@@ -3,6 +3,11 @@ package com.lyplay.sflow.api.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lyplay.sflow.api.dto.AppDescription;
+import com.lyplay.sflow.api.dto.MenuTree;
 import com.lyplay.sflow.common.dto.RestResult;
 import com.lyplay.sflow.service.UserService;
 import com.lyplay.sflow.service.dto.UserDto;
@@ -77,6 +84,56 @@ public class UserController {
 		} else {
 			return fail("Delete failed.");
 		}
+	}
+	
+	@RequestMapping(value = "/api/user/session", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public RestResult getUserSessionData() throws Exception {
+		Map<String, Object> result = new HashMap<>();
+		UserSession userSession = UserSessionContext.getUserSession();
+		result.put("app", new AppDescription());
+		result.put("user", userSession);
+		List<MenuTree> menuList = new ArrayList<MenuTree>();
+		
+		MenuTree main = new MenuTree();
+		main.setText("主导航");
+		main.setTranslate("main_navigation");
+		main.setGroup(true);
+		
+		MenuTree dashboard = new MenuTree();
+		dashboard.setText("仪表盘");
+		dashboard.setTranslate("dashboard");
+		dashboard.setGroup(false);
+		dashboard.setLink("/dashboard/v1");
+		dashboard.setIcon("icon-speedometer");
+		main.addChildMenu(dashboard);
+		
+//		{
+//	        "text": "主导航",
+//	        "translate": "main_navigation",
+//	        "group": true,
+//	        "children": [{
+//	            "text": "仪表盘",
+//	            "translate": "dashboard",
+//	            "link": "/dashboard",
+//	            "icon": "icon-speedometer",
+//	            "children": [{
+//	                "text": "仪表盘V1",
+//	                "link": "/dashboard/v1",
+//	                "translate": "dashboard_v1"
+//	            }]
+//	        }, {
+//	            "text": "小部件",
+//	            "translate": "widgets",
+//	            "link": "/widgets",
+//	            "icon": "icon-grid",
+//	            "badge": 2
+//	        }]
+//	    }
+//		
+//		
+		result.put("menu", menuList);
+		return success(result);
 	}
 	
 }
