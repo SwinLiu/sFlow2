@@ -10,15 +10,15 @@ import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { LoggerService } from './logger.service';
 
 import 'rxjs/add/operator/toPromise';
-import { UserSession } from "app/beans/userSession";
-import { HttpClient } from "@angular/common/http";
+import { UserSession } from 'app/beans/userSession';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
 
   private apiUrl: string;
 
-  loginUserName = "";
+  loginUserName = '';
   isLoggedIn = false;
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -66,7 +66,7 @@ export class AuthService {
 
   setLogoutInfo(): void {
     this.isLoggedIn = false;
-    this.loginUserName = "";
+    this.loginUserName = '';
     localStorage.removeItem('id_token');
     localStorage.removeItem('session_id');
     localStorage.removeItem('loginUserName');

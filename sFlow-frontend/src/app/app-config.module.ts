@@ -5,7 +5,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 export class AppConfig {
   apiUrl: string;
-  enableLog: boolean
+  enableLog: boolean;
 }
 
 export const APP_DI_CONFIG: AppConfig = {

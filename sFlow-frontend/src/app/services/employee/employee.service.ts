@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import { APP_CONFIG, AppConfig } from "app/app-config.module";
-import { LoggerService } from "app/services/logger.service";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { CONSTANTS } from "app/app.const";
-import { RestResult } from "app/beans/restResult";
+import { APP_CONFIG, AppConfig } from 'app/app-config.module';
+import { LoggerService } from 'app/services/logger.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { CONSTANTS } from 'app/app.const';
+import { RestResult } from 'app/beans/restResult';
 
 @Injectable()
 export class EmployeeService {

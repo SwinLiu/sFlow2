@@ -1,5 +1,7 @@
 export const environment = {
-  production: true,
-  enableLog: false,
-  apiUrl: 'http://api.lyplay.com'
+    SERVER_URL: `./`,
+    enableLog: false,
+    production: true,
+    hmr: false,
+    apiUrl: 'http://api.lyplay.com'
 };

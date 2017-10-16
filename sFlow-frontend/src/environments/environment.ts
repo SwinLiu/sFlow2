@@ -4,7 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  enableLog: true,
-  apiUrl: 'http://localhost:8080'
+    SERVER_URL: `./`,
+    enableLog: true,
+    production: false,
+    hmr: false,
+    apiUrl: 'http://api.lyplay.com'
 };
