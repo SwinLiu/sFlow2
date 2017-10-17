@@ -16,14 +16,7 @@ export const routes = [
             { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard/v1', component: DashboardV1Component, data: { translate: 'dashboard_v1' } },
-            { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' },
-            { path: 'elements', loadChildren: './elements/elements.module#ElementsModule' },
-            { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
-            { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
-            { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-            { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
-            { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' },
-            { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' }
+            { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' }
         ]
     },
     // 单页不包裹Layout
