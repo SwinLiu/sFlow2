@@ -12,7 +12,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "serve:hmr": "ng serve --hmr -e=hmr",
     "build": "ng build --prod --build-optimizer",
     "lint": "ng lint",
     "e2e": "ng e2e",

@@ -11,7 +11,10 @@ import { LoggerService } from './logger.service';
 
 import 'rxjs/add/operator/toPromise';
 import { UserSession } from 'app/beans/userSession';
-import { HttpClient } from '@angular/common/http';
+import { TokenService } from "@core/net/token/token.service";
+import { _HttpClient } from "@core/services/http.client";
+import { CONSTANTS } from "app/app.const";
+import { Router, NavigationExtras } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +28,9 @@ export class AuthService {
 
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
-    private http: HttpClient,
+    private router: Router,
+    private tokenService: TokenService,
+    private http: _HttpClient,
     private loggerService: LoggerService
   ) {
     this.apiUrl = config.apiUrl;
@@ -41,12 +46,12 @@ export class AuthService {
 
   }
 
-  getCaptchaSrc(): any {
+  getCaptchaSrc(): Promise<any> {
     const url = `${this.apiUrl}/api/captcha/160x30x6x0`;
-    return this.http.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.loggerService.handleError);
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => resolve(data));
+    });
   }
 
   getRSAPublicKey(): Promise<string> {
@@ -58,30 +63,47 @@ export class AuthService {
   }
 
   setLoginInfo(userSession: UserSession): void {
-    this.isLoggedIn = true;
-    this.loginUserName = userSession.userName;
-    localStorage.setItem('id_token', userSession.jwtToken);
-    localStorage.setItem('loginUserName', this.loginUserName);
+    this.tokenService.login(userSession.jwtToken);
+    // this.isLoggedIn = true;
+    // this.loginUserName = userSession.userName;
+    // localStorage.setItem('id_token', userSession.jwtToken);
+    // localStorage.setItem('loginUserName', this.loginUserName);
   }
 
   setLogoutInfo(): void {
-    this.isLoggedIn = false;
-    this.loginUserName = '';
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('session_id');
-    localStorage.removeItem('loginUserName');
+    this.tokenService.logout();
+    // this.isLoggedIn = false;
+    // this.loginUserName = '';
+    // localStorage.removeItem('id_token');
+    // localStorage.removeItem('session_id');
+    // localStorage.removeItem('loginUserName');
   }
 
   login(data): Promise<any> {
-    const url = `${this.apiUrl}/api/login`;
-    return this.http.post(url, data)
-      .toPromise()
-      .then(response => response)
-      .catch(this.loggerService.handleError);
+    const url = `${this.apiUrl}/${CONSTANTS.API_URL.login}`;
+    return new Promise((resolve, reject) => {
+      this.http.post(url, data).subscribe(response => resolve(response));
+    });
   }
 
-  logout(): Observable<boolean> {
-    return Observable.of(true).do(val => this.setLogoutInfo());
+  logout(): void {
+    const url = `${this.apiUrl}/${CONSTANTS.API_URL.logout}`;
+    this.http.get(url).subscribe(response => {
+      this.setLogoutInfo();
+      // Get the redirect URL from our auth service
+      // If no redirect has been set, use the default
+      const redirect = CONSTANTS.ROUTE_URL.signin;
+      
+      // Set our navigation extras object
+      // that passes on our global query params and fragment
+      const navigationExtras: NavigationExtras = {
+        preserveQueryParams: true,
+        preserveFragment: true
+      };
+      // Redirect the user
+      this.router.navigate([redirect], navigationExtras);
+    });
+    
   }
 
 }

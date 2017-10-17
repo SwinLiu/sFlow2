@@ -18,7 +18,7 @@
                     </div>
                     <div nz-form-item>
                         <div nz-form-control [nzValidateStatus]="valForm.controls.password">
-                            <nz-input [(ngModel)]="unEncryptPwd" formControlName="password" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+                            <nz-input [nzType]="'password'" [(ngModel)]="unEncryptPwd" formControlName="password" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
                                 <ng-template #suffix>
                                     <i class="anticon anticon-lock"></i>
                                 </ng-template>
@@ -29,11 +29,12 @@
                     <div nz-form-item>
                         <div nz-form-control [nzValidateStatus]="valForm.controls.captcha">
                             <nz-input [(ngModel)]="loginParam.captchaCode" formControlName="captcha" [nzPlaceHolder]="'验证码'" [nzSize]="'large'">
+                                <ng-template #suffix>
+                                    <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" (click)="refreshCaptcha()" >
+                                </ng-template>
                             </nz-input>
                             <div nz-form-explain *ngIf="valForm.controls.captcha.dirty&&valForm.controls.captcha.hasError('required')">验证码必填</div>
                         </div>
-                        {{captchaSrc}}
-                        <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" (click)="refreshCaptcha()" >
                     </div>
                     <div nz-form-item nz-row>
                         <div nz-col [nzSpan]="12">
@@ -43,6 +44,11 @@
                         </div>
                         <div nz-col [nzSpan]="12" class="text-right">
                             <a [routerLink]="['/forget']">忘记密码？</a>
+                        </div>
+                    </div>
+                    <div nz-form-item nz-row>
+                        <div nz-form-control>
+                            <div nz-form-explain class="text-center" [style.color]="'red'">{{loginMsg}}</div>
                         </div>
                     </div>
                     <div nz-form-item nz-row>
@@ -66,8 +72,8 @@
             </ng-template>
         </nz-card>
         <div class="p-lg text-center text-sm">
-            &copy; {{ settings.app.year }} - {{ settings.app.name }}
-            <br> {{ settings.app.description }}
+            &copy; 2017 - sFlow
+            <br> sFlow admin panel front-end application
         </div>
     </div>
 </div>

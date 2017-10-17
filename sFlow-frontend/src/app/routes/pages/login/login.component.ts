@@ -1,17 +1,18 @@
 import { Router, NavigationExtras } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingsService } from '@core/services/settings.service';
-import { LoginParam } from "app/beans/loginParam";
-import { AuthService } from "app/services/auth.service";
+import { LoginParam } from 'app/beans/loginParam';
+import { AuthService } from 'app/services/auth.service';
 import * as crypto from 'crypto-browserify';
-import { UserSession } from "app/beans/userSession";
+import { UserSession } from 'app/beans/userSession';
+import { StartupService } from "@core/services/startup.service";
 
 @Component({
   selector: 'app-pages-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   valForm: FormGroup;
 
   unEncryptPwd = "";
@@ -20,7 +21,8 @@ export class LoginComponent {
   loginParam: LoginParam = new LoginParam();
   submitted = false;
   
-  constructor(public authService: AuthService,
+  constructor(private startupService: StartupService,
+    public authService: AuthService,
     public settings: SettingsService, fb: FormBuilder, private router: Router) {
     this.valForm = fb.group({
       userAccount: [null, Validators.compose([Validators.required])],
@@ -28,12 +30,13 @@ export class LoginComponent {
       captcha: [null, Validators.required],
       remember_me: [null]
     });
+  }
+
+  ngOnInit(): void {
     this.refreshCaptcha();
   }
 
-
   setCaptchaImg(data): void {
-    console.log(data);
     this.loginParam.captchaCodeId = data.result.captchaId;
     this.captchaSrc = 'data:image/png;base64,' + data.result.captchaSrc;
   }
@@ -50,15 +53,13 @@ export class LoginComponent {
       this.valForm.controls[i].markAsDirty();
     }
     if (this.valForm.valid) {
-      console.log('Valid!');
-      console.log(this.valForm.value);
       // this.router.navigate(['dashboard']);
       
       const sha1Str: string = crypto.createHash('sha1').update(this.unEncryptPwd).digest('hex');
       this.loginParam.password = sha1Str;
   
       this.authService.login(this.loginParam).then(data => {
-  
+
         if (data.success) {
           const userSession: UserSession = data.result;
           this.authService.setLoginInfo(userSession);
@@ -75,6 +76,8 @@ export class LoginComponent {
               preserveFragment: true
             };
   
+            this.startupService.load();
+
             // Redirect the user
             this.router.navigate([redirect], navigationExtras);
   

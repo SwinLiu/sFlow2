@@ -32,27 +32,26 @@ export class StartupService {
         // only works with promises
         // https://github.com/angular/angular/issues/15088
         const url = `${this.config.apiUrl}${CONSTANTS.API_URL.user.session}`;
-        console.log(url);
+        // const url = 'assets/app-data.json';
         return new Promise((resolve, reject) => {
             this.httpClient.get(url)
-                           .subscribe((data: any) => {
-                               console.log(data);
-                                const res = data.result;
-                                this.settingService.setApp(res.app);
-                                this.settingService.setUser(res.user);
-                                // 设置ＡＣＬ权限为全量
-                                this.aclService.setFull(true);
-                                // 初始化菜单
-                                this.menuService.add(res.menu);
-                                // 调整语言
-                                this.tr.use(this.settingService.layout.lang);
-                                // 设置语言后缀
-                                this.titleService.suffix = res.app.name;
+                .subscribe((data: any) => {
+                    const res = data.result;
+                    this.settingService.setApp(res.app);
+                    this.settingService.setUser(res.user);
+                    // 设置ＡＣＬ权限为全量
+                    this.aclService.setFull(true);
+                    // 初始化菜单
+                    this.menuService.add(res.menu);
+                    // 调整语言
+                    this.tr.use(this.settingService.layout.lang);
+                    // 设置语言后缀
+                    this.titleService.suffix = res.app.name;
 
-                                resolve(res);
-                            }, (err: HttpErrorResponse) => {
-                                resolve(null);
-                            });
+                    resolve(res);
+                }, (err: HttpErrorResponse) => {
+                    resolve(null);
+                });
         });
     }
 }

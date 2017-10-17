@@ -4,7 +4,7 @@
  */
 export const CONSTANTS = {
   ROUTE_URL: {
-    signin: "/signin",
+    signin: "/login",
     user: {
       list: "/user/management/list",
       add: "/user/management/add"
@@ -21,6 +21,7 @@ export const CONSTANTS = {
   API_URL: {
     //登录地址
     login: "/api/login",
+    logout: "/api/logout",
     //菜单模块地址
     user: {
       session: "/api/user/session",
