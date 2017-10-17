@@ -1,7 +1,5 @@
 {
     "home": "主页",
-    "settings": "设置",
-    "profile": "个人资料",
     "login": "登录",
     "logout": "登出",
     "more": "更多",
@@ -15,7 +13,6 @@
     "fullscreen-exit": "退出全屏",
     "clear-local-storage": "清理本地缓存",
     "language": "语言",
-    "dashboard": "仪表盘",
     "dashboard_v1": "仪表盘 版本1",
     "widgets": "小部件",
     "main_navigation": "主导航",
@@ -64,5 +61,63 @@
     "post": "新建",
     "website": "前台（外链）",
     "helpcenter": "帮助中心",
-    "poi": "门店"
+    "poi": "门店",
+
+    "dashboard" : "首页",
+    "settings" : "系统设置",
+    "profile" : "个人信息",
+    "sign-in" : "登录",
+    "sign-up" : "注册",
+    "sign-out" : "登出",
+
+    "lang-en" : "英语",
+    "lang-zh" : "中文",
+
+    "user-management" : "用户管理",
+    "employee-management" : "员工管理",
+    "company-management" : "公司管理",
+
+    "user" : {
+        "list" : "用户列表",
+        "id" : "用户编号",
+        "name" : "用户名",
+        "phone" : "联系方式",
+        "email" : "邮箱",
+        "password" : "密码",
+        "status" : "状态",
+        "createTime" : "创建日期",
+        "action" : "操作",
+        "addNew" : "新增用户",
+        "add" : "新增",
+        "delete" : "删除"
+    },
+    "company" : {
+        "select" : "公司 : ",
+        "list" : "公司列表",
+        "addNew" : "新增公司",
+        "add" : "新增",
+        "delete" : "删除",
+        "action" : "操作",
+        "id" : "公司编号",
+        "name" : "公司名",
+        "address" : "公司地址"  
+    },
+    "employee" : {
+        "list" : "员工列表",
+        "addNew" : "新增员工",
+        "add" : "新增",
+        "delete" : "删除",
+        "action" : "操作",
+        "id" : "员工编号",
+        "surName" : "姓",
+        "givenName" : "名",
+        "gender" : "性别",
+        "birthday" : "生日",
+        "workEmail" : "工作邮箱",
+        "status" : "状态"
+    },
+    "gender" : {
+        "male" : "男",
+        "female" : "女"
+    }
 }

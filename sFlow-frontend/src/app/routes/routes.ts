@@ -16,7 +16,10 @@ export const routes = [
             { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard/v1', component: DashboardV1Component, data: { translate: 'dashboard_v1' } },
-            { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' }
+            { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' },
+            { path: 'user', loadChildren: './user-management/user-management.module#UserManagementModule' },
+            { path: 'company', loadChildren: './company-management/company-management.module#CompanyManagementModule' },
+            { path: 'employee', loadChildren: './employee-management/employee-management.module#EmployeeManagementModule' }
         ]
     },
     // 单页不包裹Layout
@@ -27,5 +30,5 @@ export const routes = [
     { path: 'maintenance', component: MaintenanceComponent },
     { path: '404', component: Page404Component },
     { path: '500', component: Page500Component },
-    { path: '**', redirectTo: 'dashboard' }
+    { path: '**', component: Page404Component }
 ];
