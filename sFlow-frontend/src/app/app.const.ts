@@ -23,6 +23,7 @@ export const CONSTANTS = {
     login: "/api/login",
     //菜单模块地址
     user: {
+      session: "/api/user/session",
       add: "/api/user/add", //添加用户信息
       delete: "/api/user/delete",
       list: "/api/user/list"//用户信息列表

@@ -27,16 +27,16 @@ export class TokenInterceptor implements HttpInterceptor {
         Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
         let header: HttpHeaders = null;
         // 过滤授权与多assets请求
-        if (!req.url.includes('auth/') && !req.url.includes('assets/')) {
-            // 可以进一步处理，比如：重新刷新或重新登录
-            const authData = this.injector.get(TokenService).data;
-            if (!authData.access_token) {
-                this.goLogin();
-                return Observable.create(observer => observer.error({ status: 401 }));
-            }
-            // 正常token值放在请求header当中，具体格式以后端为准
-            header = req.headers.set('Authorization', `Bearer ${authData.access_token}`);
-        }
+        // if (!req.url.includes('auth/') && !req.url.includes('assets/')) {
+        //     // 可以进一步处理，比如：重新刷新或重新登录
+        //     const authData = this.injector.get(TokenService).data;
+        //     if (!authData.access_token) {
+        //         this.goLogin();
+        //         return Observable.create(observer => observer.error({ status: 401 }));
+        //     }
+        //     // 正常token值放在请求header当中，具体格式以后端为准
+        //     header = req.headers.set('Authorization', `Bearer ${authData.access_token}`);
+        // }
 
         // 统一加上服务端前缀
         let url = req.url;
@@ -48,10 +48,12 @@ export class TokenInterceptor implements HttpInterceptor {
             headers: header,
             url: url
         });
-
+        console.log(newReq);
         return next
                 .handle(newReq)
                 .mergeMap((event: any) => {
+                    console.log("event 1");
+                    console.log(event);
                     // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
                     if (event instanceof HttpResponse && event.status !== CONSTANTS.HTTPStatus.SUCCESS) {
                         // observer.error 会跳转至后面的 `catch`
@@ -61,6 +63,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     return Observable.create(observer => observer.next(event));
                 })
                 .catch((res: HttpResponse<any>) => {
+                    console.log(res);
                     // 一些通用操作
                     switch (res.status) {
                         case CONSTANTS.HTTPStatus.UNAUTHORIZED: // 未登录状态码

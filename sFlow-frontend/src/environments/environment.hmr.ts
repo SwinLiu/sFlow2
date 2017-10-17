@@ -3,5 +3,5 @@ export const environment = {
     enableLog: true,
     production: true,
     hmr: true,
-    apiUrl: 'http://api.lyplay.com'
+    apiUrl: 'http://localhost:8080'
 };

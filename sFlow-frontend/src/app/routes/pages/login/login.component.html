@@ -7,24 +7,33 @@
             <ng-template #body>
                 <form nz-form [formGroup]="valForm" (ngSubmit)="submit()" role="form">
                     <div nz-form-item>
-                        <div nz-form-control [nzValidateStatus]="valForm.controls.email">
-                            <nz-input formControlName="email" [nzPlaceHolder]="'邮箱'" [nzSize]="'large'">
+                        <div nz-form-control [nzValidateStatus]="valForm.controls.userAccount">
+                            <nz-input [(ngModel)]="loginParam.userName" formControlName="userAccount" [nzPlaceHolder]="'用户名/邮箱'" [nzSize]="'large'">
                                 <ng-template #suffix>
                                     <i class="anticon anticon-mail"></i>
                                 </ng-template>
                             </nz-input>
-                            <div nz-form-explain *ngIf="valForm.controls.email.dirty&&valForm.controls.email.hasError('required')">邮箱必填</div>
+                            <div nz-form-explain *ngIf="valForm.controls.userAccount.dirty&&valForm.controls.userAccount.hasError('required')">用户名/邮箱必填</div>
                         </div>
                     </div>
                     <div nz-form-item>
                         <div nz-form-control [nzValidateStatus]="valForm.controls.password">
-                            <nz-input formControlName="password" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+                            <nz-input [(ngModel)]="unEncryptPwd" formControlName="password" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
                                 <ng-template #suffix>
                                     <i class="anticon anticon-lock"></i>
                                 </ng-template>
                             </nz-input>
                             <div nz-form-explain *ngIf="valForm.controls.password.dirty&&valForm.controls.password.hasError('required')">密码必填</div>
                         </div>
+                    </div>
+                    <div nz-form-item>
+                        <div nz-form-control [nzValidateStatus]="valForm.controls.captcha">
+                            <nz-input [(ngModel)]="loginParam.captchaCode" formControlName="captcha" [nzPlaceHolder]="'验证码'" [nzSize]="'large'">
+                            </nz-input>
+                            <div nz-form-explain *ngIf="valForm.controls.captcha.dirty&&valForm.controls.captcha.hasError('required')">验证码必填</div>
+                        </div>
+                        {{captchaSrc}}
+                        <img class="img-thumbnail" id="captchaCodeImg"  src="{{captchaSrc}}" (click)="refreshCaptcha()" >
                     </div>
                     <div nz-form-item nz-row>
                         <div nz-col [nzSpan]="12">

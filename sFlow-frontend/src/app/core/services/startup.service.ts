@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MenuService } from './menu.service';
 import { TranslatorService } from '../translator/translator.service';
@@ -10,6 +10,8 @@ import { TitleService } from '@core/services/title.service';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import { APP_CONFIG, AppConfig } from "app/app-config.module";
+import { CONSTANTS } from "app/app.const";
 /**
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
@@ -17,6 +19,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class StartupService {
     constructor(
+        @Inject(APP_CONFIG) private config: AppConfig,
         private menuService: MenuService,
         private tr: TranslatorService,
         private settingService: SettingsService,
@@ -28,9 +31,13 @@ export class StartupService {
     load(): Promise<any> {
         // only works with promises
         // https://github.com/angular/angular/issues/15088
+        const url = `${this.config.apiUrl}${CONSTANTS.API_URL.user.session}`;
+        console.log(url);
         return new Promise((resolve, reject) => {
-            this.httpClient.get('assets/app-data.json')
-                           .subscribe((res: any) => {
+            this.httpClient.get(url)
+                           .subscribe((data: any) => {
+                               console.log(data);
+                                const res = data.result;
                                 this.settingService.setApp(res.app);
                                 this.settingService.setUser(res.user);
                                 // 设置ＡＣＬ权限为全量

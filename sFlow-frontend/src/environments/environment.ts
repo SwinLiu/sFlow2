@@ -8,5 +8,5 @@ export const environment = {
     enableLog: true,
     production: false,
     hmr: false,
-    apiUrl: 'http://api.lyplay.com'
+    apiUrl: 'http://localhost:8080'
 };

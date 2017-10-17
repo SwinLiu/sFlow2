@@ -108,6 +108,8 @@ public class UserController {
 		dashboard.setIcon("icon-speedometer");
 		main.addChildMenu(dashboard);
 		
+		menuList.add(main);
+		
 //		{
 //	        "text": "主导航",
 //	        "translate": "main_navigation",
