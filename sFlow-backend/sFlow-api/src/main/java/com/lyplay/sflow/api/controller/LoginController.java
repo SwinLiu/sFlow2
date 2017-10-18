@@ -45,7 +45,7 @@ public class LoginController {
 	@ApiImplicitParams({ 
 		@ApiImplicitParam(name = "userParam", value = "userParam", required = true)
 	})
-	@RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/api/auth/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public RestResult login(@RequestBody UserParam userParam) throws Exception {
 

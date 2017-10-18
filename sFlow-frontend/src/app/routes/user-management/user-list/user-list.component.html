@@ -1,32 +1,32 @@
 <div>
-  <div class="row placeholders">
-    <div class="col-xs-12 col-sm-12 placeholder">
+  <div nz-row>
+    <div nz-col [nzSpan]="12">
       <h3><span translate="user.list"></span></h3>
     </div>
   </div>
-  <div class="row placeholders">
-    <div class="col-xs-12 col-sm-12 placeholder">
-      <table class="table table-striped">
-        <thead>
+  <div nz-row>
+    <div nz-col [nzSpan]="12">
+      <nz-table>
+        <thead nz-thead>
           <tr>
-            <td><span translate="user.id"></span></td>
-            <td><span translate="user.name"></span></td>
-            <td><span translate="user.phone"></span></td>
-            <td><span translate="user.email"></span></td>
-            <td><span translate="user.status"></span></td>
-            <td><span translate="user.createTime"></span></td>
-            <td><span translate="user.action"></span></td>
+            <th nz-th><span translate="user.id"></span></th>
+            <th nz-th><span translate="user.name"></span></th>
+            <th nz-th><span translate="user.phone"></span></th>
+            <th nz-th><span translate="user.email"></span></th>
+            <th nz-th><span translate="user.status"></span></th>
+            <th nz-th><span translate="user.createTime"></span></th>
+            <th nz-th><span translate="user.action"></span></th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let userAccount of userAccounts" >
-            <td>{{userAccount.uid}}</td>
-            <td>{{userAccount.userName}}</td>
-            <td>{{userAccount.phoneNumber}}</td>
-            <td>{{userAccount.email}}</td>
-            <td>{{userAccount.status}}</td>
-            <td></td>
-            <td>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let userAccount of userAccounts" >
+            <td nz-td>{{userAccount.uid}}</td>
+            <td nz-td>{{userAccount.userName}}</td>
+            <td nz-td>{{userAccount.phoneNumber}}</td>
+            <td nz-td>{{userAccount.email}}</td>
+            <td nz-td>{{userAccount.status}}</td>
+            <td nz-td></td>
+            <td nz-td>
               <button class="btn btn-danger" (click)="deleteUser(userAccount.uid)">
                 <span translate="user.delete"></span>
               </button>
@@ -42,7 +42,7 @@
             </td>
           </tr>
         </tfoot>
-      </table>
+      </nz-table>
     </div>
   </div>
 </div>

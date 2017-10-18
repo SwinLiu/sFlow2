@@ -20,8 +20,9 @@ export const CONSTANTS = {
   },
   API_URL: {
     //登录地址
-    login: "/api/login",
+    login: "/api/auth/login",
     logout: "/api/logout",
+    captcha: "/api/auth/captcha",
     //菜单模块地址
     user: {
       session: "/api/user/session",

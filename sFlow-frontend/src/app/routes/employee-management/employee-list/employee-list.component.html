@@ -18,29 +18,29 @@
   </div>
   <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-      <table class="table table-striped">
-        <thead>
+      <nz-table>
+        <thead nz-thead>
           <tr>
-            <td><span translate="employee.id"></span></td>
-            <td><span translate="employee.surName"></span></td>
-            <td><span translate="employee.givenName"></span></td>
-            <td><span translate="employee.gender"></span></td>
-            <td><span translate="employee.birthday"></span></td>
-            <td><span translate="employee.workEmail"></span></td>
-            <td><span translate="employee.status"></span></td>
-            <td><span translate="employee.action"></span></td>
+            <th nz-th><span translate="employee.id"></span></th>
+            <th nz-th><span translate="employee.surName"></span></th>
+            <th nz-th><span translate="employee.givenName"></span></th>
+            <th nz-th><span translate="employee.gender"></span></th>
+            <th nz-th><span translate="employee.birthday"></span></th>
+            <th nz-th><span translate="employee.workEmail"></span></th>
+            <th nz-th><span translate="employee.status"></span></th>
+            <th nz-th><span translate="employee.action"></span></th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let employeeBean of employeeList" >
-            <td>{{employeeBean.employeeId}}</td>
-            <td>{{employeeBean.surName}}</td>
-            <td>{{employeeBean.givenName}}</td>
-            <td>{{employeeBean.gender}}</td>
-            <td>{{employeeBean.birthday}}</td>
-            <td>{{employeeBean.workEmail}}</td>
-            <td>{{employeeBean.status}}</td>
-            <td>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let employeeBean of employeeList" >
+            <td nz-td>{{employeeBean.employeeId}}</td>
+            <td nz-td>{{employeeBean.surName}}</td>
+            <td nz-td>{{employeeBean.givenName}}</td>
+            <td nz-td>{{employeeBean.gender}}</td>
+            <td nz-td>{{employeeBean.birthday}}</td>
+            <td nz-td>{{employeeBean.workEmail}}</td>
+            <td nz-td>{{employeeBean.status}}</td>
+            <td nz-td>
               <button class="btn btn-danger" (click)="deleteEmployee(employeeBean.empId)">
                 <span translate="employee.delete"></span>
               </button>
@@ -56,7 +56,7 @@
             </td>
           </tr>
         </tfoot>
-      </table>
+      </nz-table>
     </div>
   </div>
 </div>

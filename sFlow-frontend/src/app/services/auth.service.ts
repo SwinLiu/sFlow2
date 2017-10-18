@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   getCaptchaSrc(): Promise<any> {
-    const url = `${this.apiUrl}/api/captcha/160x30x6x0`;
+    const url = `${this.apiUrl}${CONSTANTS.API_URL.captcha}/160x30x6x0`;
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => resolve(data));

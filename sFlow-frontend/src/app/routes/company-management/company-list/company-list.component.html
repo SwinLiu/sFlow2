@@ -6,21 +6,21 @@
   </div>
   <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-      <table class="table table-striped">
-        <thead>
+      <nz-table>
+        <thead nz-thead>
           <tr>
-            <td><span translate="company.id"></span></td>
-            <td><span translate="company.name"></span></td>
-            <td><span translate="company.address"></span></td>
-            <td><span translate="company.action"></span></td>
+            <th nz-th><span translate="company.id"></span></th>
+            <th nz-th><span translate="company.name"></span></th>
+            <th nz-th><span translate="company.address"></span></th>
+            <th nz-th><span translate="company.action"></span></th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let companyBean of companyList" >
-            <td>{{companyBean.compId}}</td>
-            <td>{{companyBean.companyName}}</td>
-            <td>{{companyBean.address}}</td>
-            <td>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let companyBean of companyList" >
+            <td nz-td>{{companyBean.compId}}</td>
+            <td nz-td>{{companyBean.companyName}}</td>
+            <td nz-td>{{companyBean.address}}</td>
+            <td nz-td>
               <button class="btn btn-danger" (click)="deleteCompany(companyBean.compId)">
                 <span translate="company.delete"></span>
               </button>
@@ -36,7 +36,7 @@
             </td>
           </tr>
         </tfoot>
-      </table>
+      </nz-table>
     </div>
   </div>
 </div>

@@ -30,7 +30,7 @@ public class RegisterController {
 
 
 	@AuthPassport(validate = false)
-	@RequestMapping(value = "/api/register", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/api/auth/register", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public RestResult register(RegisterUser registerUser) throws Exception {
 		

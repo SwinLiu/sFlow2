@@ -45,7 +45,7 @@ public class CecurityController {
 	CacheService cacheService;
 
 	@AuthPassport(validate = false)
-	@RequestMapping(value = "/api/captcha/{size}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/api/auth/captcha/{size}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public RestResult getCaptchaPic(@PathVariable("size") String size)
 			throws IOException {
@@ -78,7 +78,7 @@ public class CecurityController {
 	}
 	
 	@AuthPassport(validate = false)
-	@RequestMapping(value = "/api/secret", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/api/auth/secret", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public RestResult getEncryptKey() throws Exception {
 		Map<String, String> map = RSAUtil.getKeyPair();
