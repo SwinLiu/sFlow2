@@ -6,6 +6,7 @@ import { LoggerService } from "app/services/logger.service";
 import { EmployeeService } from "app/services/employee/employee.service";
 import { CompanyService } from "app/services/company/company.service";
 import { CONSTANTS } from "app/app.const";
+import { NzNotificationService } from "ng-zorro-antd";
 
 @Component({
   selector: 'sFlow-employee-container',
@@ -13,11 +14,13 @@ import { CONSTANTS } from "app/app.const";
 })
 export class EmployeeListComponent implements OnInit {
 
-  public companyList;
+  public companyList = [];
   public selectedComp;
-  public employeeList;
+  public employeeList = [];
 
-  constructor(private employeeService: EmployeeService,
+  constructor(
+    private _notification: NzNotificationService,
+    private employeeService: EmployeeService,
     private companyService: CompanyService,
     private loggerService: LoggerService,
     private location: Location,
@@ -67,7 +70,7 @@ export class EmployeeListComponent implements OnInit {
     if (this.selectedComp) {
       this.router.navigate([CONSTANTS.ROUTE_URL.employee.add, this.selectedComp]);
     } else {
-      console.error("No company data.");
+      this._notification.create('warning', 'No company data.', '');
     }
 
   }

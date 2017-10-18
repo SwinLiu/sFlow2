@@ -1,48 +1,48 @@
-<div>
-  <div nz-row>
-    <div nz-col [nzSpan]="12">
-      <h3><span translate="user.list"></span></h3>
-    </div>
-  </div>
-  <div nz-row>
-    <div nz-col [nzSpan]="12">
-      <nz-table>
-        <thead nz-thead>
-          <tr>
-            <th nz-th><span translate="user.id"></span></th>
-            <th nz-th><span translate="user.name"></span></th>
-            <th nz-th><span translate="user.phone"></span></th>
-            <th nz-th><span translate="user.email"></span></th>
-            <th nz-th><span translate="user.status"></span></th>
-            <th nz-th><span translate="user.createTime"></span></th>
-            <th nz-th><span translate="user.action"></span></th>
-          </tr>
-        </thead>
-        <tbody nz-tbody>
-          <tr nz-tbody-tr *ngFor="let userAccount of userAccounts" >
-            <td nz-td>{{userAccount.uid}}</td>
-            <td nz-td>{{userAccount.userName}}</td>
-            <td nz-td>{{userAccount.phoneNumber}}</td>
-            <td nz-td>{{userAccount.email}}</td>
-            <td nz-td>{{userAccount.status}}</td>
-            <td nz-td></td>
-            <td nz-td>
-              <button class="btn btn-danger" (click)="deleteUser(userAccount.uid)">
-                <span translate="user.delete"></span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="7">
-              <button type="button" class="btn btn-primary pull-right" routerLink="/user/management/add" >
-                <span translate="user.addNew"></span>
-              </button>
-            </td>
-          </tr>
-        </tfoot>
-      </nz-table>
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col [nzMd]="24">
+      <nz-card>
+          <ng-template #title>
+            <span translate="user.list"></span>
+          </ng-template>
+          <ng-template #extra>
+            <button nz-button [nzType]="'primary'" routerLink="/user/management/add" >
+              <span translate="user.addNew"></span>
+            </button>
+          </ng-template>
+          <ng-template #body>
+              <nz-table #nzTable [nzDataSource]="userAccounts" [nzPageSize]="10">
+                  <thead nz-thead>
+                      <tr>
+                        <th nz-th><span translate="user.id"></span></th>
+                        <th nz-th><span translate="user.name"></span></th>
+                        <th nz-th><span translate="user.phone"></span></th>
+                        <th nz-th><span translate="user.email"></span></th>
+                        <th nz-th><span translate="user.status"></span></th>
+                        <th nz-th><span translate="user.createTime"></span></th>
+                        <th nz-th><span translate="user.action"></span></th>
+                      </tr>
+                  </thead>
+                  <tbody nz-tbody>
+                      <tr nz-tbody-tr *ngFor="let userAccount of nzTable.data">
+                        <td nz-td>{{userAccount.uid}}</td>
+                        <td nz-td>{{userAccount.userName}}</td>
+                        <td nz-td>{{userAccount.phoneNumber}}</td>
+                        <td nz-td>{{userAccount.email}}</td>
+                        <td nz-td>{{userAccount.status}}</td>
+                        <td nz-td></td>
+                          <td nz-td>
+                              <span>
+                                  <a>Edit</a>
+                                  <span nz-table-divider></span>
+                                  <nz-popconfirm [nzTitle]="'Are you sure？'" [nzOkText]="'ok'" [nzCancelText]="'cancel'" (nzOnConfirm)="deleteUser(userAccount.uid)" >
+                                    <a nz-popconfirm><span translate="user.delete"></span></a>
+                                  </nz-popconfirm>
+                              </span>
+                          </td>
+                      </tr>
+                  </tbody>
+              </nz-table>
+          </ng-template>
+      </nz-card>
   </div>
 </div>

@@ -72,6 +72,11 @@ export class MenuService {
         this.resume();
     }
 
+    set(items: Menu[]) {
+        this.data = items;
+        this.resume();
+    }
+
     /**
      * 若用户权限变动时需要调用刷新
      */

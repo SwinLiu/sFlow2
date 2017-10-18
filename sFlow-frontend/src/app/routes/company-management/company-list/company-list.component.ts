@@ -9,7 +9,7 @@ import { CompanyService } from "app/services/company/company.service";
 })
 export class CompanyListComponent implements OnInit {
 
-  public companyList;
+  public companyList = [];
 
   constructor(
     private companyService: CompanyService,

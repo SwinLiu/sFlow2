@@ -64,24 +64,23 @@ export class LoginComponent implements OnInit {
           const userSession: UserSession = data.result;
           this.authService.setLoginInfo(userSession);
           this.loginMsg = "";
-          if (this.authService.isLoggedIn) {
-            // Get the redirect URL from our auth service
-            // If no redirect has been set, use the default
-            const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
-  
-            // Set our navigation extras object
-            // that passes on our global query params and fragment
-            const navigationExtras: NavigationExtras = {
-              preserveQueryParams: true,
-              preserveFragment: true
-            };
-  
-            this.startupService.load();
+            
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
-            // Redirect the user
-            this.router.navigate([redirect], navigationExtras);
+          // Set our navigation extras object
+          // that passes on our global query params and fragment
+          const navigationExtras: NavigationExtras = {
+            preserveQueryParams: true,
+            preserveFragment: true
+          };
+
+          this.startupService.load();
+
+          // Redirect the user
+          this.router.navigate([redirect], navigationExtras);
   
-          }
   
         } else {
           this.refreshCaptcha();

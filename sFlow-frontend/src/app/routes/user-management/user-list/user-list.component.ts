@@ -2,6 +2,7 @@ import {Location} from '@angular/common';
 import {Component, NgModule, OnInit} from '@angular/core';
 import { UserAccountService } from "app/services/user/user-account.service";
 import { LoggerService } from "app/services/logger.service";
+import { NzNotificationService } from "ng-zorro-antd";
 
 @Component({
   selector: 'sFlow-user-container',
@@ -9,9 +10,10 @@ import { LoggerService } from "app/services/logger.service";
 })
 export class UserListComponent implements OnInit {
 
-  public userAccounts;
+  public userAccounts = [];
 
   constructor(
+    private _notification: NzNotificationService,
     private userAccountService: UserAccountService,
     private loggerService: LoggerService,
     private location: Location) { }
@@ -29,7 +31,7 @@ export class UserListComponent implements OnInit {
       if (data.success) {
         this.renderListPage();
       } else {
-        console.error(data.message);
+        this._notification.create('error', '', data.message);
       }
     });
   }

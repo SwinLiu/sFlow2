@@ -42,7 +42,7 @@ export class StartupService {
                     // 设置ＡＣＬ权限为全量
                     this.aclService.setFull(true);
                     // 初始化菜单
-                    this.menuService.add(res.menu);
+                    this.menuService.set(res.menu);
                     // 调整语言
                     this.tr.use(this.settingService.layout.lang);
                     // 设置语言后缀
