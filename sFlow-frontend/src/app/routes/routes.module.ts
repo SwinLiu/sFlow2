@@ -9,7 +9,7 @@ import { DashboardV1Component } from './dashboard/v1/v1.component';
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forRoot(routes, { useHash: false }),
+        RouterModule.forRoot(routes, { useHash: true }),
         PagesModule
     ],
     declarations: [
