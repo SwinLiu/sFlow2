@@ -1,79 +1,82 @@
-<div>
-  <div class="row placeholders">
-    <div class="col-xs-12 col-sm-12 placeholder">
-      <h3>{{ 'employee.addNew' | translate }}</h3>
-    </div>
-  </div>
-
-  <div class="row">&nbsp;</div>
-
-  <div class="row placeholders">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="inputEmployeeId" class="col-sm-2 control-label">{{ 'employee.id' | translate }}</label>
-        <div class="col-sm-4">
-          <input type="text" [(ngModel)]="newEmployee.employeeId" class="form-control" id="inputEmployeeId"
-            name="inputEmployeeId" #inputEmployeeId=ngModel maxlength="50" required placeholder="E0001" />
-        </div>
-        <div class="col-sm-6" *ngIf="inputEmployeeId.invalid && (inputEmployeeId.dirty || inputEmployeeId.touched)" >
-          <span [style.color]="inputEmployeeId.valid ? 'black':'red'" >
-            <span *ngIf="inputEmployeeId.errors.required">Employee ID is required.</span>
-          </span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputSurName" class="col-sm-2 control-label">{{ 'employee.surName' | translate }}</label>
-        <div class="col-sm-4">
-          <input type="text" [(ngModel)]="newEmployee.surName" class="form-control" id="inputSurName" 
-            name="inputSurName" placeholder="SurName" maxlength="100" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputGivenName" class="col-sm-2 control-label">{{ 'employee.givenName' | translate }}</label>
-        <div class="col-sm-4">
-          <input type="text" [(ngModel)]="newEmployee.givenName" class="form-control" id="inputGivenName" 
-            name="inputGivenName" placeholder="Given Name" maxlength="100" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputGender" class="col-sm-2 control-label">{{ 'employee.gender' | translate }}</label>
-        <div class="col-sm-4">
-          <div class="radio">
-            <label>
-              <input type="radio" [(ngModel)]="newEmployee.gender" name="inputGender" id="inputGenderMale" value="0" checked>
-              {{ 'gender.male' | translate }}
-            </label>
-            <label>
-              <input type="radio" [(ngModel)]="newEmployee.gender" name="inputGender" id="inputGenderFemale" value="1">
-              {{ 'gender.female' | translate }}
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputBirthday" class="col-sm-2 control-label">{{ 'employee.birthday' | translate }}</label>
-        <div class="col-sm-4">
-          <nz-datepicker [(ngModel)]="newEmployee.birthday" id="inputBirthday" name="inputBirthday" 
-            [nzPlaceHolder]="'YYYY/MM/DD'" [nzFormat]="'YYYY/MM/DD'"></nz-datepicker>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputWorkEmail" class="col-sm-2 control-label">{{ 'employee.workEmail' | translate }}</label>
-        <div class="col-sm-4">
-          <input type="email" [(ngModel)]="newEmployee.workEmail" class="form-control" id="inputWorkEmail" 
-            name="inputWorkEmail" placeholder="xxxx@xxx.xx" maxlength="100" />
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-4">
-          <button type="button" (click)="addNew()" class="btn btn-default">{{ 'employee.add' | translate }}</button>
-        </div>
-        <div class="col-sm-6">
-          {{errorMsg}}
-        </div>
-      </div>
-    </form>
+<div nz-row [nzGutter]="16">
+  <div nz-col [nzMd]="24">
+      <nz-card>
+          <ng-template #title>{{ 'employee.addNew' | translate }}</ng-template>
+          <ng-template #body>
+              <form nz-form>
+                  <div nz-form-item nz-row>
+                      <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                          <label for="inputEmployeeId" nz-form-item-required>{{ 'employee.id' | translate }}</label>
+                      </div>
+                      <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                          <nz-input [(ngModel)]="newEmployee.employeeId" [nzId]="'inputEmployeeId'" name="inputEmployeeId" [nzPlaceHolder]="'E0001'" maxlength="50" required >
+                          </nz-input>
+                      </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="inputSurName" nz-form-item-required>{{ 'employee.surName' | translate }}</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [(ngModel)]="newEmployee.surName" [nzId]="'inputSurName'" name="inputSurName" [nzPlaceHolder]="'SurName'" maxlength="100" >
+                        </nz-input>
+                    </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="inputGivenName" nz-form-item-required>{{ 'employee.givenName' | translate }}</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [(ngModel)]="newEmployee.givenName" [nzId]="'inputGivenName'" name="inputGivenName" [nzPlaceHolder]="'Given Name'" maxlength="100" >
+                        </nz-input>
+                    </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="inputGender" nz-form-item-required>{{ 'employee.gender' | translate }}</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                      <nz-radio-group [(ngModel)]="newEmployee.gender" name="inputGender" >
+                        <label nz-radio [nzValue]="'0'">
+                            <span>{{ 'gender.male' | translate }}</span>
+                        </label>
+                        <label nz-radio [nzValue]="'1'">
+                            <span>{{ 'gender.female' | translate }}</span>
+                        </label>
+                      </nz-radio-group>
+                    </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="inputBirthday" nz-form-item-required>{{ 'employee.birthday' | translate }}</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                      <nz-datepicker [(ngModel)]="newEmployee.birthday" id="inputBirthday" name="inputBirthday" [nzPlaceHolder]="'YYYY/MM/DD'" [nzFormat]="'YYYY/MM/DD'">
+                      </nz-datepicker>
+                    </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="inputWorkEmail" nz-form-item-required>{{ 'employee.workEmail' | translate }}</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [(ngModel)]="newEmployee.workEmail" [nzId]="'inputWorkEmail'" name="inputWorkEmail" [nzPlaceHolder]="'xxxx@xxx.xx'" maxlength="100" >
+                        </nz-input>
+                    </div>
+                  </div>
+                  <div nz-form-item nz-row class="mb0">
+                      <div nz-form-control nz-col [nzSpan]="14" [nzXs]="24" [nzOffset]="6">
+                          <button nz-button [nzType]="'primary'" (click)="addNew()" >{{ 'employee.add' | translate }}</button>
+                      </div>
+                  </div>
+                  <div nz-form-item nz-row>
+                      <div nz-form-control nz-col [nzSpan]="14" [nzXs]="24" [nzOffset]="6">
+                        <span>{{errorMsg}}</span>
+                      </div>
+                  </div>
+              </form>
+          </ng-template>
+      </nz-card>
   </div>
 </div>
+
