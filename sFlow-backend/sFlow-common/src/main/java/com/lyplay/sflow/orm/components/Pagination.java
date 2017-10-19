@@ -1,5 +1,6 @@
 package com.lyplay.sflow.orm.components;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Pagination<T> {
@@ -9,17 +10,39 @@ public class Pagination<T> {
 
 	private int numPerPage;
 
-	private int totalRows;
+	private long totalRows;
 
-	private int totalPages;
+	private long totalPages;
 
 	private int currentPage;
 
-	private int startIndex;
+	private long startIndex;
 
-	private int lastIndex;
+	private long lastIndex;
 
 	private List<T> resultList;
+	
+	public Pagination() {
+		super();
+		this.numPerPage = DEFAULT_PER_PAGE;
+		this.totalRows = 0;
+		this.totalPages = 0;
+		this.currentPage = DEFAULT_CURRENT_PAGE;
+		this.startIndex = 0;
+		this.lastIndex = 0;
+		this.resultList = Collections.emptyList();
+	}
+	
+	public Pagination(int numPerPage, long totalRows, int currentPage, List<T> list) {
+		super();
+		setNumPerPage(numPerPage);
+		setTotalRows(totalRows);
+		setCurrentPage(currentPage);
+		setResultList(list);
+		setTotalPages();
+		setStartIndex();
+		setLastIndex();
+	}
 
 	public int getNumPerPage() {
 		return numPerPage;
@@ -29,15 +52,15 @@ public class Pagination<T> {
 		this.numPerPage = numPerPage;
 	}
 
-	public int getTotalRows() {
+	public long getTotalRows() {
 		return totalRows;
 	}
 
-	public void setTotalRows(int totalRows) {
+	public void setTotalRows(long totalRows) {
 		this.totalRows = totalRows;
 	}
 
-	public int getTotalPages() {
+	public long getTotalPages() {
 		return totalPages;
 	}
 
@@ -57,7 +80,7 @@ public class Pagination<T> {
 		this.currentPage = currentPage;
 	}
 
-	public int getStartIndex() {
+	public long getStartIndex() {
 		return startIndex;
 	}
 
@@ -65,7 +88,7 @@ public class Pagination<T> {
 		this.startIndex = (currentPage - 1) * numPerPage + 1;
 	}
 
-	public int getLastIndex() {
+	public long getLastIndex() {
 		return lastIndex;
 	}
 

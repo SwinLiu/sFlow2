@@ -8,12 +8,15 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.lyplay.sflow.data.domain.Company;
 import com.lyplay.sflow.data.repository.CompEmployeeGroupRepository;
 import com.lyplay.sflow.data.repository.CompanyRepository;
 import com.lyplay.sflow.data.repository.EmployeeRepository;
+import com.lyplay.sflow.orm.components.Pagination;
 import com.lyplay.sflow.service.CompanyService;
 import com.lyplay.sflow.service.dto.CompanyDto;
 import com.lyplay.sflow.service.dto.ValueLabelBean;
@@ -33,7 +36,7 @@ public class CompanyServiceImpl implements CompanyService {
 		Company company = new Company();
 		company.setCompanyName(companyInfo.getCompanyName());
 		company.setAddress(companyInfo.getAddress());
-		company.setChanger(companyInfo.getAddress());
+		company.setChanger(companyInfo.getChanger());
 		companyRepository.save(company);
 		return true;
 	}
@@ -55,6 +58,26 @@ public class CompanyServiceImpl implements CompanyService {
 			return compDtoList;
 		} else {
 			return Collections.emptyList();
+		}
+	}
+	
+	@Override
+	public Pagination<CompanyDto> getCompanyListByPage(Pageable pageable) {
+		// TODO add order by
+		Page<Company> compPageData = companyRepository.findAll(pageable);
+		if(CollectionUtils.isNotEmpty(compPageData.getContent())){
+			List<CompanyDto> compDtoList = new ArrayList<CompanyDto>(compPageData.getContent().size());
+			for(Company company : compPageData.getContent()){
+				CompanyDto companyDto = new CompanyDto();
+				companyDto.setCompId(company.getCompId());
+				companyDto.setCompanyName(company.getCompanyName());
+				companyDto.setAddress(company.getAddress());
+				companyDto.setChanger(company.getChanger());
+				compDtoList.add(companyDto);
+			}
+			return new Pagination<CompanyDto>(compPageData.getSize(), compPageData.getTotalElements(), compPageData.getNumber() + 1, compDtoList);
+		} else {
+			return new Pagination<CompanyDto>();
 		}
 	}
 	

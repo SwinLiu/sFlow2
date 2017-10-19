@@ -7,6 +7,7 @@ import { EmployeeService } from "app/services/employee/employee.service";
 import { CompanyService } from "app/services/company/company.service";
 import { CONSTANTS } from "app/app.const";
 import { NzNotificationService } from "ng-zorro-antd";
+import { Page } from "app/beans/page";
 
 @Component({
   selector: 'sFlow-employee-container',
@@ -14,9 +15,11 @@ import { NzNotificationService } from "ng-zorro-antd";
 })
 export class EmployeeListComponent implements OnInit {
 
+  loading = false;
+  public page: Page = new Page();
+  
   public companyList = [];
   public selectedComp;
-  public employeeList = [];
 
   constructor(
     private _notification: NzNotificationService,
@@ -38,7 +41,7 @@ export class EmployeeListComponent implements OnInit {
       this.selectedComp = this.companyList[0].value;
       this.renderEmployeeList();
     } else {
-      this.employeeList = [];
+      this.page.resultList = [];
     }
   }
 
@@ -46,10 +49,19 @@ export class EmployeeListComponent implements OnInit {
     this.renderEmployeeList();
   }
 
+  // renderEmployeeList() {
+  //   this.employeeService.getEmployeeList(this.selectedComp).then(data => {
+  //     this.employeeList = data.result;
+  //   });
+  // }
+
   renderEmployeeList() {
-    this.employeeService.getEmployeeList(this.selectedComp).then(data => {
-      this.employeeList = data.result;
-    });
+    this.loading = true;
+    this.employeeService.getEmployeeListByPage(this.selectedComp, this.page.currentPage, this.page.numPerPage)
+        .then(data => {
+          this.page = data;
+          this.loading = false;
+        });
   }
 
   goToBack() {

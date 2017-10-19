@@ -10,7 +10,15 @@
             </button>
           </ng-template>
           <ng-template #body>
-              <nz-table #nzTable [nzDataSource]="userAccounts" [nzPageSize]="10">
+              <nz-table #nzTable 
+                    [nzAjaxData]="page.resultList"
+                    [nzShowSizeChanger]="true"
+                    [nzLoading]="loading"
+                    [nzTotal]="page.totalRows"
+                    [(nzPageIndex)]="page.currentPage"
+                    (nzPageIndexChange)="renderListPage()"
+                    [(nzPageSize)]="page.numPerPage"
+                    (nzPageSizeChange)="renderListPage()">
                   <thead nz-thead>
                       <tr>
                         <th nz-th><span translate="user.id"></span></th>

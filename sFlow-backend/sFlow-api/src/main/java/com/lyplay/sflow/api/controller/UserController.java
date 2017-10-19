@@ -13,10 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,6 +76,15 @@ public class UserController {
 	@ResponseBody
 	public RestResult getUserList() throws Exception {
 		return success(userService.getUserList());
+	}
+	
+	@RequestMapping(value = "/api/user/page", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public RestResult getUserPageData(@RequestParam(value = "page", defaultValue = "1") Integer page,
+	        @RequestParam(value = "size", defaultValue = "10") Integer size) throws Exception {
+		Sort sort = new Sort(Direction.ASC, "uid");
+	    Pageable pageable = new PageRequest(page - 1, size, sort);
+		return success(userService.getUserListByPage(pageable));
 	}
 	
 	@RequestMapping(value = "/api/user/delete/{uid}", method = RequestMethod.DELETE, produces = "application/json")

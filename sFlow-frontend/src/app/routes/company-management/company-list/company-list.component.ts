@@ -2,6 +2,7 @@ import {Location} from '@angular/common';
 import {Component, NgModule, OnInit} from '@angular/core';
 import { LoggerService } from "app/services/logger.service";
 import { CompanyService } from "app/services/company/company.service";
+import { Page } from "app/beans/page";
 
 @Component({
   selector: 'sFlow-company-container',
@@ -9,7 +10,8 @@ import { CompanyService } from "app/services/company/company.service";
 })
 export class CompanyListComponent implements OnInit {
 
-  public companyList = [];
+  loading = false;
+  public page: Page = new Page();
 
   constructor(
     private companyService: CompanyService,
@@ -20,8 +22,17 @@ export class CompanyListComponent implements OnInit {
     this.renderListPage();
   }
 
+  // renderListPage() {
+  //   this.companyService.getCompanyList().then(data => this.companyList = data.result);
+  // }
+
   renderListPage() {
-    this.companyService.getCompanyList().then(data => this.companyList = data.result);
+    this.loading = true;
+    this.companyService.getCompanyListByPage(this.page.currentPage, this.page.numPerPage)
+        .then(data => {
+          this.page = data;
+          this.loading = false;
+        });
   }
 
   deleteCompany(compId: string) {

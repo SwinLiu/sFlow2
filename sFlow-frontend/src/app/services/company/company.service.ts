@@ -4,6 +4,7 @@ import { LoggerService } from 'app/services/logger.service';
 import { CONSTANTS } from 'app/app.const';
 import { RestResult } from 'app/beans/restResult';
 import { _HttpClient } from "@core/services/http.client";
+import { Page } from "app/beans/page";
 
 @Injectable()
 export class CompanyService {
@@ -51,6 +52,13 @@ export class CompanyService {
         //     .then(response => response)
         //     .catch(this.loggerService.handleError);
 
+    }
+
+    getCompanyListByPage(page: number, size: number): Promise<Page> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.company.page}`;
+        return new Promise((resolve, reject) => {
+            this.http.get(url, {page : page, size : size}).subscribe(response => resolve(response.result));
+        });
     }
 
     getCompanyDropdownList(): Promise<RestResult> {

@@ -3,6 +3,7 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import { UserAccountService } from "app/services/user/user-account.service";
 import { LoggerService } from "app/services/logger.service";
 import { NzNotificationService } from "ng-zorro-antd";
+import { Page } from "app/beans/page";
 
 @Component({
   selector: 'sFlow-user-container',
@@ -10,7 +11,8 @@ import { NzNotificationService } from "ng-zorro-antd";
 })
 export class UserListComponent implements OnInit {
 
-  public userAccounts = [];
+  loading = false;
+  public page: Page = new Page();
 
   constructor(
     private _notification: NzNotificationService,
@@ -22,8 +24,17 @@ export class UserListComponent implements OnInit {
     this.renderListPage();
   }
 
+  // renderListPage() {
+  //   this.userAccountService.getUserList().then(data => this.userAccounts = data.result);
+  // }
+
   renderListPage() {
-    this.userAccountService.getUserList().then(data => this.userAccounts = data.result);
+    this.loading = true;
+    this.userAccountService.getUserListByPage(this.page.currentPage, this.page.numPerPage)
+        .then(data => {
+          this.page = data;
+          this.loading = false;
+        });
   }
 
   deleteUser(uid: string) {

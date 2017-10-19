@@ -4,6 +4,7 @@ import { LoggerService } from 'app/services/logger.service';
 import { CONSTANTS } from 'app/app.const';
 import { RestResult } from 'app/beans/restResult';
 import { _HttpClient } from "@core/services/http.client";
+import { Page } from "app/beans/page";
 
 @Injectable()
 export class EmployeeService {
@@ -53,6 +54,13 @@ export class EmployeeService {
         //     .then(response => response)
         //     .catch(this.loggerService.handleError);
 
+    }
+
+    getEmployeeListByPage(compId: string, page: number, size: number): Promise<Page> {
+        const url = `${this.apiUrl}${CONSTANTS.API_URL.employee.page}`;
+        return new Promise((resolve, reject) => {
+            this.http.get(url, {compId : compId, page : page, size : size}).subscribe(response => resolve(response.result));
+        });
     }
 
 }

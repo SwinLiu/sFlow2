@@ -28,18 +28,21 @@ export const CONSTANTS = {
       session: "/api/user/session",
       add: "/api/user/add", //添加用户信息
       delete: "/api/user/delete",
+      page: "/api/user/page",
       list: "/api/user/list"//用户信息列表
     },
     company: {
       add: "/api/company/add",
       delete: "/api/company/delete",
       list: "/api/company/list",
+      page: "/api/company/page",
       select: "/api/company/select"
     },
     employee: {
       add: "/api/employee/add",
       delete: "/api/employee/delete",
-      list: "/api/employee/list"
+      list: "/api/employee/list",
+      page: "/api/employee/page"
     }
   },
   HTTPStatus: {

@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.lyplay.sflow.data.domain.CompEmployeeGroup;
@@ -16,6 +18,7 @@ import com.lyplay.sflow.data.enums.EmployeeStatus;
 import com.lyplay.sflow.data.pk.CompEmployeeGroupPK;
 import com.lyplay.sflow.data.repository.CompEmployeeGroupRepository;
 import com.lyplay.sflow.data.repository.EmployeeRepository;
+import com.lyplay.sflow.orm.components.Pagination;
 import com.lyplay.sflow.service.EmployeeService;
 import com.lyplay.sflow.service.dto.EmployeeDto;
 
@@ -75,6 +78,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return employeeDtoList;
 		} else {
 			return Collections.emptyList();
+		}
+	}
+	
+	@Override
+	public Pagination<EmployeeDto> getEmployeeListByPage(String compId, Pageable pageable) {
+		Page<Employee> employeePageData = employeeRepository.findPageByCompId(compId, pageable);
+		if(CollectionUtils.isNotEmpty(employeePageData.getContent())){
+			List<EmployeeDto> employeeDtoList = new ArrayList<EmployeeDto>();
+			for(Employee employee : employeePageData.getContent()){
+				EmployeeDto employeeDto = new EmployeeDto();
+				employeeDto.setCompId(compId);
+				employeeDto.setEmpId(employee.getEmpId());
+				employeeDto.setEmployeeId(employee.getEmployeeId());
+				employeeDto.setSurName(employee.getSurName());
+				employeeDto.setGivenName(employee.getGivenName());
+				employeeDto.setGender(employee.getGender());
+				employeeDto.setBirthday(employee.getBirthday());
+				employeeDto.setWorkEmail(employee.getWorkEmail());
+				employeeDto.setStatus(employee.getStatus());
+				employeeDtoList.add(employeeDto);
+			}
+			return new Pagination<EmployeeDto>(employeePageData.getSize(), employeePageData.getTotalElements(), employeePageData.getNumber() + 1, employeeDtoList);
+		} else {
+			return new Pagination<EmployeeDto>();
 		}
 	}
 	

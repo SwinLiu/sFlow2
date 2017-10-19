@@ -7,10 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,6 +60,15 @@ public class CompanyController {
 	@ResponseBody
 	public RestResult getCompanyInfoList() throws Exception {
 		return success(companyService.getCompanyList());
+	}
+	
+	@RequestMapping(value = "/api/company/page", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public RestResult getCompanyPageData(@RequestParam(value = "page", defaultValue = "1") Integer page,
+	        @RequestParam(value = "size", defaultValue = "10") Integer size) throws Exception {
+		Sort sort = new Sort(Direction.ASC, "compId");
+	    Pageable pageable = new PageRequest(page - 1, size, sort);
+		return success(companyService.getCompanyListByPage(pageable));
 	}
 	
 	@RequestMapping(value = "/api/company/select", method = RequestMethod.GET, produces = "application/json")

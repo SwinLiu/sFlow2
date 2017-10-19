@@ -7,7 +7,8 @@
             <span translate="company.select"></span>
           </div>
           <div nz-col [nzMd]="16">
-            <nz-select [nzSize]="'large'" style="width: 100%" [(ngModel)]="selectedComp">
+            <nz-select [nzSize]="'large'" style="width: 100%" [(ngModel)]="selectedComp" 
+              (ngModelChange)="selectedCompChange()" [nzShowSearch]="true" >
               <nz-option *ngFor="let company of companyList" [nzLabel]="company.label" [nzValue]="company.value"></nz-option>
             </nz-select>
           </div>
@@ -29,7 +30,15 @@
             </button>
           </ng-template>
           <ng-template #body>
-              <nz-table #nzTable [nzDataSource]="employeeList" [nzPageSize]="10">
+              <nz-table #nzTable 
+                  [nzAjaxData]="page.resultList"
+                  [nzShowSizeChanger]="true"
+                  [nzLoading]="loading"
+                  [nzTotal]="page.totalRows"
+                  [(nzPageIndex)]="page.currentPage"
+                  (nzPageIndexChange)="renderEmployeeList()"
+                  [(nzPageSize)]="page.numPerPage"
+                  (nzPageSizeChange)="renderEmployeeList()">
                   <thead nz-thead>
                       <tr>
                         <th nz-th><span translate="employee.id"></span></th>
