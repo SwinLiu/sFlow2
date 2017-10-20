@@ -3,7 +3,6 @@ package com.lyplay.sflow.api.controller;
 import static com.lyplay.sflow.common.dto.RestResult.fail;
 import static com.lyplay.sflow.common.dto.RestResult.success;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lyplay.sflow.api.dto.AppDescription;
-import com.lyplay.sflow.api.dto.MenuTree;
 import com.lyplay.sflow.common.dto.RestResult;
+import com.lyplay.sflow.service.MenuService;
 import com.lyplay.sflow.service.UserService;
+import com.lyplay.sflow.service.dto.MenuTree;
 import com.lyplay.sflow.service.dto.UserDto;
 import com.lyplay.sflow.service.model.UserSession;
 import com.lyplay.sflow.service.model.UserSessionContext;
@@ -49,6 +49,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	MenuService menuService;
 
 	@RequestMapping(value = "/api/user/add", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -107,79 +109,56 @@ public class UserController {
 		UserSession userSession = UserSessionContext.getUserSession();
 		result.put("app", new AppDescription());
 		result.put("user", userSession);
-		List<MenuTree> menuList = new ArrayList<MenuTree>();
-		
-		MenuTree main = new MenuTree();
-		main.setText("主导航");
-		main.setTranslate("main_navigation");
-		main.setGroup(true);
-		
-		MenuTree dashboard = new MenuTree();
-		dashboard.setText("仪表盘");
-		dashboard.setTranslate("dashboard");
-		dashboard.setGroup(false);
-		dashboard.setLink("/dashboard/v1");
-		dashboard.setIcon("icon-speedometer");
-		main.addChildMenu(dashboard);
-		
-		MenuTree userProfile = new MenuTree();
-		userProfile.setText("User Profile");
-		userProfile.setTranslate("profile");
-		userProfile.setGroup(false);
-		userProfile.setLink("/user/profile");
-		userProfile.setIcon("icon-speedometer");
-		main.addChildMenu(userProfile);
-		
-		MenuTree userManagement = new MenuTree();
-		userManagement.setText("User Management");
-		userManagement.setTranslate("user-management");
-		userManagement.setGroup(false);
-		userManagement.setLink("/user/management");
-		userManagement.setIcon("icon-user");
-		main.addChildMenu(userManagement);
-		
-		MenuTree companyManagement = new MenuTree();
-		companyManagement.setText("Company Management");
-		companyManagement.setTranslate("company-management");
-		companyManagement.setGroup(false);
-		companyManagement.setLink("/company/management");
-		companyManagement.setIcon("icon-speedometer");
-		main.addChildMenu(companyManagement);
-		
-		MenuTree employeeManagement = new MenuTree();
-		employeeManagement.setText("Employee Management");
-		employeeManagement.setTranslate("employee-management");
-		employeeManagement.setGroup(false);
-		employeeManagement.setLink("/employee/management");
-		employeeManagement.setIcon("icon-speedometer");
-		main.addChildMenu(employeeManagement);
-		
-		menuList.add(main);
-		
-//		{
-//	        "text": "主导航",
-//	        "translate": "main_navigation",
-//	        "group": true,
-//	        "children": [{
-//	            "text": "仪表盘",
-//	            "translate": "dashboard",
-//	            "link": "/dashboard",
-//	            "icon": "icon-speedometer",
-//	            "children": [{
-//	                "text": "仪表盘V1",
-//	                "link": "/dashboard/v1",
-//	                "translate": "dashboard_v1"
-//	            }]
-//	        }, {
-//	            "text": "小部件",
-//	            "translate": "widgets",
-//	            "link": "/widgets",
-//	            "icon": "icon-grid",
-//	            "badge": 2
-//	        }]
-//	    }
+		List<MenuTree> menuList = menuService.getFullMenuList();
+//		List<MenuTree> menuList = new ArrayList<MenuTree>();
 //		
+//		MenuTree main = new MenuTree();
+//		main.setText("主导航");
+//		main.setTranslate("main_navigation");
+//		main.setGroup(true);
 //		
+//		MenuTree dashboard = new MenuTree();
+//		dashboard.setText("仪表盘");
+//		dashboard.setTranslate("dashboard");
+//		dashboard.setGroup(false);
+//		dashboard.setLink("/dashboard");
+//		dashboard.setIcon("icon-speedometer");
+//		main.addChildMenu(dashboard);
+//		
+//		MenuTree userProfile = new MenuTree();
+//		userProfile.setText("User Profile");
+//		userProfile.setTranslate("profile");
+//		userProfile.setGroup(false);
+//		userProfile.setLink("/user/profile");
+//		userProfile.setIcon("icon-speedometer");
+//		main.addChildMenu(userProfile);
+//		
+//		MenuTree userManagement = new MenuTree();
+//		userManagement.setText("User Management");
+//		userManagement.setTranslate("user-management");
+//		userManagement.setGroup(false);
+//		userManagement.setLink("/user/management");
+//		userManagement.setIcon("icon-user");
+//		main.addChildMenu(userManagement);
+//		
+//		MenuTree companyManagement = new MenuTree();
+//		companyManagement.setText("Company Management");
+//		companyManagement.setTranslate("company-management");
+//		companyManagement.setGroup(false);
+//		companyManagement.setLink("/company/management");
+//		companyManagement.setIcon("icon-speedometer");
+//		main.addChildMenu(companyManagement);
+//		
+//		MenuTree employeeManagement = new MenuTree();
+//		employeeManagement.setText("Employee Management");
+//		employeeManagement.setTranslate("employee-management");
+//		employeeManagement.setGroup(false);
+//		employeeManagement.setLink("/employee/management");
+//		employeeManagement.setIcon("icon-speedometer");
+//		main.addChildMenu(employeeManagement);
+//		
+//		menuList.add(main);
+		
 		result.put("menu", menuList);
 		return success(result);
 	}

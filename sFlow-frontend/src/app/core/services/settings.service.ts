@@ -86,16 +86,13 @@ export class SettingsService {
     }
 
     setUser(val: User) {
-        if (!this._user) {
-            this.local.set(USER_SESSION, Object.assign(<User>{
-                userId : '',
-                userName : '',
-                jwtToken : '',
-                email : ''
-            }, val));
-            return true;
-        }
-        return false;
+        this.local.set(USER_SESSION, Object.assign(<User>{
+            userId : '',
+            userName : '',
+            jwtToken : '',
+            email : ''
+        }, val));
+        return true;
     }
 
     constructor(private local: LocalStorageService) { }

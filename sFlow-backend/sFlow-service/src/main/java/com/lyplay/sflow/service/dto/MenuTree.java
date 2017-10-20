@@ -1,4 +1,4 @@
-package com.lyplay.sflow.api.dto;
+package com.lyplay.sflow.service.dto;
 
 import java.util.ArrayList;
 import java.util.List;
