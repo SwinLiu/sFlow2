@@ -1,7 +1,7 @@
 -- Delete table sf_sys_sequence
 Drop table  IF EXISTS sf_sys_sequence ;
 
--- Create table sf_sys_sequence 
+-- Create table sf_sys_sequence
 CREATE TABLE `sf_sys_sequence` (
   `sequence_name` varchar(20) NOT NULL,
   `curr_value` bigint(20) NOT NULL,
@@ -37,21 +37,21 @@ CREATE PROCEDURE nextval(
   OUT out_curr_value bigint(20),
   OUT out_lpad_char char(1),
   OUT out_lpad_length int(2),
-  OUT out_suffix varchar(10) 
+  OUT out_suffix varchar(10)
  )
 BEGIN
-		
+
 	-- get current sequence value
- 	select prefix,curr_value,lpad_char, lpad_length, suffix 
+ 	select prefix,curr_value,lpad_char, lpad_length, suffix
       INTO out_prefix,out_curr_value,out_lpad_char, out_lpad_length, out_suffix
-      from sf_sys_sequence 
+      from sf_sys_sequence
 	 WHERE sequence_name = in_sequence_name for update;
-     
+
 	-- update current sequence value
 	UPDATE sf_sys_sequence t
-	   SET t.curr_value = t.curr_value + t.increment  
+	   SET t.curr_value = t.curr_value + t.increment
 	 WHERE t.sequence_name = in_sequence_name;
-	
+
 END$$
 
 DELIMITER ;
@@ -81,7 +81,7 @@ CREATE TABLE `sf_usr_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE `sf_usr_account` 
+ALTER TABLE `sf_usr_account`
 ADD PRIMARY KEY (`uid`),
 ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC),
 ADD UNIQUE INDEX `phone_number_UNIQUE` (`phone_number` ASC),
@@ -99,12 +99,12 @@ BEGIN
 	DECLARE lpad_char char(1);
 	DECLARE lpad_length int(2);
 	DECLARE suffix varchar(10);
-  
+
 	SET dt = DATE_FORMAT(CURDATE(),'%Y%m%d');
     SET in_sequence_name = 'SEQ_USER_ID';
-    
+
 	CALL nextval(in_sequence_name,@prefix,@curr_value,@lpad_char, @lpad_length, @suffix);
-	
+
     SET new_uid =  CONCAT(@prefix, dt, RIGHT(CONCAT('00000000000', @curr_value), @lpad_length));
 
 	SET NEW.uid = new_uid;
@@ -137,8 +137,8 @@ CREATE TABLE `sf_usr_password` (
 
 
 INSERT INTO `sf_usr_password` (`uid`, `password`, `create_time`, `changer`, `update_time`)
-select uid, '7b902e6ff1db9f560443f2048974fd7d386975b0', unix_timestamp(NOW(3))* 1000, 'SYSTEM', unix_timestamp(NOW(3))* 1000 
-  from sf_usr_account 
+select uid, '7b902e6ff1db9f560443f2048974fd7d386975b0', unix_timestamp(NOW(3))* 1000, 'SYSTEM', unix_timestamp(NOW(3))* 1000
+  from sf_usr_account
  where user_name = 'admin';
 commit;
 
@@ -165,14 +165,14 @@ CREATE TABLE `sf_com_company` (
   `changer` varchar(20) DEFAULT NULL,
   `update_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`comp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
--- Delete table sf_emp_employee
-Drop table  IF EXISTS sf_emp_employee ;
+-- Delete table sf_com_emp
+Drop table  IF EXISTS sf_com_emp ;
 
-CREATE TABLE `sf_emp_employee` (
+CREATE TABLE `sf_com_emp` (
   `emp_id` varchar(20) NOT NULL,
   `employee_id` varchar(50) NOT NULL,
   `sur_name` varchar(100) DEFAULT NULL,
@@ -186,24 +186,186 @@ CREATE TABLE `sf_emp_employee` (
   `changer` varchar(20) DEFAULT NULL,
   `update_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- Delete table sf_com_emp_grp
-Drop table  IF EXISTS sf_com_emp_grp ;
+-- Delete table sf_com_user_emp
+Drop table  IF EXISTS sf_com_user_emp ;
 
-CREATE TABLE `sf_com_emp_grp` (
+CREATE TABLE `sf_com_user_emp` (
+  `id` varchar(20) NOT NULL,
   `comp_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `emp_id` varchar(20) NOT NULL,
   `create_time` bigint(20) DEFAULT NULL,
   `changer` varchar(20) DEFAULT NULL,
   `update_time` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`comp_id`,`emp_id`)
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_org
+Drop table  IF EXISTS sf_com_org ;
+
+CREATE TABLE `sf_com_org` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `org_id` varchar(20) NOT NULL,
+  `org_name` varchar(200) NOT NULL,
+  `org_type_id` varchar(20) NOT NULL,
+  `order_number` int(5) NOT NULL,
+  `parent_id` varchar(20) DEFAULT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_org_type
+Drop table  IF EXISTS sf_com_org_type ;
+
+CREATE TABLE `sf_com_org_type` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `org_type_name` varchar(200) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_pos
+Drop table  IF EXISTS sf_com_pos ;
+
+CREATE TABLE `sf_com_pos` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `pos_name` varchar(200) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_usr_org_pos
+Drop table  IF EXISTS sf_com_usr_org_pos ;
+
+CREATE TABLE `sf_com_usr_org_pos` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `org_id` varchar(20) NOT NULL,
+  `pos_id` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_grade
+Drop table  IF EXISTS sf_com_grade ;
+
+CREATE TABLE `sf_com_grade` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `grade_id` varchar(20) NOT NULL,
+  `grade_name` varchar(200) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Delete table sf_com_emp_grade
+Drop table  IF EXISTS sf_com_emp_grade ;
+
+CREATE TABLE `sf_com_emp_grade` (
+  `id` varchar(20) NOT NULL,
+  `emp_id` varchar(20) NOT NULL,
+  `grade_id` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Delete table sf_com_role
+Drop table  IF EXISTS sf_com_role ;
+
+CREATE TABLE `sf_com_role` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `role_name` varchar(200) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
+-- Delete table sf_com_access_grp
+Drop table  IF EXISTS sf_com_access_grp ;
 
+CREATE TABLE `sf_com_access_grp` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `group_name` varchar(20) NOT NULL,
+  `order_number` int(5) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Delete table sf_com_role_access_grp
+Drop table  IF EXISTS sf_com_role_access_grp ;
+
+CREATE TABLE `sf_com_role_access_grp` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `role_id` varchar(20) NOT NULL,
+  `group_id` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Delete table sf_com_user_access_grp
+Drop table  IF EXISTS sf_com_user_access_grp ;
+
+CREATE TABLE `sf_com_user_access_grp` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `group_id` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Delete table sf_com_acl
+Drop table  IF EXISTS sf_com_acl ;
+
+CREATE TABLE `sf_com_acl` (
+  `id` varchar(20) NOT NULL,
+  `comp_id` varchar(20) NOT NULL,
+  `p_id` varchar(20) NOT NULL,
+  `p_type` varchar(20) NOT NULL,
+  `r_id` varchar(20) NOT NULL,
+  `r_type` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
