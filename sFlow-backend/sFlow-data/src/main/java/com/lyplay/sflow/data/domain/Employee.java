@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.lyplay.sflow.data.enums.EmployeeStatus;
 import com.lyplay.sflow.data.enums.Gender;
 
-@Entity(name="sf_emp_employee")
+@Entity(name="sf_com_emp")
 public class Employee implements Serializable{
 
 	private static final long serialVersionUID = 2337490945537439497L;

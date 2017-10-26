@@ -27,6 +27,7 @@ public class SFlowKeyGenerator implements IdentifierGenerator, Configurable {
 	
 	public static final String SEQUENCE_NAME = "SEQUENCE_NAME";
 	public Sequence sequence;
+	private String seqName = StringUtils.EMPTY;
 	
 	@Override
 	public Serializable generate(SessionImplementor session, Object object) throws HibernateException {
@@ -95,10 +96,11 @@ public class SFlowKeyGenerator implements IdentifierGenerator, Configurable {
 
 	@Override
 	public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
+		seqName = StringUtils.defaultIfEmpty(params.getProperty(SEQUENCE_NAME), StringUtils.EMPTY);
 	}
 
 	public String getSequenceName() {
-		return StringUtils.EMPTY;
+		return seqName;
 	}
 
 }

@@ -3,7 +3,7 @@ Drop table  IF EXISTS sf_sys_sequence ;
 
 -- Create table sf_sys_sequence
 CREATE TABLE `sf_sys_sequence` (
-  `sequence_name` varchar(20) NOT NULL,
+  `sequence_name` varchar(50) NOT NULL,
   `curr_value` bigint(20) NOT NULL,
   `increment` int(2) DEFAULT NULL,
   `lpad_char` char(1) DEFAULT NULL,
@@ -22,6 +22,30 @@ INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad
 VALUES ('SEQ_COMP_ID',1,1,'0',5,'C',NULL);
 INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
 VALUES ('SEQ_EMP_ID',1,1,'0',5,'E',NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ACCESS_GRP',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ACL',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_EMP_GRADE',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_GRADE',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ORG',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ORG_TYPE',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_POS',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ROLE',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_ROLE_ACCESS_GRP',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_USER_ACCESS_GRP',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_USER_EMP',1,1,NULL,NULL,NULL,NULL);
+INSERT INTO `sf_sys_sequence` (`sequence_name`, `curr_value`, `increment`, `lpad_char`, `lpad_length`, `prefix`, `suffix`)
+VALUES ('SEQ_SF_COM_USER_ORG_POS',1,1,NULL,NULL,NULL,NULL);
 commit;
 UNLOCK TABLES;
 
@@ -188,6 +212,17 @@ CREATE TABLE `sf_com_emp` (
   PRIMARY KEY (`emp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- Delete table sf_com_emp_grp
+Drop table  IF EXISTS sf_com_emp_grp ;
+
+CREATE TABLE `sf_com_emp_grp` (
+  `comp_id` varchar(20) NOT NULL,
+  `emp_id` varchar(20) NOT NULL,
+  `create_time` bigint(20) DEFAULT NULL,
+  `changer` varchar(20) DEFAULT NULL,
+  `update_time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`comp_id`,`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Delete table sf_com_user_emp
 Drop table  IF EXISTS sf_com_user_emp ;
@@ -250,10 +285,10 @@ CREATE TABLE `sf_com_pos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- Delete table sf_com_usr_org_pos
-Drop table  IF EXISTS sf_com_usr_org_pos ;
+-- Delete table sf_com_user_org_pos
+Drop table  IF EXISTS sf_com_user_org_pos ;
 
-CREATE TABLE `sf_com_usr_org_pos` (
+CREATE TABLE `sf_com_user_org_pos` (
   `id` varchar(20) NOT NULL,
   `comp_id` varchar(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
@@ -361,6 +396,7 @@ CREATE TABLE `sf_com_acl` (
   `p_type` varchar(20) NOT NULL,
   `r_id` varchar(20) NOT NULL,
   `r_type` varchar(20) NOT NULL,
+  `acl_state` int(4) NOT NULL,
   `create_time` bigint(20) DEFAULT NULL,
   `changer` varchar(20) DEFAULT NULL,
   `update_time` bigint(20) DEFAULT NULL,
@@ -370,6 +406,34 @@ CREATE TABLE `sf_com_acl` (
 
 
 
+
+DROP TABLE IF EXISTS `sf_sys_menu`;
+CREATE TABLE `sf_sys_menu` (
+  `menu_id` varchar(20) NOT NULL,
+  `text` varchar(50) NOT NULL,
+  `translate` varchar(100) DEFAULT NULL,
+  `group` bit(1) DEFAULT NULL,
+  `link` varchar(50) DEFAULT NULL,
+  `icon` varchar(50) DEFAULT NULL,
+  `parent_id` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sf_sys_menu
+-- ----------------------------
+INSERT INTO `sf_sys_menu` VALUES ('M0000', '主导航', 'main_navigation', '', null, null, null);
+INSERT INTO `sf_sys_menu` VALUES ('M0010', '仪表盘', 'dashboard', '\0', '/dashboard', 'icon-speedometer', 'M0000');
+INSERT INTO `sf_sys_menu` VALUES ('M0020', 'User Profile', 'profile', '\0', '/user/profile', 'icon-speedometer', 'M0000');
+INSERT INTO `sf_sys_menu` VALUES ('M0030', 'User Management', 'user-management', '\0', '/user/management', 'icon-user', 'M0000');
+INSERT INTO `sf_sys_menu` VALUES ('M0040', 'Company Management', 'company-management', '\0', '/company/management', 'icon-speedometer', 'M0000');
+INSERT INTO `sf_sys_menu` VALUES ('M0050', 'Employee Management', 'employee-management', '\0', '/employee/management', 'icon-speedometer', 'M0000');
+INSERT INTO `sf_sys_menu` VALUES ('M1000', 'More', 'more', '', null, null, null);
+INSERT INTO `sf_sys_menu` VALUES ('M1010', 'Common Logics', 'logics', '\0', '/logics', 'icon-compass', 'M1000');
+INSERT INTO `sf_sys_menu` VALUES ('M1020', 'ACL', 'acl', '\0', '/logics/acl', null, 'M1010');
+INSERT INTO `sf_sys_menu` VALUES ('M1030', 'Route Guard', 'guard', '\0', '/logics/guard', null, 'M1010');
+INSERT INTO `sf_sys_menu` VALUES ('M1040', 'Down File', 'downfile', '\0', '/logics/downfile', null, 'M1010');
+commit;
 
 
 
