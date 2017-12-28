@@ -88,4 +88,18 @@ public class CompanyController {
 		}
 	}
 	
+	@RequestMapping(value = "/api/company/organization/add", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public RestResult addOrganization(@RequestBody CompanyDto companyDto) throws Exception {
+		UserSession userSession = UserSessionContext.getUserSession();
+		companyDto.setChanger(userSession.getUid());
+		try {
+			companyService.createCompany(companyDto);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return fail("Save failed.");
+		}
+		return success();
+	}
+	
 }

@@ -110,55 +110,6 @@ public class UserController {
 		result.put("app", new AppDescription());
 		result.put("user", userSession);
 		List<MenuTree> menuList = menuService.getFullMenuList();
-//		List<MenuTree> menuList = new ArrayList<MenuTree>();
-//		
-//		MenuTree main = new MenuTree();
-//		main.setText("主导航");
-//		main.setTranslate("main_navigation");
-//		main.setGroup(true);
-//		
-//		MenuTree dashboard = new MenuTree();
-//		dashboard.setText("仪表盘");
-//		dashboard.setTranslate("dashboard");
-//		dashboard.setGroup(false);
-//		dashboard.setLink("/dashboard");
-//		dashboard.setIcon("icon-speedometer");
-//		main.addChildMenu(dashboard);
-//		
-//		MenuTree userProfile = new MenuTree();
-//		userProfile.setText("User Profile");
-//		userProfile.setTranslate("profile");
-//		userProfile.setGroup(false);
-//		userProfile.setLink("/user/profile");
-//		userProfile.setIcon("icon-speedometer");
-//		main.addChildMenu(userProfile);
-//		
-//		MenuTree userManagement = new MenuTree();
-//		userManagement.setText("User Management");
-//		userManagement.setTranslate("user-management");
-//		userManagement.setGroup(false);
-//		userManagement.setLink("/user/management");
-//		userManagement.setIcon("icon-user");
-//		main.addChildMenu(userManagement);
-//		
-//		MenuTree companyManagement = new MenuTree();
-//		companyManagement.setText("Company Management");
-//		companyManagement.setTranslate("company-management");
-//		companyManagement.setGroup(false);
-//		companyManagement.setLink("/company/management");
-//		companyManagement.setIcon("icon-speedometer");
-//		main.addChildMenu(companyManagement);
-//		
-//		MenuTree employeeManagement = new MenuTree();
-//		employeeManagement.setText("Employee Management");
-//		employeeManagement.setTranslate("employee-management");
-//		employeeManagement.setGroup(false);
-//		employeeManagement.setLink("/employee/management");
-//		employeeManagement.setIcon("icon-speedometer");
-//		main.addChildMenu(employeeManagement);
-//		
-//		menuList.add(main);
-		
 		result.put("menu", menuList);
 		return success(result);
 	}

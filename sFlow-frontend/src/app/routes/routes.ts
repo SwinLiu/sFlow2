@@ -17,6 +17,7 @@ export const routes = [
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard/v1', component: DashboardV1Component, data: { translate: 'dashboard_v1' } },
             { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' },
+            { path: 'sys', loadChildren: './system-management/system-management.module#SystemManagementModule' },
             { path: 'user', loadChildren: './user-management/user-management.module#UserManagementModule' },
             { path: 'company', loadChildren: './company-management/company-management.module#CompanyManagementModule' },
             { path: 'employee', loadChildren: './employee-management/employee-management.module#EmployeeManagementModule' }

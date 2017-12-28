@@ -1,0 +1,31 @@
+<div>
+    <div class="content__title">
+        <h1>
+            <span>Menu Management</span>
+            <small class="text-sm hidden-xs">Welcome !</small>
+        </h1>
+    </div>
+    <div>
+        <div nz-row [nzGutter]="16">
+            <div nz-col [nzMd]="24">
+                <nz-card>
+                    <ng-template #title>
+                        <span>Menu List</span>
+                    </ng-template>
+                    <ng-template #extra>
+                        <button nz-button [nzType]="'primary'" routerLink="/company/management/add" >
+                        <span translate="company.addNew"></span>
+                        </button>
+                    </ng-template>
+                        <ng-template #body>
+                            <nz-tree [nzNodes]="nodes"
+                                    [nzOptions]="options"
+                                    [nzShowLine]="false">
+                                <span>Test</span>
+                            </nz-tree>
+                        </ng-template>
+                </nz-card>
+            </div>
+            </div>    
+    </div>  
+</div>

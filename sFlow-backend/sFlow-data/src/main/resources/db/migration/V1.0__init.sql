@@ -415,6 +415,7 @@ CREATE TABLE `sf_sys_menu` (
   `group` bit(1) DEFAULT NULL,
   `link` varchar(50) DEFAULT NULL,
   `icon` varchar(50) DEFAULT NULL,
+  `order_number` int(4) NOT NULL,
   `parent_id` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -433,6 +434,7 @@ INSERT INTO `sf_sys_menu` VALUES ('M1010', 'Common Logics', 'logics', '\0', '/lo
 INSERT INTO `sf_sys_menu` VALUES ('M1020', 'ACL', 'acl', '\0', '/logics/acl', null, 'M1010');
 INSERT INTO `sf_sys_menu` VALUES ('M1030', 'Route Guard', 'guard', '\0', '/logics/guard', null, 'M1010');
 INSERT INTO `sf_sys_menu` VALUES ('M1040', 'Down File', 'downfile', '\0', '/logics/downfile', null, 'M1010');
+INSERT INTO `sf_sys_menu` VALUES ('M1050', '菜单管理', 'menu-management', '\0', '/sys/menu', null, 'M1000');
 commit;
 
 

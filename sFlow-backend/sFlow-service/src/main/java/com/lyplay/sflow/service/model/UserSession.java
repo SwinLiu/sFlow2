@@ -10,6 +10,7 @@ public class UserSession implements Serializable{
 	private String userName;
 	private String email;
 	private String avatar = "./assets/img/zorro.svg";
+	private String compId;
 	private String jwtToken;
 	
 	public String getUid() {
@@ -35,6 +36,12 @@ public class UserSession implements Serializable{
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+	public String getCompId() {
+		return compId;
+	}
+	public void setCompId(String compId) {
+		this.compId = compId;
 	}
 	public String getJwtToken() {
 		return jwtToken;
