@@ -34,6 +34,12 @@ public class Menu implements Serializable{
 	
 	@Column(name = "parent_id")
 	private String parentId;
+	
+	@Column(name = "authority_id")
+	private String authorityId;
+	
+	@Column(name = "order_number")
+	private Integer orderNumber;
 
 	public String getMenuId() {
 		return menuId;
@@ -89,6 +95,22 @@ public class Menu implements Serializable{
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getAuthorityId() {
+		return authorityId;
+	}
+
+	public void setAuthorityId(String authorityId) {
+		this.authorityId = authorityId;
+	}
+
+	public Integer getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	@Override

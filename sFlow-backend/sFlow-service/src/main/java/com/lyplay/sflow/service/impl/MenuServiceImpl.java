@@ -25,7 +25,7 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public List<MenuTree> getFullMenuList() {
-		Sort sort = new Sort(Direction.ASC, "menuId");
+		Sort sort = new Sort(Direction.ASC, "orderNumber");
 		List<Menu> menuList = menuRepository.findAll(sort);
 		return buildMenuTree(menuList);
 	}
@@ -43,6 +43,8 @@ public class MenuServiceImpl implements MenuService {
 				menuNode.setIcon(menu.getIcon());
 				menuNode.setLink(menu.getLink());
 				menuNode.setGroup(menu.getGroup());
+				menuNode.setAuthorityId(menu.getAuthorityId());
+				menuNode.setOrderNumber(menu.getOrderNumber());
 				menuTreeMap.put(menu.getMenuId(), menuNode);
 			}
 			

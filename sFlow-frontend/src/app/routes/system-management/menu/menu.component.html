@@ -13,16 +13,63 @@
                         <span>Menu List</span>
                     </ng-template>
                     <ng-template #extra>
-                        <button nz-button [nzType]="'primary'" routerLink="/company/management/add" >
-                        <span translate="company.addNew"></span>
+                        <button nz-button [nzType]="'primary'" *ngIf="!editFlag" (click)="editMenu()">
+                        <span>Edit</span>
+                        </button>
+                        <button nz-button [nzType]="'primary'" *ngIf="editFlag" >
+                            <span>Save</span>
+                        </button>
+                        <button nz-button [nzType]="'danger'" *ngIf="editFlag" (click)="cancelEditMenu()" >
+                            <span>Cancel</span>
                         </button>
                     </ng-template>
                         <ng-template #body>
-                            <nz-tree [nzNodes]="nodes"
-                                    [nzOptions]="options"
-                                    [nzShowLine]="false">
-                                <span>Test</span>
-                            </nz-tree>
+                            <nz-table #nzTable 
+                                    [nzAjaxData]="treeNodes"
+                                    [nzLoading]="loading"
+                                    [nzIsPagination]="false">
+                                <thead nz-thead>
+                                    <tr>
+                                        <th nz-th><span>菜单名称</span></th>
+                                        <th nz-th><span>菜单i18n</span></th>
+                                        <th nz-th><span>Group</span></th>
+                                        <th nz-th><span>Link</span></th>
+                                        <th nz-th><span>Authority</span></th>
+                                        <th nz-th *ngIf="editFlag"><span>Actions</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody nz-tbody>
+                                    <tr nz-tbody-tr *ngFor="let menuTreeNode of nzTable.data">
+                                        <td nz-td>
+                                            <span *ngFor="let inx of getArray(menuTreeNode.deep)">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            <span *ngIf="menuTreeNode.deep > 0" >|</span>
+                                            <span *ngFor="let inx of getArray(menuTreeNode.deep)">—</span>
+                                            <i class="{{menuTreeNode.icon}}"></i>
+                                            <span>{{menuTreeNode.text}}</span>
+                                            <span *ngIf="editFlag">
+                                                <a *ngIf="menuTreeNode.up" >Up</a>
+                                                <span nz-table-divider *ngIf="menuTreeNode.up && menuTreeNode.down" ></span>
+                                                <a *ngIf="menuTreeNode.down" >Down</a>
+                                            </span>
+                                        </td>
+                                        <td nz-td>{{menuTreeNode.translate}}</td>
+                                        <td nz-td>{{menuTreeNode.group}}</td>
+                                        <td nz-td>{{menuTreeNode.link}}</td>
+                                        <td nz-td>{{menuTreeNode.authorityId}}</td>
+                                        <td nz-td *ngIf="editFlag">
+                                            <span>
+                                                <a *ngIf="menuTreeNode.editable" >Edit</a>
+                                                <span nz-table-divider *ngIf="menuTreeNode.editable && menuTreeNode.addChildFlag" ></span>
+                                                <a *ngIf="menuTreeNode.addChildFlag" >Add</a>
+                                                <span nz-table-divider *ngIf="menuTreeNode.addChildFlag && menuTreeNode.deleteable" ></span>
+                                                <nz-popconfirm [nzTitle]="'Are you sure？'" [nzOkText]="'ok'" [nzCancelText]="'cancel'" (nzOnConfirm)="deleteMenu(menuTreeNode.menuId)" >
+                                                <a nz-popconfirm *ngIf="menuTreeNode.deleteable" ><span translate="company.delete"></span></a>
+                                                </nz-popconfirm>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </nz-table>
                         </ng-template>
                 </nz-card>
             </div>

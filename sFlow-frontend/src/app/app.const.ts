@@ -43,6 +43,12 @@ export const CONSTANTS = {
       delete: "/api/employee/delete",
       list: "/api/employee/list",
       page: "/api/employee/page"
+    },
+    sys: {
+      menu: {
+        list : "/api/sys/menu/list",
+        add : "/api/sys/menu/add"
+      }
     }
   },
   HTTPStatus: {

@@ -1,5 +1,7 @@
 import {Location} from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
+import { SysMenuService } from "app/services/system/sys-menu.service";
+import { MenuTreeNode } from "app/beans/menuTreeNode";
 
 @Component({
     selector: 'sFlow-main-container',
@@ -7,45 +9,92 @@ import { Component, NgModule, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-    nodes = [];
+    editFlag = false;
 
-    options = {
-        autoExpandParent: true,
-        allowDrag: true
-    };
+    loading = false;
 
-    constructor(private location: Location) { }
+    public treeNodes = [];
+
+    public menuTreeData: any;
+
+    constructor(private location: Location,
+        private sysMenuService: SysMenuService) { }
     
     ngOnInit() {
-        this.generateData(this.nodes, 3, 2, 1);
-        console.log("-----");
-        console.log(this.nodes);
-        console.log("-----");
+        this.loading = true;
+        this.sysMenuService.getMenuList()
+            .then(data => {
+                this.menuTreeData = data.result;
+                this.generateMenuTree();
+                this.loading = false;
+            });
+    }
+
+    generateMenuTree() {
+        for (let i = 0; i < this.menuTreeData.length; i ++) {
+            this.getMenuTreeNode(this.menuTreeData[i], 1, i, this.menuTreeData.length);
+        }
+    }
+
+    getMenuTreeNode(node, deep, index, brotherNum) {
+        const treeNode: MenuTreeNode = new MenuTreeNode();
+        treeNode.menuId = node.menuId;
+        treeNode.text = node.text;
+        treeNode.translate = node.translate;
+        treeNode.group = node.group;
+        treeNode.link = node.link;
+        treeNode.icon = node.icon;
+        treeNode.parentId = node.parentId;
+        treeNode.orderNumber = node.orderNumber;
+        treeNode.authorityId = node.authorityId;
+        treeNode.editable = true;
+        treeNode.deleteable = true;
+        treeNode.deep = deep - 1;
+        
+        if (index === 0) {
+            treeNode.up = false;
+        } else {
+            treeNode.up = true;
+        }
+
+        if (index === brotherNum - 1 ) {
+            treeNode.down = false;
+        } else {
+            treeNode.down = true;
+        }
+
+        if (deep >= 3) {
+            treeNode.addChildFlag = false;
+        } else {
+            treeNode.addChildFlag = true;
+        }
+        treeNode.children = [];
+        this.treeNodes.push(treeNode);
+        if (node.children.length > 0) {
+            for (let i = 0; i < node.children.length; i ++) {
+                this.getMenuTreeNode(node.children[i], deep + 1, i, node.children.length);
+            }
+        }
     }
 
     goToBack() {
         this.location.back();
     }
 
-    generateData(nodes, _x, _y, _z, _preKey?: any, _tns?: any) {
-        const preKey = _preKey || '0';
-        const tns = _tns || nodes;
+    deleteMenu(menuId: string) {
     
-        const children = [];
-        for (let i = 0; i < _x; i++) {
-          const key = `${preKey}-${i}`;
-          tns.push({ name: key, id: key, disableCheckbox: true });
-          if (i < _y) {
-            children.push(key);
-          }
-        }
-        if (_z < 0) {
-          return tns;
-        }
-        const level = _z - 1;
-        children.forEach((key, index) => {
-          tns[index].children = [];
-          return this.generateData(nodes, _x, _y, level, key, tns[index].children);
-        });
-      }
+    }
+
+    getArray(size) {
+        return new Array(size);
+    }
+
+    editMenu() {
+        this.editFlag = true;
+    }
+
+    cancelEditMenu() {
+        this.generateMenuTree();
+        this.editFlag = false;
+    }
 }

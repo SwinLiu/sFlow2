@@ -6,6 +6,7 @@ import { UserAccountService } from "app/services/user/user-account.service";
 import { AuthService } from "app/services/auth.service";
 import { LoggerService } from "app/services/logger.service";
 import { ConsoleService } from "app/services/console.service";
+import { SysMenuService } from "app/services/system/sys-menu.service";
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ConsoleService } from "app/services/console.service";
     CompanyService,
     EmployeeService,
     UserAccountService,
+    SysMenuService,
     AuthService,
     ConsoleService,
     LoggerService

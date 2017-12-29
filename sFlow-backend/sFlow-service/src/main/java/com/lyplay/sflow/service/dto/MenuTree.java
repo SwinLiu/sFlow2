@@ -11,6 +11,8 @@ public class MenuTree {
 	private String link;
 	private String icon;
 	private Integer badge;
+	private String authorityId;
+	private Integer orderNumber;
 	private List<MenuTree> children = new ArrayList<MenuTree>();
 	
 	public String getText() {
@@ -48,6 +50,18 @@ public class MenuTree {
 	}
 	public void setBadge(Integer badge) {
 		this.badge = badge;
+	}
+	public String getAuthorityId() {
+		return authorityId;
+	}
+	public void setAuthorityId(String authorityId) {
+		this.authorityId = authorityId;
+	}
+	public Integer getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 	public List<MenuTree> getChildren() {
 		return children;
